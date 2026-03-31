@@ -1,0 +1,66 @@
+-- MySQL dump 10.13  Distrib 8.0.44, for Linux (x86_64)
+--
+-- Host: localhost    Database: oddsmind
+-- ------------------------------------------------------
+-- Server version	8.0.44-0ubuntu0.22.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `miniprogram_users`
+--
+
+DROP TABLE IF EXISTS `miniprogram_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `miniprogram_users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `openid` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '微信OpenID',
+  `unionid` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '微信UnionID（可选）',
+  `nickname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户昵称',
+  `avatar_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT '头像URL',
+  `is_activated` tinyint(1) DEFAULT '0' COMMENT '是否已激活',
+  `activated_at` datetime DEFAULT NULL COMMENT '激活时间',
+  `expires_at` datetime DEFAULT NULL COMMENT '账号过期时间',
+  `invite_code_used` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '使用的邀请码',
+  `last_login_at` datetime DEFAULT NULL COMMENT '最后登录时间',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `openid` (`openid`),
+  KEY `idx_openid` (`openid`),
+  KEY `idx_activated` (`is_activated`),
+  KEY `idx_expires_at` (`expires_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=1180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `miniprogram_users`
+--
+-- WHERE:  is_activated = 1 AND expires_at IS NOT NULL AND expires_at < NOW()
+
+LOCK TABLES `miniprogram_users` WRITE;
+/*!40000 ALTER TABLE `miniprogram_users` DISABLE KEYS */;
+INSERT INTO `miniprogram_users` VALUES (1108,'oQUNz5Z2HKUfdtE8gHDCcwKEXwh0',NULL,NULL,NULL,1,'2026-02-08 16:23:59','2026-02-09 16:23:59','TEST007','2026-02-09 12:17:11','2026-02-04 16:20:53','2026-02-09 04:17:11'),(1150,'oQUNz5Uea6b4rin5U5LAzLm7Lnw8',NULL,NULL,NULL,1,'2026-02-08 16:31:45','2026-02-09 16:31:46','TEST007','2026-02-09 15:49:35','2026-02-08 07:45:50','2026-02-09 07:49:35'),(1098,'oQUNz5YJ3ZUh8tqAZAeV9L6vj5vI',NULL,NULL,NULL,1,'2026-02-08 16:49:12','2026-02-09 16:49:12','TEST007','2026-02-08 17:12:33','2026-02-04 03:31:27','2026-02-08 09:12:33'),(1151,'oQUNz5T3C9e4b9xNQmgVNjZu1YwE',NULL,NULL,NULL,1,'2026-02-08 16:56:06','2026-02-09 16:56:07','TEST007',NULL,'2026-02-08 08:55:22','2026-02-08 08:56:06'),(1153,'oQUNz5QPQZluu7gYlQ_XqG4eFbgk',NULL,NULL,NULL,1,'2026-02-08 19:18:49','2026-02-09 19:18:49','TEST007','2026-02-08 22:20:41','2026-02-08 11:18:38','2026-02-08 14:20:41'),(1154,'oQUNz5RNofiaA4czE8LQmOiQNFpU',NULL,NULL,NULL,1,'2026-02-08 19:40:00','2026-02-09 19:40:01','TEST007','2026-02-08 22:56:41','2026-02-08 11:39:49','2026-02-08 14:56:41'),(925,'oQUNz5agsdw7rtqnX-4xDE6LdLhI',NULL,NULL,NULL,1,'2026-01-25 20:59:58','2026-02-09 20:59:59','1IU3W38B','2026-02-08 00:35:30','2026-01-25 12:59:55','2026-02-07 16:35:30'),(1155,'oQUNz5S6eqoqeWfQ7OSs-dQTRcrQ',NULL,NULL,NULL,1,'2026-02-08 21:00:30','2026-02-09 21:00:30','5LRPETJ1','2026-02-09 15:05:32','2026-02-08 12:59:50','2026-02-09 07:05:32');
+/*!40000 ALTER TABLE `miniprogram_users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-02-10 16:29:26

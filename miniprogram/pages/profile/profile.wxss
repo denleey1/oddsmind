@@ -1,0 +1,604 @@
+/* pages/profile/profile.wxss */
+.profile-page {
+  min-height: 100vh;
+  background: var(--bg-secondary);
+  padding-bottom: calc(var(--spacing-3xl) + env(safe-area-inset-bottom));
+}
+
+/* 用户头部 */
+.user-header {
+  background: linear-gradient(135deg, #FF6B35 0%, #004E89 100%);
+  padding: 60rpx 30rpx 80rpx;
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+  border-radius: 0 0 40rpx 40rpx;
+  box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-text {
+  font-size: 60rpx;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.user-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.user-desc {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* VIP卡片 */
+.vip-card {
+  margin: -50rpx 30rpx 30rpx;
+  padding: 30rpx;
+  background: linear-gradient(135deg, rgba(247, 183, 49, 0.2), rgba(255, 107, 53, 0.2));
+  border-radius: 20rpx;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 2rpx solid rgba(247, 183, 49, 0.3);
+}
+
+.vip-content {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.vip-icon {
+  font-size: 48rpx;
+}
+
+.vip-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.vip-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.vip-subtitle {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.vip-badge {
+  padding: 8rpx 20rpx;
+  background: var(--accent-color);
+  color: #FFFFFF;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+
+.vip-badge-active {
+  background: linear-gradient(135deg, #ff6b35, #ff4444);
+}
+
+.vip-card:active {
+  opacity: 0.85;
+}
+
+/* 菜单区域 */
+.menu-section {
+  margin: 0 30rpx 30rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 16rpx;
+  padding: 0 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.module-toggle {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 10rpx;
+}
+
+.module-toggle.expanded {
+  transform: rotate(180deg);
+  color: var(--primary-color);
+}
+
+.menu-list {
+  background: var(--bg-primary);
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--border-color);
+  transition: background 0.3s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background: var(--bg-secondary);
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.menu-icon {
+  font-size: 40rpx;
+}
+
+.menu-text {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.menu-arrow {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  min-width: 32rpx;
+  text-align: right;
+}
+
+/* 版本信息 */
+.version-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 40rpx 0;
+}
+
+.version-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.copyright-text {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.user-status {
+  font-size: 22rpx;
+  color: var(--primary-color);
+  margin-top: 8rpx;
+}
+
+/* 状态徽章 */
+.status-badge-wrapper {
+  margin-top: 12rpx;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.status-badge.activated {
+  background: rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+  border: 1rpx solid rgba(76, 175, 80, 0.5);
+}
+
+.status-badge.not-activated {
+  background: rgba(255, 152, 0, 0.3);
+  color: #ff9800;
+  border: 1rpx solid rgba(255, 152, 0, 0.5);
+}
+
+/* 账号信息区域 */
+.info-section {
+  background: var(--bg-primary);
+  margin: 20rpx 30rpx;
+  border-radius: 16rpx;
+  padding: 0 30rpx;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item.clickable {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.info-item.clickable:active {
+  background: rgba(102, 126, 234, 0.08);
+}
+
+.info-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  flex: 1;
+}
+
+.info-right {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  min-height: 52rpx;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.info-value.activated {
+  color: #4caf50;
+}
+
+.info-value.not-activated {
+  color: #ff9800;
+}
+
+.info-value.openid {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  max-width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info-value.expires-time {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.info-hint {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.info-arrow {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.logout-wrapper {
+  padding: 20rpx 30rpx 40rpx;
+}
+
+.logout-button {
+  width: 100%;
+  height: 80rpx;
+  border-radius: 16rpx;
+  background: #FF6B35;
+  color: white;
+  font-size: 28rpx;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 6rpx 16rpx rgba(255, 107, 53, 0.4);
+}
+
+/* ========== Round 5 Layout Refinement Overrides ========== */
+.profile-page {
+  padding-bottom: var(--spacing-3xl);
+}
+
+.user-header {
+  padding: 54rpx var(--spacing-2xl) 72rpx;
+  gap: var(--spacing-xl);
+  border-radius: 0 0 44rpx 44rpx;
+}
+
+.user-avatar {
+  width: 112rpx;
+  height: 112rpx;
+}
+
+.avatar-text {
+  font-size: 54rpx;
+}
+
+.user-name {
+  font-size: 32rpx;
+  line-height: 1.3;
+}
+
+.user-desc {
+  font-size: 22rpx;
+  line-height: 1.45;
+}
+
+.status-badge {
+  padding: 6rpx 16rpx;
+  font-size: 22rpx;
+}
+
+.info-section {
+  margin: var(--spacing-lg) var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  padding: 0 var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.info-item {
+  min-height: 88rpx;
+  padding: 18rpx 0;
+}
+
+.info-label {
+  font-size: 24rpx;
+  line-height: 1.35;
+}
+
+.info-value {
+  font-size: 24rpx;
+  line-height: 1.35;
+}
+
+.info-value.openid {
+  font-size: 22rpx;
+}
+
+.vip-card {
+  margin: -42rpx var(--spacing-2xl) var(--spacing-xl);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+}
+
+.vip-content {
+  gap: var(--spacing-lg);
+}
+
+.vip-title {
+  font-size: 28rpx;
+  line-height: 1.3;
+}
+
+.vip-subtitle {
+  font-size: 22rpx;
+  line-height: 1.4;
+}
+
+.vip-badge {
+  font-size: 20rpx;
+  border-radius: 999rpx;
+}
+
+.menu-section {
+  margin: 0 var(--spacing-2xl) var(--spacing-xl);
+}
+
+.section-title {
+  min-height: 64rpx;
+  margin-bottom: var(--spacing-sm);
+  padding: 0 8rpx;
+  font-size: 26rpx;
+  color: var(--text-primary);
+}
+
+.module-toggle {
+  min-width: 56rpx;
+  min-height: 56rpx;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-list {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.menu-item {
+  min-height: 84rpx;
+  padding: 22rpx var(--spacing-lg);
+}
+
+.menu-left {
+  gap: 16rpx;
+}
+
+.menu-icon {
+  font-size: 34rpx;
+}
+
+.menu-text {
+  font-size: 24rpx;
+  line-height: 1.35;
+}
+
+.menu-arrow {
+  font-size: 24rpx;
+}
+
+.version-info {
+  gap: 6rpx;
+  padding: var(--spacing-xl) 0 var(--spacing-lg);
+}
+
+.version-text {
+  font-size: 22rpx;
+}
+
+.copyright-text {
+  font-size: 20rpx;
+}
+
+.logout-wrapper {
+  padding: var(--spacing-sm) var(--spacing-2xl) calc(var(--spacing-xl) + env(safe-area-inset-bottom));
+}
+
+.logout-button {
+  height: 84rpx;
+  border-radius: var(--radius-md);
+  font-size: 26rpx;
+}
+
+/* ========== Round 8 Visual Consolidation Overrides ========== */
+.user-header {
+  box-shadow: 0 10rpx 28rpx rgba(255, 107, 53, 0.24);
+}
+
+.info-section,
+.menu-list,
+.vip-card {
+  border: 1rpx solid #eef1f5;
+}
+
+.section-title {
+  letter-spacing: 0.2rpx;
+}
+
+.menu-item {
+  border-bottom-color: #edf1f6;
+}
+
+.menu-item:active {
+  background: #f7f9fc;
+}
+
+.menu-text {
+  color: #203247;
+}
+
+.menu-arrow {
+  color: #98a4b3;
+}
+
+.status-badge.activated {
+  background: rgba(76, 175, 80, 0.18);
+}
+
+.status-badge.not-activated {
+  background: rgba(255, 152, 0, 0.16);
+}
+
+.info-value.expires-time {
+  color: #2f74b5;
+}
+
+.vip-badge {
+  box-shadow: 0 4rpx 12rpx rgba(247, 183, 49, 0.28);
+}
+
+.version-info {
+  opacity: 0.9;
+}
+
+.logout-button {
+  box-shadow: 0 8rpx 20rpx rgba(255, 107, 53, 0.3);
+}
+
+/* 续费输入区域 */
+.renew-section {
+  padding: 0 30rpx 20rpx;
+}
+
+.renew-card {
+  background: var(--bg-primary);
+  border-radius: 16rpx;
+  padding: 24rpx 24rpx;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.renew-title {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-bottom: 16rpx;
+}
+
+.renew-input-group {
+  display: flex;
+  gap: 12rpx;
+  align-items: center;
+}
+
+.renew-input {
+  flex: 1;
+  height: 72rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.renew-input:focus {
+  border-color: #667eea;
+}
+
+.renew-btn {
+  height: 72rpx;
+  padding: 0 28rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  font-weight: bold;
+  border: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120rpx;
+}
+
+.renew-btn[disabled] {
+  opacity: 0.6;
+}

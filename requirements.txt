@@ -1,0 +1,50 @@
+# OddsMind - Football Odds Data Collection System
+# Core dependencies only
+
+# Web Framework
+Flask[async]==3.0.0
+Flask-Cors==4.0.1
+Flask-Compress==1.14
+
+# Task Scheduling  
+APScheduler==3.10.4
+
+# HTTP and Web Scraping
+requests==2.31.0
+beautifulsoup4==4.12.2
+
+# Database
+pymysql==1.1.0
+DBUtils==3.1.2
+
+# Redis (for rate limiting and caching)
+redis>=5.0.0
+
+# Data Processing
+pandas==2.2.2
+numpy==1.26.4
+
+# Date/Time Processing
+python-dateutil==2.8.2
+pytz==2023.3
+
+# System Monitoring
+psutil>=5.9.0
+
+# Authentication
+Flask-Session>=0.5.0
+SQLAlchemy==2.0.31
+PyJWT==2.8.0
+sshtunnel==0.4.0
+tenacity
+urllib3==2.2.2
+waitress==3.0.0
+Werkzeug==3.0.3
+
+# Google AI
+google-genai>=0.2.0
+
+# 欧赔意图分析
+simpleeval>=0.9.13
+pyyaml>=6.0.2
+pydantic>=2.0.0

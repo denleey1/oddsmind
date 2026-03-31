@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入门级解盘策略培训系统</title>
+    <style>
+        /* ===== 全局变量 - 统一配色系统 ===== */
+        :root {
+            /* 主题色 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(45deg, #FFD700, #FFA500);
+            
+            /* 语义化颜色 */
+            --color-primary: #667eea;
+            --color-secondary: #764ba2;
+            --color-accent: #FFD700;
+            --color-success: #2ecc71;
+            --color-warning: #f39c12;
+            --color-info: #3498db;
+            
+            /* 背景色 */
+            --bg-glass: rgba(255,255,255,0.1);
+            --bg-glass-hover: rgba(255,255,255,0.15);
+            --bg-dark: rgba(0,0,0,0.2);
+            
+            /* 文字色 */
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.9);
+            --text-muted: rgba(255,255,255,0.7);
+            
+            /* 边框色 */
+            --border-light: rgba(255,255,255,0.2);
+            --border-medium: rgba(255,255,255,0.3);
+            --border-accent: rgba(255,215,0,0.6);
+            
+            /* 阴影 */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.15);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.3);
+            
+            /* 间距 */
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 20px;
+            --spacing-lg: 30px;
+            --spacing-xl: 40px;
+            
+            /* 圆角 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 50px;
+        }
+        
+        /* ===== 基础样式 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
+            background: var(--primary-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-md);
+        }
+        
+        /* ===== Header 优化 ===== */
+        .header {
+            text-align: center;
+            padding: var(--spacing-md) 0 var(--spacing-sm) 0;
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: clamp(1.8em, 4vw, 2.8em);
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: clamp(0.9em, 1.8vw, 1.1em);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xs);
+            font-weight: 500;
+        }
+        
+        .description {
+            font-size: clamp(0.85em, 1.3vw, 0.95em);
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        /* ===== 进度条系统 ===== */
+        .progress-container {
+            margin: var(--spacing-sm) 0;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-glass);
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-light);
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .progress-label {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .progress-stats {
+            font-size: 0.9em;
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+        
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-dark);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-warning));
+            border-radius: var(--radius-full);
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* ===== 导航系统优化 ===== */
+        .nav-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(102, 126, 234, 0.95);
+            backdrop-filter: blur(20px);
+            padding: var(--spacing-xs) 0;
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 0 var(--spacing-sm);
+        }
+        
+        .nav-btn {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-light);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s, height 0.4s;
+        }
+        
+        .nav-btn:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--border-accent);
+        }
+        
+        .nav-btn.active {
+            background: var(--secondary-gradient);
+            color: #2c3e50;
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            font-weight: 700;
+        }
+        
+        .nav-btn.completed::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-success);
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+        
+        /* ===== 模块卡片优化 ===== */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .module-card {
+            background: var(--bg-glass);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--border-light);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--border-accent);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .module-card:hover::before {
+            opacity: 1;
+        }
+        
+        .module-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: var(--spacing-xs);
+            line-height: 1;
+        }
+        
+        .module-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+        
+        .module-desc {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .module-features {
+            font-size: 0.85em;
+            color: var(--text-muted);
+        }
+        
+        .module-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .module-features li {
+            margin: 4px 0;
+            padding-left: 18px;
+            position: relative;
+            transition: transform 0.2s;
+        }
+        
+        .module-card:hover .module-features li {
+            transform: translateX(5px);
+        }
+        
+        .module-features li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        /* ===== 内容区域优化 ===== */
+        .content-area {
+            display: none;
+            background: var(--bg-glass);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--border-medium);
+            box-shadow: var(--shadow-md);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .content-area.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-md);
+            padding: var(--spacing-sm);
+            background: var(--bg-dark);
+            border-radius: var(--radius-sm);
+            font-size: 0.9em;
+            color: var(--text-muted);
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .breadcrumb-separator {
+            color: var(--color-accent);
+        }
+        
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .iframe-container iframe {
+            width: 100%;
+            min-height: 800px;
+            border: none;
+            display: block;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top-color: var(--color-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* ===== Footer 优化 ===== */
+        .footer {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+            margin-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .footer-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-link:hover {
+            opacity: 0.7;
+        }
+        
+        /* ===== 焦点状态 (可访问性) ===== */
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
+        }
+        
+        *:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        /* 跳过到主内容链接 */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-accent);
+            color: #2c3e50;
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 0 0 var(--radius-sm) 0;
+            z-index: 1000;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* 屏幕阅读器专用 */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* ===== 响应式优化 ===== */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2em;
+            }
+            
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav {
+                gap: 6px;
+            }
+            
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 0.85em;
+            }
+            
+            .module-card {
+                padding: var(--spacing-md);
+            }
+            
+            .progress-container {
+                padding: var(--spacing-sm);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: var(--spacing-sm);
+            }
+            
+            .nav-btn {
+                padding: 6px 12px;
+                font-size: 0.8em;
+            }
+            
+            .module-number {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 跳过到主内容链接 (可访问性) -->
+    <a href="#main-content" class="skip-link">跳过到主内容</a>
+    
+    <div class="container">
+        <!-- Header -->
+        <header class="header" role="banner">
+            <h1 class="main-title">入门级解盘策略培训系统</h1>
+            <p class="subtitle">系统化解盘分析方法 · 建立完整分析框架</p>
+            <p class="description">
+                本系统旨在系统化地讲解一套独特的解盘分析方法。所有内容均基于原始分析逻辑,通过结构化的梳理,帮助初学者建立完整的分析框架。
+            </p>
+        </header>
+        
+        <!-- 进度追踪 -->
+        <section aria-label="学习进度" role="region">
+        <div class="progress-container">
+            <div class="progress-header">
+                <span class="progress-label">学习进度</span>
+                <span class="progress-stats"><span id="completed-count">0</span>/8 模块完成</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-bar" style="width: 0%"></div>
+            </div>
+        </section>
+        
+        <!-- Navigation -->
+        <nav class="nav-wrapper" aria-label="主导航" role="navigation">
+            <div class="nav">
+                <button class="nav-btn active" onclick="showHome()" aria-current="page" aria-label="返回首页">首页</button>
+                <button class="nav-btn" onclick="showModule('guide')" aria-label="产品介绍">📚 产品介绍</button>
+                <button class="nav-btn" onclick="showModule('quickstart')" aria-label="快速开始">🚀 快速开始</button>
+                <button class="nav-btn" onclick="showModule('module1')" data-module="1" aria-label="模块一：理解广义实力与开盘基本手法">模块一</button>
+                <button class="nav-btn" onclick="showModule('module2')" data-module="2" aria-label="模块二：一赔与三赔的理解及应用">模块二</button>
+                <button class="nav-btn" onclick="showModule('module3')" data-module="3" aria-label="模块三：平赔的全面解析">模块三</button>
+                <button class="nav-btn" onclick="showModule('module4')" data-module="4" aria-label="模块四：平赔的形象化理解">模块四</button>
+                <button class="nav-btn" onclick="showModule('module5')" data-module="5" aria-label="模块五：基本面拉力与变盘影响">模块五</button>
+                <button class="nav-btn" onclick="showModule('module6')" data-module="6" aria-label="模块六：基本面拉力与理想赔率区间的对应">模块六</button>
+                <button class="nav-btn" onclick="showModule('module7')" data-module="7" aria-label="模块七：解读第一推荐与规则差">模块七</button>
+                <button class="nav-btn" onclick="showModule('module8')" data-module="8" aria-label="模块八：盘口难易度的选择">模块八</button>
+            </div>
+        </nav>
+        
+        <!-- Home Page - Module Cards -->
+        <main id="main-content" role="main">
+        <div id="home" class="modules-grid">
+            <div class="module-card" onclick="showModule('module1')">
+                <div class="module-number">01</div>
+                <div class="module-title">理解广义实力与开盘基本手法</div>
+                <div class="module-desc">掌握球队实力分类与盘口基础逻辑</div>
+                <div class="module-features">
+                    <ul>
+                        <li>广义实力层级划分</li>
+                        <li>强队打出开盘逻辑</li>
+                        <li>弱队打出分析方法</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module2')">
+                <div class="module-number">02</div>
+                <div class="module-title">一赔与三赔的理解及应用</div>
+                <div class="module-desc">掌握不同庄家的特点与策略</div>
+                <div class="module-features">
+                    <ul>
+                        <li>澳门、马会、欧洲大庄特点</li>
+                        <li>五大核心赔率区间</li>
+                        <li>水位划分与冲突判断</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module3')">
+                <div class="module-number">03</div>
+                <div class="module-title">平赔的全面解析</div>
+                <div class="module-desc">深入理解平赔的核心作用与策略</div>
+                <div class="module-features">
+                    <ul>
+                        <li>平赔核心作用分析</li>
+                        <li>九个位置层级详解</li>
+                        <li>四种典型庄家策略</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module4')">
+                <div class="module-number">04</div>
+                <div class="module-title">平赔的形象化理解</div>
+                <div class="module-desc">通过形象比喻理解筹码流动规律</div>
+                <div class="module-features">
+                    <ul>
+                        <li>筹码流动模型</li>
+                        <li>地理景观形象比喻</li>
+                        <li>基本面联动分析</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module5')">
+                <div class="module-number">05</div>
+                <div class="module-title">基本面拉力与变盘影响</div>
+                <div class="module-desc">理解投注信心对盘口的影响机制</div>
+                <div class="module-features">
+                    <ul>
+                        <li>基本面拉力定义</li>
+                        <li>九个拉力层级</li>
+                        <li>变盘水位影响分析</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module6')">
+                <div class="module-number">06</div>
+                <div class="module-title">基本面拉力与理想赔率区间的对应</div>
+                <div class="module-desc">掌握信心与赔率的对应关系</div>
+                <div class="module-features">
+                    <ul>
+                        <li>核心对应原则</li>
+                        <li>不同信心盘口解读</li>
+                        <li>球队实力限制规则</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module7')">
+                <div class="module-number">07</div>
+                <div class="module-title">解读"第一推荐"与规则差</div>
+                <div class="module-desc">理解规则差与推荐结果的含义</div>
+                <div class="module-features">
+                    <ul>
+                        <li>规则差含义解读</li>
+                        <li>六种推荐赛果分析</li>
+                        <li>颜色代码组合判断</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="module-card" onclick="showModule('module8')">
+                <div class="module-number">08</div>
+                <div class="module-title">盘口难易度的选择</div>
+                <div class="module-desc">选择适合的盘口类型与难度等级</div>
+                <div class="module-features">
+                    <ul>
+                        <li>基本盘类型选择</li>
+                        <li>七个难度等级划分</li>
+                        <li>实战建议与学习路径</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content Areas for Each Module -->
+        <div id="module1" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块一：理解广义实力与开盘基本手法</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading1">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module1_General_Strength.html" onload="hideLoading('loading1')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module2" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块二：一赔与三赔的理解及应用</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading2">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module2_Odds_Application.html" onload="hideLoading('loading2')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module3" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块三：平赔的全面解析</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading3">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module3_Draw_Analysis.html" onload="hideLoading('loading3')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module4" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块四：平赔的形象化理解</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading4">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module4_Visual_Understanding.html" onload="hideLoading('loading4')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module5" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块五：基本面拉力与变盘影响</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading5">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module5_Pull_Force.html" onload="hideLoading('loading5')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module6" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块六：基本面拉力与理想赔率区间的对应</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading6">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module6_Odds_Intervals.html" onload="hideLoading('loading6')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module7" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块七：解读"第一推荐"与规则差</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading7">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module7_Rule_Differences.html" onload="hideLoading('loading7')"></iframe>
+            </div>
+        </div>
+        
+        <div id="module8" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">模块八：盘口难易度的选择</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loading8">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="Complete_Module8_Market_Difficulty.html" onload="hideLoading('loading8')"></iframe>
+            </div>
+        </div>
+        
+        <div id="guide" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">产品介绍</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loadingGuide">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="product-guide.html" onload="hideLoading('loadingGuide')"></iframe>
+            </div>
+        </div>
+        
+        <div id="quickstart" class="content-area">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">首页</span>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-item">快速开始</span>
+            </div>
+            <div class="iframe-container">
+                <div class="loading-overlay" id="loadingQuickstart">
+                    <div class="loading-spinner"></div>
+                    <p>加载中...</p>
+                </div>
+                <iframe src="quick-start.html" onload="hideLoading('loadingQuickstart')"></iframe>
+            </div>
+        </div>
+        
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer" role="contentinfo">
+            <p class="footer-text">© 2024 入门级解盘策略培训系统</p>
+            <p class="footer-text">系统化分析 · 科学化决策 · 专业化培训</p>
+        </footer>
+    </div>
+
+    <!-- Analytics数据追踪 -->
+    <script src="analytics.js"></script>
+    
+    <script>
+        // 进度跟踪系统
+        const completedModules = new Set(
+            JSON.parse(localStorage.getItem('completedModules') || '[]')
+        );
+        
+        function updateProgress() {
+            const completedCount = completedModules.size;
+            const progressPercent = (completedCount / 8) * 100;
+            
+            document.getElementById('completed-count').textContent = completedCount;
+            document.getElementById('progress-bar').style.width = progressPercent + '%';
+            
+            // 更新导航按钮状态
+            document.querySelectorAll('.nav-btn[data-module]').forEach(btn => {
+                const moduleNum = btn.getAttribute('data-module');
+                if (completedModules.has(moduleNum)) {
+                    btn.classList.add('completed');
+                }
+            });
+        }
+        
+        function markModuleCompleted(moduleId) {
+            const moduleNum = moduleId.replace('module', '');
+            completedModules.add(moduleNum);
+            localStorage.setItem('completedModules', JSON.stringify([...completedModules]));
+            updateProgress();
+        }
+        
+        function showHome() {
+            // Hide all content areas
+            document.querySelectorAll('.content-area').forEach(area => {
+                area.classList.remove('active');
+            });
+            
+            // Show home page
+            document.getElementById('home').style.display = 'grid';
+            
+            // Update navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.nav-btn').classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function showModule(moduleId) {
+            // Hide home page
+            document.getElementById('home').style.display = 'none';
+            
+            // Hide all content areas
+            document.querySelectorAll('.content-area').forEach(area => {
+                area.classList.remove('active');
+            });
+            
+            // Show selected module
+            document.getElementById(moduleId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav button by moduleId
+            // Use attribute selector instead of index to avoid position issues
+            if (moduleId.startsWith('module')) {
+                const moduleNumber = moduleId.replace('module', '');
+                const targetBtn = document.querySelector(`.nav-btn[data-module="${moduleNumber}"]`);
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                }
+            } else {
+                // For guide, quickstart, or analyzer, find by onclick attribute
+                const targetBtn = document.querySelector(`.nav-btn[onclick*="'${moduleId}'"]`);
+                if (targetBtn) {
+                    targetBtn.classList.add('active');
+                }
+            }
+            
+            // Analytics: 开始学习模块
+            const moduleNames = {
+                'guide': '产品介绍:系统功能及使用指南',
+                'quickstart': '快速开始:入门指导及操作流程',
+                'module1': '模块一:理解广义实力与开盘基本手法',
+                'module2': '模块二:一赔与三赔的理解及应用',
+                'module3': '模块三:平赔的全面解析',
+                'module4': '模块四:平赔的形象化理解',
+                'module5': '模块五:基本面拉力与变盘影响',
+                'module6': '模块六:基本面拉力与理想赔率区间的对应',
+                'module7': '模块七:解读"第一推荐"与规则差',
+                'module8': '模块八:盘口难易度的选择'
+            };
+            if (window.analytics) {
+                window.analytics.startModule(moduleId, moduleNames[moduleId] || moduleId);
+            }
+            
+            // Mark module as completed after viewing for 3 seconds (only for training modules)
+            if (moduleId.startsWith('module')) {
+                setTimeout(() => {
+                    markModuleCompleted(moduleId);
+                    // Analytics: 完成模块
+                    if (window.analytics) {
+                        window.analytics.completeModule(moduleId);
+                    }
+                }, 3000);
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function hideLoading(loadingId) {
+            const loadingElement = document.getElementById(loadingId);
+            if (loadingElement) {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            showHome();
+        });
+        
+        // 增强键盘导航支持
+        let currentModuleIndex = 0; // 0 = 首页, 1-8 = 模块
+        
+        document.addEventListener('keydown', function(e) {
+            // ESC - 返回首页
+            if (e.key === 'Escape') {
+                showHome();
+                currentModuleIndex = 0;
+                return;
+            }
+            
+            // 数字键 1-8 - 快速跳转模块
+            if (e.key >= '1' && e.key <= '8' && !e.ctrlKey && !e.altKey) {
+                const moduleNum = parseInt(e.key);
+                showModule(`module${moduleNum}`);
+                currentModuleIndex = moduleNum;
+                return;
+            }
+            
+            // 左箭头 - 上一个模块 (only for modules 1-8)
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                if (currentModuleIndex > 1) {
+                    currentModuleIndex--;
+                    showModule(`module${currentModuleIndex}`);
+                } else if (currentModuleIndex === 1) {
+                    currentModuleIndex = 0;
+                    showHome();
+                }
+                return;
+            }
+            
+            // 右箭头 - 下一个模块 (only for modules 1-8)
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                if (currentModuleIndex === 0) {
+                    currentModuleIndex = 1;
+                    showModule('module1');
+                } else if (currentModuleIndex < 8) {
+                    currentModuleIndex++;
+                    showModule(`module${currentModuleIndex}`);
+                }
+                return;
+            }
+            
+            // H - 返回首页 (Home)
+            if (e.key === 'h' || e.key === 'H') {
+                if (!e.target.matches('input, textarea')) {
+                    showHome();
+                    currentModuleIndex = 0;
+                }
+                return;
+            }
+            
+            // ? - 显示帮助
+            if (e.key === '?') {
+                showKeyboardHelp();
+                return;
+            }
+        });
+        
+        // 显示键盘快捷键帮助
+        function showKeyboardHelp() {
+            const helpText = `
+⌨️ 键盘快捷键：
+
+▶ ESC      - 返回首页
+▶ H        - 返回首页
+▶ 1-8      - 快速跳转到对应模块
+▶ ← / →   - 上一个/下一个模块
+▶ ?        - 显示此帮助
+            `;
+            alert(helpText);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+0 1 * * * /home/ubuntu/oddsmind/scripts/run_strength_calculation.sh >> /home/ubuntu/oddsmind/logs/cron_strength.log 2>&1

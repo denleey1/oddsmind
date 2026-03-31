@@ -1,0 +1,188 @@
+[
+  {
+    "rule": "/",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "module": "application.routes.web",
+    "function": "index"
+  },
+  {
+    "rule": "/api/matches/<int:match_id>",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_match_detail_route"
+  },
+  {
+    "rule": "/api/matches/<int:match_id>/ai-analysis",
+    "methods": [
+      "POST"
+    ],
+    "module": "application.routes.web",
+    "function": "get_ai_analysis"
+  },
+  {
+    "rule": "/api/matches/<int:match_id>/ai-analysis/check",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "check_ai_analysis_exists"
+  },
+  {
+    "rule": "/api/matches/<int:match_id>/all_analyses",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_all_match_analyses"
+  },
+  {
+    "rule": "/api/matches/<int:match_id>/analysis",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_match_analysis"
+  },
+  {
+    "rule": "/api/matches/<int:match_id>/poisson",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_match_poisson_prediction"
+  },
+  {
+    "rule": "/api/matches/today",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_today_matches"
+  },
+  {
+    "rule": "/api/miniprogram/activate",
+    "methods": [
+      "POST"
+    ],
+    "module": "application.routes.miniprogram",
+    "function": "miniprogram_activate"
+  },
+  {
+    "rule": "/api/miniprogram/login",
+    "methods": [
+      "POST"
+    ],
+    "module": "application.routes.miniprogram",
+    "function": "miniprogram_login"
+  },
+  {
+    "rule": "/api/miniprogram/user",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.miniprogram",
+    "function": "miniprogram_get_user"
+  },
+  {
+    "rule": "/api/public/matches/<int:match_id>",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_public_match_detail_route"
+  },
+  {
+    "rule": "/api/public/matches/<int:match_id>/pagination",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_public_match_detail_pagination"
+  },
+  {
+    "rule": "/api/public/matches/<int:match_id>/poisson",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_public_match_poisson_prediction"
+  },
+  {
+    "rule": "/api/public/matches/<int:match_id>/summary",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_public_match_summary"
+  },
+  {
+    "rule": "/api/public/matches/today",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "get_public_today_matches"
+  },
+  {
+    "rule": "/api/v2/matches/<int:match_id>/analyze",
+    "methods": [
+      "POST"
+    ],
+    "module": "application.routes.web",
+    "function": "analyze_odds_intent_v2"
+  },
+  {
+    "rule": "/health",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "health_check"
+  },
+  {
+    "rule": "/health/tasks",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "health_check_tasks"
+  },
+  {
+    "rule": "/login",
+    "methods": [
+      "GET"
+    ],
+    "module": "auth",
+    "function": "login"
+  },
+  {
+    "rule": "/logout",
+    "methods": [
+      "GET"
+    ],
+    "module": "auth",
+    "function": "logout"
+  },
+  {
+    "rule": "/monitor",
+    "methods": [
+      "GET"
+    ],
+    "module": "application.routes.web",
+    "function": "monitor_dashboard"
+  },
+  {
+    "rule": "/old",
+    "methods": [
+      "GET",
+      "POST"
+    ],
+    "module": "application.routes.web",
+    "function": "old_index"
+  }
+]

@@ -1,0 +1,828 @@
+<!--pages/match-detail/match-detail.wxml-->
+<view class="match-detail-page">
+  <view class="loading" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <scroll-view class="detail-content" wx:else scroll-y>
+    <!-- 头部信息 -->
+    <view class="match-header gradient-bg">
+      <view class="league-info">
+        <text class="league-name">{{matchDetail.leagueName}}</text>
+        <text class="league-round">{{matchDetail.roundName || (matchDetail.roundNumber ? ('第' + matchDetail.roundNumber + '轮') : (matchDetail.round || ''))}}</text>
+      </view>
+      <view class="match-teams">
+        <view class="team-section">
+          <view class="team-logo home">
+            <text>{{matchDetail.homeTeamShort || matchDetail.homeTeam}}</text>
+          </view>
+          <text class="team-name">{{matchDetail.homeTeam}}</text>
+          <!-- 已完成比赛显示比分，否则显示排名 -->
+          <view class="score-pill" wx:if="{{matchDetail.homeScore != null && matchDetail.homeScore !== ''}}">
+            <text class="score">{{matchDetail.homeScore}}</text>
+          </view>
+          <view class="rank-pill" wx:elif="{{matchDetail.homeRank}}">
+            <text class="rank-text">第{{matchDetail.homeRank}}名</text>
+          </view>
+        </view>
+        <view class="match-center">
+          <text class="status-text">{{statusText}}</text>
+          <text class="start-time">{{matchTime}}</text>
+          <text class="vs-text">VS</text>
+        </view>
+        <view class="team-section">
+          <view class="team-logo away">
+            <text>{{matchDetail.awayTeamShort || matchDetail.awayTeam}}</text>
+          </view>
+          <text class="team-name">{{matchDetail.awayTeam}}</text>
+          <!-- 已完成比赛显示比分，否则显示排名 -->
+          <view class="score-pill" wx:if="{{matchDetail.awayScore != null && matchDetail.awayScore !== ''}}">
+            <text class="score">{{matchDetail.awayScore}}</text>
+          </view>
+          <view class="rank-pill" wx:elif="{{matchDetail.awayRank}}">
+            <text class="rank-text">第{{matchDetail.awayRank}}名</text>
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+
+    <view class="rule-match-card" wx:if="{{hasRuleMatch}}">
+      <view class="card-title" bindtap="toggleModule" data-module="ruleMatch">
+        <text>🎯 规则匹配</text>
+        <text class="module-toggle {{collapsedModules.ruleMatch ? '' : 'expanded'}}">▼</text>
+      </view>
+
+      <block wx:if="{{!collapsedModules.ruleMatch}}">
+
+      <view class="teams-info" wx:if="{{handicapTeam || receiverTeam}}">
+        <view class="team">
+          <text class="label">让球方</text>
+          <text class="name handicap">{{handicapTeam}}</text>
+        </view>
+        <text class="vs">VS</text>
+        <view class="team">
+          <text class="label">受让方</text>
+          <text class="name receiver">{{receiverTeam}}</text>
+        </view>
+      </view>
+
+      <view class="rule-features" wx:if="{{ruleFeatures}}">
+        <view class="feature-row" wx:if="{{ruleFeatures.power}}">
+          <text class="label">力量差</text>
+          <text class="value">{{ruleFeatures.power}}</text>
+        </view>
+        <view class="feature-row" wx:if="{{ruleFeatures.init_h}}">
+          <text class="label">初让方盘型</text>
+          <text class="value">{{ruleFeatures.init_h}}</text>
+        </view>
+        <view class="feature-row" wx:if="{{ruleFeatures.curr_h}}">
+          <text class="label">即时让方盘型</text>
+          <text class="value">{{ruleFeatures.curr_h}}</text>
+        </view>
+        <view class="feature-row" wx:if="{{ruleFeatures.curr_r}}">
+          <text class="label">即时受让盘型</text>
+          <text class="value">{{ruleFeatures.curr_r}}</text>
+        </view>
+        <view class="feature-row" wx:if="{{ruleFeatures.h_change}}">
+          <text class="label">让方变化</text>
+          <text class="value {{ruleFeatures.hChangeClass}}">{{ruleFeatures.h_change}}</text>
+        </view>
+        <view class="feature-row" wx:if="{{ruleFeatures.r_change}}">
+          <text class="label">受让变化</text>
+          <text class="value {{ruleFeatures.rChangeClass}}">{{ruleFeatures.r_change}}</text>
+        </view>
+      </view>
+
+      <view class="prediction-box {{targetMode === 'handicap' ? 'green' : (targetMode === 'receiver' ? 'pink' : 'draw')}}">
+        <text class="main">{{targetMain}}</text>
+        <text class="sub">{{targetSub}}</text>
+      </view>
+
+      <view class="rules-list">
+        <text class="list-title">命中规则 ({{alerts.length}}条)</text>
+        <view class="rule-item" wx:for="{{alerts}}" wx:key="id">
+          <view class="rule-info">
+            <text class="rule-name">{{item.rule_name || item.ruleName}}</text>
+            <text class="rule-prediction">{{item.target || '--'}}</text>
+          </view>
+          <view class="accuracy-badge">{{item.accuracyText}}</view>
+        </view>
+      </view>
+      </block>
+    </view>
+
+    <!-- 理论开盘区间 -->
+    <view class="reasonable-odds-card" wx:if="{{reasonableOddsTable.length > 0}}">
+      <view class="card-title" bindtap="toggleModule" data-module="reasonable">
+        <text>理论开盘区间</text>
+        <text class="system-label">({{reasonableOddsSystem}})</text>
+        <text class="module-toggle {{collapsedModules.reasonable ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view class="reasonable-odds-table" wx:if="{{!collapsedModules.reasonable}}">
+        <view class="reasonable-odds-header">
+          <text class="table-cell">区间</text>
+          <text class="table-cell">合理区间</text>
+          <text class="table-cell">初盘</text>
+          <text class="table-cell">即盘</text>
+        </view>
+        <view class="reasonable-odds-row" wx:for="{{reasonableOddsTable}}" wx:key="index">
+          <view class="table-cell">
+            <text class="section-label">{{item.section}}</text>
+            <text class="zone-desc">{{item.zoneLabel}}</text>
+          </view>
+          <view class="table-cell odds-range-cell">
+            <text class="odds-item">主 {{item.homeWin}}</text>
+            <text class="odds-item">平 {{item.draw}}</text>
+            <text class="odds-item">客 {{item.awayWin}}</text>
+          </view>
+          <view class="table-cell company-odds-cell">
+            <text class="odds-item">主 {{item.initialOdds.homeWin}}</text>
+            <text class="odds-item">平 {{item.initialOdds.draw}}</text>
+            <text class="odds-item">客 {{item.initialOdds.awayWin}}</text>
+          </view>
+          <view class="table-cell company-odds-cell">
+            <text class="odds-item">主 {{item.currentOdds.homeWin}}<text class="{{item.currentOdds.homeWinClass}}">{{item.currentOdds.homeWinArrow}}</text></text>
+            <text class="odds-item">平 {{item.currentOdds.draw}}<text class="{{item.currentOdds.drawClass}}">{{item.currentOdds.drawArrow}}</text></text>
+            <text class="odds-item">客 {{item.currentOdds.awayWin}}<text class="{{item.currentOdds.awayWinClass}}">{{item.currentOdds.awayWinArrow}}</text></text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 亚盘对比（理论 vs 澳门实际） -->
+    <view class="asian-handicap-card" wx:if="{{asianHandicapRows.length > 0}}">
+      <view class="card-title" bindtap="toggleModule" data-module="asianHandicap">
+        <text>亚盘对比</text>
+        <text class="system-label">(理论 vs 澳门)</text>
+        <text class="module-toggle {{collapsedModules.asianHandicap ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view class="ah-table" wx:if="{{!collapsedModules.asianHandicap}}">
+        <view class="ah-header">
+          <text class="ah-cell ah-label-cell">类型</text>
+          <text class="ah-cell">盘口</text>
+          <text class="ah-cell">盘口值</text>
+          <text class="ah-cell">主水</text>
+          <text class="ah-cell">客水</text>
+        </view>
+        <view class="ah-row {{item.matchClass}}" wx:for="{{asianHandicapRows}}" wx:key="label">
+          <text class="ah-cell ah-label-cell">{{item.label}}</text>
+          <text class="ah-cell ah-text-cell">{{item.text}}</text>
+          <text class="ah-cell">{{item.value}}</text>
+          <text class="ah-cell">{{item.homeOdds}}</text>
+          <text class="ah-cell">{{item.awayOdds}}</text>
+        </view>
+        <view class="ah-legend">
+          <text class="ah-legend-item ah-match-dot">吻合</text>
+          <text class="ah-legend-item ah-close-dot">偏差≤0.25</text>
+          <text class="ah-legend-item ah-diff-dot">偏差>0.25</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 长节点控赔分析 -->
+    <view class="draw-system-card" wx:if="{{hasDrawSystem}}">
+      <view class="card-title" bindtap="toggleModule" data-module="drawSystem">
+        <text>长节点控赔分析</text>
+        <text class="system-label" wx:if="{{drawSystem.drawSystemName}}">({{drawSystem.drawSystemName}})</text>
+        <text class="module-toggle {{collapsedModules.drawSystem ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view wx:if="{{!collapsedModules.drawSystem}}" class="draw-system-body">
+
+        <!-- 大小球 → 标准平赔 横幅 -->
+        <view class="ds-ou-banner" wx:if="{{drawSystem.ouLine !== '--'}}">
+          <view class="ds-ou-item">
+            <text class="ds-ou-label">大小球</text>
+            <text class="ds-ou-value">{{drawSystem.ouLine}} 球</text>
+          </view>
+          <view class="ds-ou-arrow">→</view>
+          <view class="ds-ou-item">
+            <text class="ds-ou-label">平系</text>
+            <text class="ds-ou-value ds-value-purple">{{drawSystem.drawSystemName}}</text>
+          </view>
+          <view class="ds-ou-arrow">→</view>
+          <view class="ds-ou-item">
+            <text class="ds-ou-label">标准平赔</text>
+            <text class="ds-ou-value ds-std-draw">{{drawSystem.standardDraw}}</text>
+          </view>
+        </view>
+        <view class="ds-ou-reference" wx:if="{{drawSystem.ouReferenceReason}}">
+          <text class="ds-ou-reference-label">判系依据</text>
+          <text class="ds-ou-reference-text">{{drawSystem.ouReferenceReason}}</text>
+        </view>
+        <view class="ds-ou-grid" wx:if="{{drawSystem.openOuSnapshot || drawSystem.currentOuSnapshot}}">
+          <view class="ds-ou-snapshot" wx:if="{{drawSystem.openOuSnapshot}}">
+            <text class="ds-ou-snapshot-label">初指大小球</text>
+            <text class="ds-ou-snapshot-value">{{drawSystem.openOuSnapshot.line}}球 大{{drawSystem.openOuSnapshot.over}} / 小{{drawSystem.openOuSnapshot.under}}</text>
+            <text class="ds-ou-snapshot-water">方向 {{drawSystem.openOuSnapshot.biasLabel}} / 水位 {{drawSystem.openOuSnapshot.waterText}}</text>
+            <text class="ds-ou-snapshot-meta">{{drawSystem.openOuSnapshot.summary}}</text>
+          </view>
+          <view class="ds-ou-snapshot" wx:if="{{drawSystem.currentOuSnapshot}}">
+            <text class="ds-ou-snapshot-label">即时大小球</text>
+            <text class="ds-ou-snapshot-value">{{drawSystem.currentOuSnapshot.line}}球 大{{drawSystem.currentOuSnapshot.over}} / 小{{drawSystem.currentOuSnapshot.under}}</text>
+            <text class="ds-ou-snapshot-water">方向 {{drawSystem.currentOuSnapshot.biasLabel}} / 水位 {{drawSystem.currentOuSnapshot.waterText}}</text>
+            <text class="ds-ou-snapshot-meta">{{drawSystem.currentOuSnapshot.summary}}</text>
+          </view>
+        </view>
+
+        <!-- 长节点 -->
+        <view class="ds-section" wx:if="{{drawSystem.longNode}}">
+          <view class="ds-section-title">
+            <view class="ds-dot long-node"></view>
+            <text>长节点（定义初赔）</text>
+            <text class="ds-source-tag">{{drawSystem.oddsSource}}</text>
+          </view>
+          <view class="ds-odds-row">
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">主</text>
+              <text class="ds-odds-value">{{drawSystem.longNode.home}}</text>
+            </view>
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">平</text>
+              <text class="ds-odds-value highlight">{{drawSystem.longNode.draw}}</text>
+            </view>
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">客</text>
+              <text class="ds-odds-value">{{drawSystem.longNode.away}}</text>
+            </view>
+          </view>
+          <view class="ds-meta-row">
+            <text class="ds-meta">94%体系: {{drawSystem.longNode.home94}} / {{drawSystem.longNode.draw94}} / {{drawSystem.longNode.away94}}</text>
+          </view>
+          <view class="ds-node-ou" wx:if="{{drawSystem.longNode.ouSnapshot}}">
+            <text class="ds-node-ou-label">{{drawSystem.longNode.ouSnapshot.phaseLabel}}大小球</text>
+            <text class="ds-node-ou-value">{{drawSystem.longNode.ouSnapshot.line}}球 大{{drawSystem.longNode.ouSnapshot.over}} / 小{{drawSystem.longNode.ouSnapshot.under}}</text>
+            <text class="ds-node-ou-tag">{{drawSystem.longNode.ouSnapshot.biasLabel}} / {{drawSystem.longNode.ouSnapshot.waterText}}</text>
+          </view>
+          <!-- 水位标注 -->
+          <view class="ds-water-row" wx:if="{{drawSystem.longNode.waterLevel}}">
+            <text class="ds-water-tag {{drawSystem.longNode.waterClass}}">{{drawSystem.longNode.waterLevel}}</text>
+            <text class="ds-water-zone">{{drawSystem.longNode.zoneName}}</text>
+            <view class="ds-water-std-wrap">
+              <text class="ds-water-std-label">标准平</text>
+              <text class="ds-water-std-val">{{drawSystem.longNode.standardDraw}}</text>
+            </view>
+          </view>
+          <view class="ds-meta-row" wx:if="{{drawSystem.longNode.duration}}">
+            <text class="ds-meta">持续 {{drawSystem.longNode.duration}}h</text>
+            <text class="ds-meta">设定于 {{drawSystem.longNode.time}}</text>
+          </view>
+        </view>
+
+        <!-- 控赔组合 -->
+        <view class="ds-section" wx:if="{{drawSystem.controlNode}}">
+          <view class="ds-section-title">
+            <view class="ds-dot control-node"></view>
+            <text>控赔组合</text>
+          </view>
+          <view class="ds-odds-row">
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">主</text>
+              <text class="ds-odds-value">{{drawSystem.controlNode.home}}</text>
+            </view>
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">平</text>
+              <text class="ds-odds-value">{{drawSystem.controlNode.draw}}</text>
+            </view>
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">客</text>
+              <text class="ds-odds-value">{{drawSystem.controlNode.away}}</text>
+            </view>
+          </view>
+          <view class="ds-meta-row">
+            <text class="ds-meta">94%体系: {{drawSystem.controlNode.home94}} / {{drawSystem.controlNode.draw94}} / {{drawSystem.controlNode.away94}}</text>
+          </view>
+          <view class="ds-node-ou" wx:if="{{drawSystem.controlNode.ouSnapshot}}">
+            <text class="ds-node-ou-label">{{drawSystem.controlNode.ouSnapshot.phaseLabel}}大小球</text>
+            <text class="ds-node-ou-value">{{drawSystem.controlNode.ouSnapshot.line}}球 大{{drawSystem.controlNode.ouSnapshot.over}} / 小{{drawSystem.controlNode.ouSnapshot.under}}</text>
+            <text class="ds-node-ou-tag">{{drawSystem.controlNode.ouSnapshot.biasLabel}} / {{drawSystem.controlNode.ouSnapshot.waterText}}</text>
+          </view>
+          <!-- 水位标注 -->
+          <view class="ds-water-row" wx:if="{{drawSystem.controlNode.waterLevel}}">
+            <text class="ds-water-tag {{drawSystem.controlNode.waterClass}}">{{drawSystem.controlNode.waterLevel}}</text>
+            <text class="ds-water-zone">{{drawSystem.controlNode.zoneName}}</text>
+            <view class="ds-water-std-wrap">
+              <text class="ds-water-std-label">标准平</text>
+              <text class="ds-water-std-val">{{drawSystem.controlNode.standardDraw}}</text>
+            </view>
+          </view>
+          <view class="ds-meta-row">
+            <text class="ds-meta">变化于 {{drawSystem.controlNode.time}}</text>
+          </view>
+        </view>
+
+        <!-- 即时赔率（终赔） -->
+        <view class="ds-section ds-section-current" wx:if="{{drawSystem.currentNode}}">
+          <view class="ds-section-title">
+            <view class="ds-dot current-node"></view>
+            <text>即时赔率（终赔）</text>
+            <text class="ds-source-tag ds-tag-current">即时</text>
+          </view>
+          <view class="ds-odds-row">
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">主</text>
+              <text class="ds-odds-value">{{drawSystem.currentNode.home}}</text>
+            </view>
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">平</text>
+              <text class="ds-odds-value highlight">{{drawSystem.currentNode.draw}}</text>
+            </view>
+            <view class="ds-odds-item">
+              <text class="ds-odds-label">客</text>
+              <text class="ds-odds-value">{{drawSystem.currentNode.away}}</text>
+            </view>
+          </view>
+          <view class="ds-meta-row">
+            <text class="ds-meta">94%体系: {{drawSystem.currentNode.home94}} / {{drawSystem.currentNode.draw94}} / {{drawSystem.currentNode.away94}}</text>
+          </view>
+          <view class="ds-node-ou" wx:if="{{drawSystem.currentNode.ouSnapshot}}">
+            <text class="ds-node-ou-label">{{drawSystem.currentNode.ouSnapshot.phaseLabel}}大小球</text>
+            <text class="ds-node-ou-value">{{drawSystem.currentNode.ouSnapshot.line}}球 大{{drawSystem.currentNode.ouSnapshot.over}} / 小{{drawSystem.currentNode.ouSnapshot.under}}</text>
+            <text class="ds-node-ou-tag">{{drawSystem.currentNode.ouSnapshot.biasLabel}} / {{drawSystem.currentNode.ouSnapshot.waterText}}</text>
+          </view>
+          <!-- 水位标注 -->
+          <view class="ds-water-row" wx:if="{{drawSystem.currentNode.waterLevel}}">
+            <text class="ds-water-tag {{drawSystem.currentNode.waterClass}}">{{drawSystem.currentNode.waterLevel}}</text>
+            <text class="ds-water-zone">{{drawSystem.currentNode.zoneName}}</text>
+            <view class="ds-water-std-wrap">
+              <text class="ds-water-std-label">标准平</text>
+              <text class="ds-water-std-val">{{drawSystem.currentNode.standardDraw}}</text>
+            </view>
+          </view>
+          <view class="ds-meta-row" wx:if="{{drawSystem.currentNode.time}}">
+            <text class="ds-meta">更新于 {{drawSystem.currentNode.time}}</text>
+          </view>
+        </view>
+
+        <!-- 平赔偏差分析 -->
+        <view class="ds-section ds-section-deviation" wx:if="{{drawSystem.deviation !== null && drawSystem.deviation !== undefined}}">
+          <view class="ds-section-title">
+            <view class="ds-dot deviation-node"></view>
+            <text>平赔偏差分析</text>
+          </view>
+          <view class="ds-deviation-grid">
+            <view class="ds-deviation-item ds-deviation-cell">
+              <text class="ds-deviation-label">一赔方</text>
+              <text class="ds-deviation-value">{{drawSystem.favorite}}</text>
+            </view>
+            <view class="ds-deviation-item ds-deviation-cell">
+              <text class="ds-deviation-label">大小球初指</text>
+              <text class="ds-deviation-value">{{drawSystem.ouLine}}</text>
+            </view>
+            <view class="ds-deviation-item ds-deviation-cell">
+              <text class="ds-deviation-label">平系类型</text>
+              <text class="ds-deviation-value ds-value-purple">{{drawSystem.drawSystemName}}</text>
+            </view>
+          </view>
+          <view class="ds-deviation-grid">
+            <view class="ds-deviation-item ds-deviation-cell">
+              <text class="ds-deviation-label">标准平赔</text>
+              <text class="ds-deviation-value">{{drawSystem.standardDraw}}</text>
+            </view>
+            <view class="ds-deviation-item ds-deviation-cell">
+              <text class="ds-deviation-label">实际平赔(94%)</text>
+              <text class="ds-deviation-value">{{drawSystem.actualDraw94}}</text>
+            </view>
+            <view class="ds-deviation-item ds-deviation-cell">
+              <text class="ds-deviation-label">偏差</text>
+              <text class="ds-deviation-value {{drawSystem.deviationClass}}">{{drawSystem.deviationText}}</text>
+            </view>
+          </view>
+          <view class="ds-conclusion {{drawSystem.deviationClass}}">
+            {{drawSystem.conclusion}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 基本面分析 -->
+    <view class="fundamental-card" wx:if="{{fundamentalItems.length}}">
+      <view class="card-title" bindtap="toggleModule" data-module="fundamental">
+        <text>基本面分析</text>
+        <text class="module-toggle {{collapsedModules.fundamental ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view class="fundamental-list" wx:if="{{!collapsedModules.fundamental}}">
+        <view class="fundamental-list-item" wx:for="{{fundamentalItems}}" wx:key="label" wx:for-index="index">
+          <view class="fundamental-main">
+            <view class="fundamental-badge">{{item.label}}</view>
+            <view class="fundamental-score">{{item.score}}</view>
+            <view class="fundamental-confidence">{{item.confidence}}</view>
+          </view>
+          <view class="fundamental-range-container" wx:if="{{item.oddsRange && item.oddsRange.length > 0}}">
+            <view class="fundamental-range-header" bindtap="toggleOddsRange" data-index="{{index}}">
+              <text class="fundamental-range-label">合理开盘：</text>
+              <view class="fundamental-range-content">
+                <text class="fundamental-range-preview" wx:if="{{!expandedOddsRanges[index]}}">
+                  {{item.oddsRange[0]}}<text wx:if="{{item.oddsRange.length > 1}}"> 等{{item.oddsRange.length}}档</text>
+                </text>
+                <text class="fundamental-range-expanded" wx:else>
+                  {{item.oddsRangeText}}
+                </text>
+              </view>
+              <text class="fundamental-range-toggle {{expandedOddsRanges[index] ? 'expanded' : ''}}">▼</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 临场基本面分析 -->
+    <view class="fundamental-card" wx:if="{{hasPreMatch}}">
+      <view class="card-title" bindtap="toggleModule" data-module="prematch">
+        <text>临场基本面分析</text>
+        <text class="module-toggle {{collapsedModules.prematch ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view wx:if="{{!collapsedModules.prematch}}">
+        <!-- 拉力方向 -->
+        <view wx:if="{{pullDirection}}" class="pull-direction-bar pull-{{pullDirection}}">
+          <text class="pull-icon">{{pullDirection === 'home' ? '← 主' : pullDirection === 'away' ? '客 →' : pullDirection === 'draw' ? '⇔ 平' : '= 均'}}</text>
+          <view class="pull-text">
+            <text class="pull-label">拉力方向：{{pullDescription}}</text>
+            <text class="pull-sub">基于胜率、赢盘率、历史交锋综合计算</text>
+          </view>
+        </view>
+
+        <!-- 分布判断（试行） -->
+        <view wx:if="{{distributionNode}}" class="distribution-node-bar">
+          <text class="distribution-node-label">分布判断（试行）：</text>
+          <text class="distribution-node-value">{{distributionNode}}</text>
+        </view>
+
+        <!-- 赛事提示标签 -->
+        <view wx:if="{{preMatchPrompts.length > 0}}" class="prompts-container">
+          <text wx:for="{{preMatchPrompts}}" wx:key="*this" class="prompt-tag">{{item}}</text>
+        </view>
+
+        <!-- 缺阵信息 -->
+        <view wx:if="{{absentPlayersHome.length > 0 || absentPlayersAway.length > 0}}" class="absent-section">
+          <text class="absent-title">缺阵信息</text>
+          <view class="absent-grid">
+            <view class="absent-col">
+              <text class="absent-team-name">{{matchDetail.homeTeam}} ({{absentPlayersHome.length}})</text>
+              <text wx:for="{{absentPlayersHome}}" wx:key="*this" class="absent-item">{{item}}</text>
+              <text wx:if="{{absentPlayersHome.length === 0}}" class="absent-empty">暂无缺阵信息</text>
+            </view>
+            <view class="absent-col">
+              <text class="absent-team-name">{{matchDetail.awayTeam}} ({{absentPlayersAway.length}})</text>
+              <text wx:for="{{absentPlayersAway}}" wx:key="*this" class="absent-item">{{item}}</text>
+              <text wx:if="{{absentPlayersAway.length === 0}}" class="absent-empty">暂无缺阵信息</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 赛前简报 -->
+        <view wx:if="{{briefing}}" class="briefing-section">
+          <text class="briefing-title">赛前简报</text>
+          <text class="briefing-text">{{briefing}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 赔率分析 -->
+    <view class="odds-card" wx:if="{{selectedCompany}}">
+      <view class="card-title" bindtap="toggleModule" data-module="odds">
+        <text>赔率分析 - {{selectedCompany.companyName}}</text>
+        <text class="module-toggle {{collapsedModules.odds ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view wx:if="{{!collapsedModules.odds}}">
+        <picker mode="selector" range="{{companyOptions}}" value="{{selectedCompanyIndex}}" bindchange="onCompanyChange">
+          <view class="company-selector">
+            <text>{{companyOptions[selectedCompanyIndex] || '选择公司'}}</text>
+            <text class="selector-icon">▼</text>
+          </view>
+        </picker>
+
+        <view class="odds-table-container" wx:if="{{oddsRows.length}}">
+          <view class="table-head">
+            <text>盘口类型</text>
+            <text>主队实力</text>
+            <text>主队区间</text>
+            <text>主队规则值</text>
+            <text>平局区间</text>
+            <text>客队实力</text>
+            <text>客队区间</text>
+            <text>客队规则值</text>
+            <text>规则差</text>
+            <text>推荐</text>
+          </view>
+          <block wx:for="{{oddsRows}}" wx:key="label">
+            <view class="table-row">
+              <text class="table-cell type-cell">{{item.label}}</text>
+              <text class="table-cell">{{item.homeStrength}}</text>
+              <text class="table-cell {{item.homeRangeClass}}">{{item.homeRange}}</text>
+              <text class="table-cell">{{item.homePressure}}</text>
+              <text class="table-cell">{{item.drawRange}}</text>
+              <text class="table-cell">{{item.awayStrength}}</text>
+              <text class="table-cell {{item.awayRangeClass}}">{{item.awayRange}}</text>
+              <text class="table-cell">{{item.awayPressure}}</text>
+              <text class="table-cell">{{item.ruleDiff}}</text>
+              <text class="table-cell recommendation">{{item.recommendation || '--'}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+
+      <view class="pagination-bar" wx:if="{{pagination.totalCompanies}}">
+        <text class="pagination-text">Loaded {{companyOptions.length}} / {{pagination.totalCompanies}} companies</text>
+        <button class="pagination-btn" bindtap="loadMoreCompanies" loading="{{loadingMore}}" disabled="{{loadingMore || !pagination.hasMore}}">
+          {{loadingMore ? 'Loading...' : (pagination.hasMore ? 'Load more' : 'All loaded')}}
+        </button>
+      </view>
+    </view>
+
+    <!-- 公司态度汇总 -->
+    <view class="attitude-card" wx:if="{{companySummary}}">
+      <view class="card-title" bindtap="toggleModule" data-module="attitude">
+        <text>公司态度汇总</text>
+        <text class="total-badge">{{companySummary.totalCount}}家</text>
+        <text class="module-toggle {{collapsedModules.attitude ? '' : 'expanded'}}">▼</text>
+      </view>
+      
+      <view class="attitude-content" wx:if="{{!collapsedModules.attitude}}">
+        <!-- 视图切换 -->
+        <view class="attitude-tabs">
+          <view class="attitude-tab {{attitudeViewMode === 'initial' ? 'active' : ''}}" bindtap="onAttitudeViewModeChange" data-mode="initial">
+            初盘态度
+          </view>
+          <view class="attitude-tab {{attitudeViewMode === 'current' ? 'active' : ''}}" bindtap="onAttitudeViewModeChange" data-mode="current">
+            即时态度
+          </view>
+        </view>
+        
+        <!-- 初盘态度数据 -->
+        <block wx:if="{{attitudeViewMode === 'initial' && companySummary.initial}}">
+          <!-- 主胜 -->
+          <view class="attitude-item" bindtap="toggleAttitudeDetail" data-key="home">
+            <view class="attitude-header">
+              <view class="attitude-label">
+                <view class="attitude-dot" style="background: #FF6B35;"></view>
+                <text>主胜</text>
+              </view>
+              <view class="attitude-stats">
+                <text class="attitude-count">{{companySummary.initial.home.count}}家</text>
+                <text class="attitude-percent">{{companySummary.initial.home.percentage}}%</text>
+                <text class="expand-icon {{expandedAttitude.home ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            <view class="attitude-bar-container">
+              <view class="attitude-bar home" style="width: {{companySummary.initial.home.barWidth}}%;"></view>
+            </view>
+            <view class="attitude-companies" wx:if="{{expandedAttitude.home && companySummary.initial.home.companies.length > 0}}">
+              <text class="company-tag" wx:for="{{companySummary.initial.home.companies}}" wx:key="*this" wx:for-item="company">{{company}}</text>
+            </view>
+          </view>
+          
+          <!-- 平局 -->
+          <view class="attitude-item" bindtap="toggleAttitudeDetail" data-key="draw">
+            <view class="attitude-header">
+              <view class="attitude-label">
+                <view class="attitude-dot" style="background: #F7B731;"></view>
+                <text>平局</text>
+              </view>
+              <view class="attitude-stats">
+                <text class="attitude-count">{{companySummary.initial.draw.count}}家</text>
+                <text class="attitude-percent">{{companySummary.initial.draw.percentage}}%</text>
+                <text class="expand-icon {{expandedAttitude.draw ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            <view class="attitude-bar-container">
+              <view class="attitude-bar draw" style="width: {{companySummary.initial.draw.barWidth}}%;"></view>
+            </view>
+            <view class="attitude-companies" wx:if="{{expandedAttitude.draw && companySummary.initial.draw.companies.length > 0}}">
+              <text class="company-tag" wx:for="{{companySummary.initial.draw.companies}}" wx:key="*this" wx:for-item="company">{{company}}</text>
+            </view>
+          </view>
+          
+          <!-- 客胜 -->
+          <view class="attitude-item" bindtap="toggleAttitudeDetail" data-key="away">
+            <view class="attitude-header">
+              <view class="attitude-label">
+                <view class="attitude-dot" style="background: #004E89;"></view>
+                <text>客胜</text>
+              </view>
+              <view class="attitude-stats">
+                <text class="attitude-count">{{companySummary.initial.away.count}}家</text>
+                <text class="attitude-percent">{{companySummary.initial.away.percentage}}%</text>
+                <text class="expand-icon {{expandedAttitude.away ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            <view class="attitude-bar-container">
+              <view class="attitude-bar away" style="width: {{companySummary.initial.away.barWidth}}%;"></view>
+            </view>
+            <view class="attitude-companies" wx:if="{{expandedAttitude.away && companySummary.initial.away.companies.length > 0}}">
+              <text class="company-tag" wx:for="{{companySummary.initial.away.companies}}" wx:key="*this" wx:for-item="company">{{company}}</text>
+            </view>
+          </view>
+        </block>
+        
+        <!-- 即时态度数据 -->
+        <block wx:if="{{attitudeViewMode === 'current' && companySummary.current}}">
+          <!-- 主胜 -->
+          <view class="attitude-item" bindtap="toggleAttitudeDetail" data-key="home">
+            <view class="attitude-header">
+              <view class="attitude-label">
+                <view class="attitude-dot" style="background: #FF6B35;"></view>
+                <text>主胜</text>
+              </view>
+              <view class="attitude-stats">
+                <text class="attitude-count">{{companySummary.current.home.count}}家</text>
+                <text class="attitude-percent">{{companySummary.current.home.percentage}}%</text>
+                <text class="expand-icon {{expandedAttitude.home ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            <view class="attitude-bar-container">
+              <view class="attitude-bar home" style="width: {{companySummary.current.home.barWidth}}%;"></view>
+            </view>
+            <view class="attitude-companies" wx:if="{{expandedAttitude.home && companySummary.current.home.companies.length > 0}}">
+              <text class="company-tag" wx:for="{{companySummary.current.home.companies}}" wx:key="*this" wx:for-item="company">{{company}}</text>
+            </view>
+          </view>
+          
+          <!-- 平局 -->
+          <view class="attitude-item" bindtap="toggleAttitudeDetail" data-key="draw">
+            <view class="attitude-header">
+              <view class="attitude-label">
+                <view class="attitude-dot" style="background: #F7B731;"></view>
+                <text>平局</text>
+              </view>
+              <view class="attitude-stats">
+                <text class="attitude-count">{{companySummary.current.draw.count}}家</text>
+                <text class="attitude-percent">{{companySummary.current.draw.percentage}}%</text>
+                <text class="expand-icon {{expandedAttitude.draw ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            <view class="attitude-bar-container">
+              <view class="attitude-bar draw" style="width: {{companySummary.current.draw.barWidth}}%;"></view>
+            </view>
+            <view class="attitude-companies" wx:if="{{expandedAttitude.draw && companySummary.current.draw.companies.length > 0}}">
+              <text class="company-tag" wx:for="{{companySummary.current.draw.companies}}" wx:key="*this" wx:for-item="company">{{company}}</text>
+            </view>
+          </view>
+          
+          <!-- 客胜 -->
+          <view class="attitude-item" bindtap="toggleAttitudeDetail" data-key="away">
+            <view class="attitude-header">
+              <view class="attitude-label">
+                <view class="attitude-dot" style="background: #004E89;"></view>
+                <text>客胜</text>
+              </view>
+              <view class="attitude-stats">
+                <text class="attitude-count">{{companySummary.current.away.count}}家</text>
+                <text class="attitude-percent">{{companySummary.current.away.percentage}}%</text>
+                <text class="expand-icon {{expandedAttitude.away ? 'expanded' : ''}}">▼</text>
+              </view>
+            </view>
+            <view class="attitude-bar-container">
+              <view class="attitude-bar away" style="width: {{companySummary.current.away.barWidth}}%;"></view>
+            </view>
+            <view class="attitude-companies" wx:if="{{expandedAttitude.away && companySummary.current.away.companies.length > 0}}">
+              <text class="company-tag" wx:for="{{companySummary.current.away.companies}}" wx:key="*this" wx:for-item="company">{{company}}</text>
+            </view>
+          </view>
+        </block>
+        
+        <!-- 可视化饼图区域 -->
+        <view class="attitude-pie-section" wx:if="{{attitudeViewMode === 'initial' && companySummary.initial}}">
+          <view class="pie-chart-wrapper">
+            <view class="pie-chart">
+              <view class="pie-slice home" style="--percentage: {{companySummary.initial.home.percentage}}; --start: 0;"></view>
+              <view class="pie-slice draw" style="--percentage: {{companySummary.initial.draw.percentage}}; --start: {{companySummary.initial.home.percentage}};"></view>
+              <view class="pie-slice away" style="--percentage: {{companySummary.initial.away.percentage}}; --start: {{companySummary.initial.home.percentage + companySummary.initial.draw.percentage}};"></view>
+              <view class="pie-center">
+                <text class="pie-total">{{companySummary.totalCount}}</text>
+                <text class="pie-label">家公司</text>
+              </view>
+            </view>
+          </view>
+          <view class="pie-legend">
+            <view class="legend-item">
+              <view class="legend-dot home"></view>
+              <text>主胜 {{companySummary.initial.home.percentage}}%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot draw"></view>
+              <text>平局 {{companySummary.initial.draw.percentage}}%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot away"></view>
+              <text>客胜 {{companySummary.initial.away.percentage}}%</text>
+            </view>
+          </view>
+        </view>
+        
+        <view class="attitude-pie-section" wx:if="{{attitudeViewMode === 'current' && companySummary.current}}">
+          <view class="pie-chart-wrapper">
+            <view class="pie-chart">
+              <view class="pie-slice home" style="--percentage: {{companySummary.current.home.percentage}}; --start: 0;"></view>
+              <view class="pie-slice draw" style="--percentage: {{companySummary.current.draw.percentage}}; --start: {{companySummary.current.home.percentage}};"></view>
+              <view class="pie-slice away" style="--percentage: {{companySummary.current.away.percentage}}; --start: {{companySummary.current.home.percentage + companySummary.current.draw.percentage}};"></view>
+              <view class="pie-center">
+                <text class="pie-total">{{companySummary.totalCount}}</text>
+                <text class="pie-label">家公司</text>
+              </view>
+            </view>
+          </view>
+          <view class="pie-legend">
+            <view class="legend-item">
+              <view class="legend-dot home"></view>
+              <text>主胜 {{companySummary.current.home.percentage}}%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot draw"></view>
+              <text>平局 {{companySummary.current.draw.percentage}}%</text>
+            </view>
+            <view class="legend-item">
+              <view class="legend-dot away"></view>
+              <text>客胜 {{companySummary.current.away.percentage}}%</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 泊松预测 -->
+    <view class="poisson-card">
+      <view class="card-title" bindtap="toggleModule" data-module="poisson">
+        <text>泊松分布预测</text>
+        <text class="poisson-status-badge" wx:if="{{poissonLoaded}}">已加载</text>
+        <text class="module-toggle {{collapsedModules.poisson ? '' : 'expanded'}}">▼</text>
+      </view>
+      <view wx:if="{{!collapsedModules.poisson}}">
+        <!-- 已有数据时直接显示 -->
+        <view wx:if="{{poissonLoaded && poissonPrediction}}">
+          <view class="poisson-stats">
+            <text class="poisson-stat">主胜 {{poissonSummary.home}}</text>
+            <text class="poisson-stat">平局 {{poissonSummary.draw}}</text>
+            <text class="poisson-stat">客胜 {{poissonSummary.away}}</text>
+          </view>
+          <button class="poisson-view" bindtap="openPoissonModal">查看泊松分布预测详情</button>
+        </view>
+        <!-- 加载中 -->
+        <view wx:elif="{{poissonLoading}}" class="poisson-placeholder">
+          <text class="placeholder-text">正在加载预测数据...</text>
+        </view>
+        <!-- 加载失败 -->
+        <view wx:elif="{{poissonError}}" class="poisson-error">
+          <text class="error-text">{{poissonError}}</text>
+          <button class="retry-btn" bindtap="onLoadPoissonTap" size="mini">重试</button>
+        </view>
+        <!-- 无数据时提供手动加载选项 -->
+        <view wx:else class="poisson-placeholder">
+          <text class="placeholder-text">暂无泊松预测数据</text>
+          <button class="load-btn" bindtap="onLoadPoissonTap" size="mini" type="primary">手动加载</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 泊松预测弹窗 -->
+    <view class="modal-mask" wx:if="{{poissonModalVisible}}" catchtap="closePoissonModal">
+      <view class="modal-card" catchtap="stopPropagation">
+        <view class="modal-head">
+          <text class="modal-title">泊松分布预测 / {{poissonModalData.method}}</text>
+          <button class="modal-close" bindtap="closePoissonModal">关闭</button>
+        </view>
+        <view class="modal-body">
+          <view class="modal-row">
+            <text>主队预期进球：{{poissonModalData.expectedHome}}</text>
+            <text>客队预期进球：{{poissonModalData.expectedAway}}</text>
+            <text>总进球预期：{{poissonModalData.expectedTotal}}</text>
+          </view>
+          <view class="modal-row">
+            <text>主胜概率：{{poissonModalData.homeProb}}</text>
+            <text>平局概率：{{poissonModalData.drawProb}}</text>
+            <text>客胜概率：{{poissonModalData.awayProb}}</text>
+          </view>
+          <view class="modal-subtitle">大小球概率</view>
+          <view class="ou-list">
+            <block wx:for="{{poissonModalData.ouList}}" wx:key="label">
+              <view class="ou-item">
+                <text>{{item.label}}</text>
+                <text>{{item.value}}</text>
+              </view>
+            </block>
+            <view wx:if="{{!poissonModalData.ouList.length}}" class="ou-empty">暂无数据</view>
+          </view>
+          <view class="modal-subtitle">最可能比分</view>
+          <scroll-view class="score-table" scroll-y>
+            <block wx:for="{{poissonModalData.scoreTable}}" wx:key="score">
+              <view class="score-row">
+                <text>{{item.score}}</text>
+                <text>{{formatPercent(item.probability)}}</text>
+                <text>{{item.odds || '--'}}</text>
+              </view>
+            </block>
+            <view wx:if="{{!poissonModalData.scoreTable.length}}" class="ou-empty">暂无比分数据</view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="action-btn btn-secondary" bindtap="onRefresh">🔄 刷新</button>
+      <button class="action-btn btn-primary" open-type="share">📤 分享</button>
+    </view>
+  </scroll-view>
+</view>

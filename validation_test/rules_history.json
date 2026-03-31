@@ -1,0 +1,320 @@
+[
+  {
+    "timestamp": "2026-01-28 01:27:30",
+    "total_matches": 634,
+    "threshold": 0.8,
+    "results": {
+      "R001": {
+        "name": "强让+即时让方超实",
+        "sample": 29,
+        "correct": 29,
+        "accuracy": 1.0,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R002": {
+        "name": "让方低Kelly",
+        "sample": 6,
+        "correct": 6,
+        "accuracy": 1.0,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R003": {
+        "name": "强让+让方赔率稳",
+        "sample": 77,
+        "correct": 73,
+        "accuracy": 0.948051948051948,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R004": {
+        "name": "强让+即时受让方韬光",
+        "sample": 31,
+        "correct": 29,
+        "accuracy": 0.9354838709677419,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R005": {
+        "name": "强让+即时受让方高开",
+        "sample": 27,
+        "correct": 25,
+        "accuracy": 0.9259259259259259,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R006": {
+        "name": "强让+受让方赔率升",
+        "sample": 40,
+        "correct": 36,
+        "accuracy": 0.9,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R007": {
+        "name": "五大联赛+即时让方低开",
+        "sample": 26,
+        "correct": 23,
+        "accuracy": 0.8846153846153846,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R008": {
+        "name": "强让+五大联赛",
+        "sample": 32,
+        "correct": 28,
+        "accuracy": 0.875,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R009": {
+        "name": "即时让方韬光盘",
+        "sample": 45,
+        "correct": 38,
+        "accuracy": 0.8444444444444444,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R010": {
+        "name": "初双实开+低开平",
+        "sample": 41,
+        "correct": 34,
+        "accuracy": 0.8292682926829268,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R011": {
+        "name": "初双实开→即时让低受高",
+        "sample": 11,
+        "correct": 9,
+        "accuracy": 0.8181818181818182,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R012": {
+        "name": "强让+即时让方韬光",
+        "sample": 11,
+        "correct": 9,
+        "accuracy": 0.8181818181818182,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R013": {
+        "name": "五大联赛+即时让方超实",
+        "sample": 27,
+        "correct": 22,
+        "accuracy": 0.8148148148148148,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R014": {
+        "name": "初让方超实+受让方韬光→即时让方低开+受让方韬光",
+        "sample": 5,
+        "correct": 4,
+        "accuracy": 0.8,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R015": {
+        "name": "五大联赛+即时让方韬光",
+        "sample": 8,
+        "correct": 8,
+        "accuracy": 1.0,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R016": {
+        "name": "让方赔率降+受让方赔率升",
+        "sample": 139,
+        "correct": 108,
+        "accuracy": 0.7769784172661871,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R017": {
+        "name": "初双实开→即时让高受低",
+        "sample": 8,
+        "correct": 6,
+        "accuracy": 0.75,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R018": {
+        "name": "即时让方超韬盘",
+        "sample": 16,
+        "correct": 11,
+        "accuracy": 0.6875,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R019": {
+        "name": "让方赔率升+受让方赔率降",
+        "sample": 170,
+        "correct": 98,
+        "accuracy": 0.5764705882352941,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-01-28 01:28:49",
+    "total_matches": 634,
+    "threshold": 0.88,
+    "results": {
+      "R001": {
+        "name": "强让+即时让方超实",
+        "sample": 29,
+        "correct": 29,
+        "accuracy": 1.0,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R002": {
+        "name": "让方低Kelly",
+        "sample": 6,
+        "correct": 6,
+        "accuracy": 1.0,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R003": {
+        "name": "强让+让方赔率稳",
+        "sample": 77,
+        "correct": 73,
+        "accuracy": 0.948051948051948,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R004": {
+        "name": "强让+即时受让方韬光",
+        "sample": 31,
+        "correct": 29,
+        "accuracy": 0.9354838709677419,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R005": {
+        "name": "强让+即时受让方高开",
+        "sample": 27,
+        "correct": 25,
+        "accuracy": 0.9259259259259259,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R006": {
+        "name": "强让+受让方赔率升",
+        "sample": 40,
+        "correct": 36,
+        "accuracy": 0.9,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R007": {
+        "name": "五大联赛+即时让方低开",
+        "sample": 26,
+        "correct": 23,
+        "accuracy": 0.8846153846153846,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R008": {
+        "name": "强让+五大联赛",
+        "sample": 32,
+        "correct": 28,
+        "accuracy": 0.875,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R009": {
+        "name": "即时让方韬光盘",
+        "sample": 45,
+        "correct": 38,
+        "accuracy": 0.8444444444444444,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R010": {
+        "name": "初双实开+低开平",
+        "sample": 41,
+        "correct": 34,
+        "accuracy": 0.8292682926829268,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R011": {
+        "name": "初双实开→即时让低受高",
+        "sample": 11,
+        "correct": 9,
+        "accuracy": 0.8181818181818182,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R012": {
+        "name": "强让+即时让方韬光",
+        "sample": 11,
+        "correct": 9,
+        "accuracy": 0.8181818181818182,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R013": {
+        "name": "五大联赛+即时让方超实",
+        "sample": 27,
+        "correct": 22,
+        "accuracy": 0.8148148148148148,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R014": {
+        "name": "初让方超实+受让方韬光→即时让方低开+受让方韬光",
+        "sample": 5,
+        "correct": 4,
+        "accuracy": 0.8,
+        "enabled": false,
+        "status": "⛔ 新禁用"
+      },
+      "R015": {
+        "name": "五大联赛+即时让方韬光",
+        "sample": 8,
+        "correct": 8,
+        "accuracy": 1.0,
+        "enabled": true,
+        "status": "✅ 启用"
+      },
+      "R016": {
+        "name": "让方赔率降+受让方赔率升",
+        "sample": 139,
+        "correct": 108,
+        "accuracy": 0.7769784172661871,
+        "enabled": false,
+        "status": "❌ 禁用"
+      },
+      "R017": {
+        "name": "初双实开→即时让高受低",
+        "sample": 8,
+        "correct": 6,
+        "accuracy": 0.75,
+        "enabled": false,
+        "status": "❌ 禁用"
+      },
+      "R018": {
+        "name": "即时让方超韬盘",
+        "sample": 16,
+        "correct": 11,
+        "accuracy": 0.6875,
+        "enabled": false,
+        "status": "❌ 禁用"
+      },
+      "R019": {
+        "name": "让方赔率升+受让方赔率降",
+        "sample": 170,
+        "correct": 98,
+        "accuracy": 0.5764705882352941,
+        "enabled": false,
+        "status": "❌ 禁用"
+      }
+    }
+  }
+]

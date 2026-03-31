@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OddsMind - 获取激活码</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .page-header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: #fff;
+        }
+        .page-header h1 { font-size: 24px; margin-bottom: 8px; }
+        .page-header p { font-size: 14px; opacity: 0.9; }
+
+        /* 历史激活码 */
+        .history-section { padding: 0 16px 16px; display: none; }
+        .history-section.show { display: block; }
+        .history-card {
+            background: #fff; border-radius: 16px; padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .history-title {
+            font-size: 14px; color: #667eea; font-weight: bold; margin-bottom: 12px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .history-title .toggle-btn {
+            font-size: 12px; color: #999; background: none; border: none; cursor: pointer;
+        }
+        .history-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid #f5f5f5;
+        }
+        .history-item:last-child { border-bottom: none; }
+        .history-item-code {
+            font-size: 18px; font-weight: bold; color: #333; letter-spacing: 2px; user-select: all;
+        }
+        .history-item-info { font-size: 12px; color: #999; margin-top: 4px; }
+        .history-copy-btn {
+            background: #667eea; color: #fff; border: none; border-radius: 8px;
+            padding: 6px 14px; font-size: 12px; cursor: pointer; white-space: nowrap;
+        }
+
+        .plans-container { padding: 0 16px 20px; }
+        .plan-card {
+            background: #fff; border-radius: 16px; padding: 24px 20px; margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+            border: 3px solid transparent;
+        }
+        .plan-card:active { transform: scale(0.98); }
+        .plan-card.selected {
+            border-color: #667eea;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        }
+        .plan-card.popular { position: relative; }
+        .plan-card.popular::after {
+            content: "推荐"; position: absolute; top: -1px; right: 16px;
+            background: linear-gradient(135deg, #ff6b35, #ff4444);
+            color: #fff; font-size: 11px; padding: 2px 10px; border-radius: 0 0 8px 8px;
+        }
+        .plan-info h3 { font-size: 18px; margin-bottom: 4px; color: #333; }
+        .plan-info p { font-size: 13px; color: #999; }
+        .plan-price { text-align: right; }
+        .plan-price .price { font-size: 28px; font-weight: bold; color: #667eea; }
+        .plan-price .price .unit { font-size: 14px; font-weight: normal; }
+        .plan-price .per-day { font-size: 12px; color: #999; margin-top: 2px; }
+
+        .action-area { padding: 20px 16px 40px; }
+        .pay-button {
+            width: 100%; height: 52px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff; border: none; border-radius: 26px;
+            font-size: 18px; font-weight: bold; cursor: pointer;
+            letter-spacing: 2px;
+        }
+        .pay-button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .pay-button:active:not(:disabled) { opacity: 0.85; }
+        .tips {
+            text-align: center; margin-top: 16px; font-size: 12px;
+            color: rgba(255,255,255,0.7); line-height: 1.8;
+        }
+
+        /* QR Code Modal */
+        .qr-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.6); z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .qr-overlay.show { display: flex; }
+        .qr-box {
+            background: #fff; border-radius: 20px; padding: 32px 24px;
+            text-align: center; width: 90%; max-width: 360px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .qr-title { font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333; }
+        .qr-amount { font-size: 28px; font-weight: bold; color: #667eea; margin-bottom: 16px; }
+        .qr-canvas-wrap {
+            display: flex; justify-content: center; margin-bottom: 16px;
+        }
+        .qr-canvas-wrap canvas { border: 8px solid #f5f5f5; border-radius: 12px; }
+        .qr-hint { font-size: 13px; color: #999; margin-bottom: 20px; line-height: 1.6; }
+        .qr-close-btn {
+            width: 100%; height: 44px; background: #f0f0f0; color: #666;
+            border: none; border-radius: 22px; font-size: 15px; cursor: pointer;
+        }
+        .qr-status { font-size: 14px; color: #2ecc71; font-weight: bold; margin-bottom: 12px; display: none; }
+
+        /* Loading & Toast */
+        .loading-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5); z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .loading-overlay.show { display: flex; }
+        .loading-box {
+            background: #fff; border-radius: 16px; padding: 40px; text-align: center;
+        }
+        .loading-spinner {
+            width: 40px; height: 40px; border: 4px solid #eee; border-top-color: #667eea;
+            border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .toast {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); background: rgba(0,0,0,0.75);
+            color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px;
+            z-index: 2000; max-width: 80%; text-align: center;
+        }
+        .toast.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+    <!-- QR Code 生成库 -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="page-header">
+        <h1>OddsMind 激活码</h1>
+        <p>选择套餐，微信扫码获取激活码</p>
+    </div>
+
+    <!-- 历史激活码 -->
+    <div class="history-section" id="historySection">
+        <div class="history-card">
+            <div class="history-title">
+                <span>我的激活码</span>
+                <button class="toggle-btn" id="toggleHistoryBtn" onclick="toggleHistory()">收起</button>
+            </div>
+            <div class="history-list" id="historyList"></div>
+        </div>
+    </div>
+
+    <div class="plans-container">
+        {% for plan in plans %}
+        <div class="plan-card {% if plan.plan_type == 'month' %}popular{% endif %}"
+             data-plan="{{ plan.plan_type }}" data-price="{{ plan.price_cents }}"
+             onclick="selectPlan(this)">
+            <div class="plan-info">
+                <h3>{{ plan.name }}</h3>
+                <p>{{ plan.description }}</p>
+            </div>
+            <div class="plan-price">
+                <div class="price"><span class="unit">&yen;</span>{{ plan.price_yuan }}</div>
+                {% if plan.plan_type == 'week' %}
+                <div class="per-day">约{{ "%.2f"|format(plan.price_cents / 700) }}元/天</div>
+                {% elif plan.plan_type == 'month' %}
+                <div class="per-day">约{{ "%.2f"|format(plan.price_cents / 3000) }}元/天</div>
+                {% elif plan.plan_type == 'year' %}
+                <div class="per-day">约{{ "%.2f"|format(plan.price_cents / 36500) }}元/天</div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="action-area">
+        <button class="pay-button" id="payBtn" disabled onclick="submitOrder()">请选择套餐</button>
+        <div class="tips">
+            选择套餐后将生成微信收款码<br>
+            扫码完成后自动生成激活码
+        </div>
+    </div>
+
+    <!-- QR Code 弹窗 -->
+    <div class="qr-overlay" id="qrOverlay">
+        <div class="qr-box">
+            <div class="qr-title" id="qrTitle">微信扫码</div>
+            <div class="qr-amount" id="qrAmount"></div>
+            <div class="qr-canvas-wrap"><canvas id="qrCanvas"></canvas></div>
+            <div class="qr-status" id="qrStatus">✅ 已完成</div>
+            <div class="qr-hint">请使用微信扫描上方二维码完成操作<br>完成后将自动跳转</div>
+            <button class="qr-close-btn" onclick="closeQr()">取消</button>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-box">
+            <div class="loading-spinner"></div>
+            <div>正在处理...</div>
+        </div>
+    </div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let selectedPlan = null;
+        let currentOrderNo = null;
+        let pollTimer = null;
+
+        // ============ 历史激活码 ============
+        function getOrderHistory() {
+            try { return JSON.parse(localStorage.getItem('oddsmind_orders') || '[]'); }
+            catch(e) { return []; }
+        }
+        function saveOrderToHistory(order) {
+            try {
+                let h = getOrderHistory().filter(o => o.order_no !== order.order_no);
+                h.unshift(order);
+                if (h.length > 20) h = h.slice(0, 20);
+                localStorage.setItem('oddsmind_orders', JSON.stringify(h));
+            } catch(e) {}
+        }
+        function renderHistory() {
+            const history = getOrderHistory().filter(o => o.invite_code);
+            const section = document.getElementById('historySection');
+            const list = document.getElementById('historyList');
+            if (history.length === 0) { section.classList.remove('show'); return; }
+            section.classList.add('show');
+            const pn = {day:'日卡',week:'周卡',month:'月卡',year:'年卡'};
+            list.innerHTML = history.map(o => `
+                <div class="history-item">
+                    <div>
+                        <div class="history-item-code">${o.invite_code}</div>
+                        <div class="history-item-info">${pn[o.plan_type]||o.plan_type} · ${o.time||''}</div>
+                    </div>
+                    <button class="history-copy-btn" onclick="copyText('${o.invite_code}')">复制</button>
+                </div>
+            `).join('');
+        }
+        let historyCollapsed = false;
+        function toggleHistory() {
+            const list = document.getElementById('historyList');
+            const btn = document.getElementById('toggleHistoryBtn');
+            historyCollapsed = !historyCollapsed;
+            list.style.display = historyCollapsed ? 'none' : 'block';
+            btn.textContent = historyCollapsed ? '展开' : '收起';
+        }
+        renderHistory();
+
+        // ============ 套餐选择 ============
+        function selectPlan(el) {
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedPlan = el.dataset.plan;
+            const btn = document.getElementById('payBtn');
+            btn.disabled = false;
+            const pn = {day:'日卡',week:'周卡',month:'月卡',year:'年卡'};
+            btn.textContent = '立即获取 - ' + (pn[selectedPlan] || selectedPlan);
+        }
+
+        function showLoading() { document.getElementById('loadingOverlay').classList.add('show'); }
+        function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
+        function showToast(msg, dur) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), dur || 2000);
+        }
+        function copyText(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => showToast('已复制！')).catch(() => fbCopy(text));
+            } else { fbCopy(text); }
+        }
+        function fbCopy(text) {
+            const ta = document.createElement('textarea'); ta.value = text;
+            ta.style.position = 'fixed'; ta.style.left = '-9999px';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); showToast('已复制！'); } catch(e) {}
+            document.body.removeChild(ta);
+        }
+
+        // ============ 生成二维码 ============
+        function showQrCode(codeUrl, amountYuan, planName) {
+            const qr = qrcode(0, 'M');
+            qr.addData(codeUrl);
+            qr.make();
+
+            const canvas = document.getElementById('qrCanvas');
+            const ctx = canvas.getContext('2d');
+            const cellSize = 6;
+            const count = qr.getModuleCount();
+            const size = count * cellSize + 20;
+            canvas.width = size;
+            canvas.height = size;
+
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, 0, size, size);
+            for (let row = 0; row < count; row++) {
+                for (let col = 0; col < count; col++) {
+                    if (qr.isDark(row, col)) {
+                        ctx.fillStyle = '#333';
+                        ctx.fillRect(col * cellSize + 10, row * cellSize + 10, cellSize, cellSize);
+                    }
+                }
+            }
+
+            document.getElementById('qrTitle').textContent = '微信扫码 - ' + planName;
+            document.getElementById('qrAmount').textContent = '¥' + amountYuan;
+            document.getElementById('qrStatus').style.display = 'none';
+            document.getElementById('qrOverlay').classList.add('show');
+        }
+
+        function closeQr() {
+            document.getElementById('qrOverlay').classList.remove('show');
+            if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+            document.getElementById('payBtn').disabled = false;
+        }
+
+        // ============ 轮询订单状态 ============
+        function startPolling(orderNo) {
+            currentOrderNo = orderNo;
+            let retries = 0;
+            pollTimer = setInterval(() => {
+                retries++;
+                if (retries > 120) { // 10分钟超时
+                    clearInterval(pollTimer); pollTimer = null;
+                    showToast('等待超时，如已完成请刷新页面');
+                    return;
+                }
+                fetch('/api/payment/query/' + orderNo).then(r => r.json()).then(res => {
+                    if (res.success && res.data && res.data.status === 'paid' && res.data.invite_code) {
+                        clearInterval(pollTimer); pollTimer = null;
+                        // 保存到历史
+                        saveOrderToHistory({
+                            order_no: orderNo,
+                            invite_code: res.data.invite_code,
+                            plan_type: selectedPlan,
+                            time: new Date().toLocaleString('zh-CN')
+                        });
+                        // 跳转结果页
+                        window.location.href = '/pay/result?order_no=' + orderNo;
+                    }
+                }).catch(() => {});
+            }, 3000); // 每3秒查一次
+        }
+
+        // ============ 下单 ============
+        async function submitOrder() {
+            if (!selectedPlan) { showToast('请先选择套餐'); return; }
+            const btn = document.getElementById('payBtn');
+            btn.disabled = true;
+            showLoading();
+
+            try {
+                const resp = await fetch('/api/payment/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ plan_type: selectedPlan })
+                });
+                const result = await resp.json();
+                hideLoading();
+
+                if (!result.success) throw new Error(result.message || '创建订单失败');
+
+                const orderData = result.data;
+                const orderNo = orderData.order_no;
+
+                // 检查是否拿到了 code_url
+                if (orderData.wx_pay && orderData.wx_pay.success && orderData.wx_pay.code_url) {
+                    // 展示二维码
+                    showQrCode(orderData.wx_pay.code_url, orderData.amount_yuan, orderData.plan_name);
+                    // 开始轮询
+                    startPolling(orderNo);
+                } else {
+                    const errMsg = (orderData.wx_pay && orderData.wx_pay.error) || '获取收款码失败，请稍后重试';
+                    showToast(errMsg, 3000);
+                    btn.disabled = false;
+                }
+            } catch (e) {
+                hideLoading();
+                showToast(e.message || '操作失败', 3000);
+                btn.disabled = false;
+            }
+        }
+
+        // 从结果页返回时检查
+        (function() {
+            const p = new URLSearchParams(window.location.search);
+            const o = p.get('order_no');
+            if (o) window.location.href = '/pay/result?order_no=' + o;
+        })();
+    </script>
+</body>
+</html>

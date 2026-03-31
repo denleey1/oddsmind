@@ -1,0 +1,49 @@
+{
+  "backup_dir": "backups",
+  "backup_database": true,
+  "backup_app_files": true,
+  "app_files_to_backup": [
+    "config",
+    "core",
+    "application",
+    "database",
+    "oddsmind.env",
+    "requirements.txt"
+  ],
+  "app_files_to_exclude": [
+    "__pycache__",
+    "*.pyc",
+    "*.pyo",
+    ".git",
+    "venv",
+    "node_modules",
+    "logs",
+    "backups",
+    "data/checkpoints",
+    "*.log"
+  ],
+  "compress_backup": true,
+  "keep_days": 30,
+  "transfer": {
+    "enabled": true,
+    "type": "remote",
+    "destination": "ubuntu@119.29.112.18:~/backup/oddsmind",
+    "password": "",
+    "comment": "传输类型: local(本地目录), remote(远程服务器), s3(Amazon S3)"
+  },
+  "transfer_remote_example": {
+    "enabled": false,
+    "type": "remote",
+    "destination": "user@remote-server:/backup/oddsmind",
+    "comment": "使用rsync或scp传输到远程服务器，需要配置SSH密钥"
+  },
+  "transfer_s3_example": {
+    "enabled": false,
+    "type": "s3",
+    "destination": "s3://my-backup-bucket/oddsmind",
+    "aws_access_key_id": "",
+    "aws_secret_access_key": "",
+    "aws_region": "us-east-1",
+    "comment": "需要安装boto3: pip install boto3，并配置AWS凭证"
+  }
+}

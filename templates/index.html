@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>足球数据分析</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>欧核数据分析</h1>
+            <div class="status-bar">
+                <span id="status-indicator" class="status-indicator"></span>
+                <span id="last-update">更新时间: --</span>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 比赛列表视图 -->
+            <div id="match-list-view" class="view active">
+                <div class="filter-bar">
+                    <select id="league-filter" class="filter-select">
+                        <option value="">全部联赛</option>
+                    </select>
+                    <select id="status-filter" class="filter-select">
+                        <option value="">全部状态</option>
+                        <option value="scheduled">未开始</option>
+                        <option value="live">进行中</option>
+                        <option value="finished">已结束</option>
+                    </select>
+                </div>
+                
+                <div id="match-list" class="match-list">
+                    <!-- 比赛列表将通过JS动态生成 -->
+                </div>
+            </div>
+
+            <!-- 比赛详情视图 -->
+            <div id="match-detail-view" class="view">
+                <div class="back-button" onclick="showMatchList()">
+                    &lt; 返回列表
+                </div>
+                
+                <div id="match-detail-content" class="match-detail">
+                    <!-- 比赛详情将通过JS动态生成 -->
+                </div>
+            </div>
+        </main>
+
+        <!-- 加载提示 -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>加载中...</p>
+        </div>
+    </div>
+
+    <!-- 直接内联JavaScript - 绕过静态文件问题 -->
+    <script>
+        console.log('🔵 开始内联加载 OddsLookup...');
+        
+        // 直接定义在全局
+        window.OddsLookup = {
+            lookupOdds: function(homeStrength, awayStrength, system) {
+                console.log('✅ lookupOdds 被调用:', {homeStrength, awayStrength, system});
+                
+                // 返回测试数据
+                return {
+                    success: true,
+                    homeStrength: homeStrength,
+                    awayStrength: awayStrength,
+                    system: system,
+                    matches: [
+                        {
+                            section: "主2区",
+                            rawValue: "主2区",
+                            isHomeSection: true,
+                            zones: [
+                                {
+                                    zone: 2,
+                                    zoneLabel: "2区 (平手-0.25)",
+                                    odds: {
+                                        winMin: 2.01,
+                                        winMax: 2.30,
+                                        drawMin: 3.14,
+                                        drawMax: 3.29,
+                                        loseMin: 2.70,
+                                        loseMax: 3.10,
+                                        returnMin: 0.8896,
+                                        returnMax: 0.8906
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                };
+            },
+            
+            availableSystems: function() {
+                return ['标准89', '澳门90.2', '竞彩88.6', '马会88.2', '威廉93.5'];
+            }
+        };
+        
+        console.log('✅ OddsLookup 内联加载完成！');
+        console.log('window.OddsLookup =', window.OddsLookup);
+    </script>
+    <script src="/static/js/app_modern.js?v=20260331ouwater"></script>
+</body>
+</html>

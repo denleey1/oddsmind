@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>系统监控仪表板 - OddsMind</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, 'Microsoft YaHei', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            color: #58a6ff;
+        }
+
+        .header h1::before {
+            content: "📊";
+            font-size: 1.8rem;
+        }
+
+        .refresh-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: #2ea043;
+        }
+
+        .refresh-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Overall Status Card */
+        .overall-status {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .status-main {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-icon {
+            font-size: 4rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .status-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-text p {
+            color: #8b949e;
+            font-size: 0.95rem;
+        }
+
+        .status-healthy .status-icon { color: #3fb950; }
+        .status-healthy .status-text h2 { color: #3fb950; }
+
+        .status-warning .status-icon { color: #d29922; }
+        .status-warning .status-text h2 { color: #d29922; }
+
+        .status-critical .status-icon { color: #f85149; }
+        .status-critical .status-text h2 { color: #f85149; }
+
+        .status-unknown .status-icon { color: #8b949e; }
+        .status-unknown .status-text h2 { color: #8b949e; }
+
+        .status-counts {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .count-item {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            background: #21262d;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .count-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .count-label {
+            font-size: 0.8rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .count-healthy .count-value { color: #3fb950; }
+        .count-warning .count-value { color: #d29922; }
+        .count-critical .count-value { color: #f85149; }
+
+        /* Tasks Grid */
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .task-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: #58a6ff;
+            transform: translateY(-2px);
+        }
+
+        .task-card.healthy { border-left: 4px solid #3fb950; }
+        .task-card.warning { border-left: 4px solid #d29922; }
+        .task-card.critical { border-left: 4px solid #f85149; }
+        .task-card.unknown { border-left: 4px solid #8b949e; }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .task-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f0f6fc;
+        }
+
+        .task-id {
+            font-size: 0.75rem;
+            color: #8b949e;
+            font-family: monospace;
+            margin-top: 0.25rem;
+        }
+
+        .task-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .task-status.healthy { background: rgba(63, 185, 80, 0.2); color: #3fb950; }
+        .task-status.warning { background: rgba(210, 153, 34, 0.2); color: #d29922; }
+        .task-status.critical { background: rgba(248, 81, 73, 0.2); color: #f85149; }
+        .task-status.unknown { background: rgba(139, 148, 158, 0.2); color: #8b949e; }
+
+        .task-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-item {
+            background: #21262d;
+            padding: 0.8rem;
+            border-radius: 6px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-value {
+            font-size: 0.95rem;
+            color: #f0f6fc;
+            font-weight: 500;
+        }
+
+        .stat-value.error { color: #f85149; }
+        .stat-value.success { color: #3fb950; }
+
+        .task-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #30363d;
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        .progress-bar {
+            background: #21262d;
+            border-radius: 4px;
+            height: 6px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .progress-fill.healthy { background: #3fb950; }
+        .progress-fill.warning { background: #d29922; }
+        .progress-fill.critical { background: #f85149; }
+
+        /* Services Section */
+        .services-section {
+            margin-top: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #f0f6fc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-item {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .service-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .service-indicator.running { background: #3fb950; box-shadow: 0 0 8px #3fb950; }
+        .service-indicator.stopped { background: #f85149; box-shadow: 0 0 8px #f85149; }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #f0f6fc;
+        }
+
+        .service-detail {
+            font-size: 0.8rem;
+            color: #8b949e;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: #8b949e;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #30363d;
+            border-top-color: #58a6ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Auto-refresh indicator */
+        .auto-refresh {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #8b949e;
+        }
+
+        .auto-refresh-dot {
+            width: 8px;
+            height: 8px;
+            background: #3fb950;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .overall-status { grid-template-columns: 1fr; }
+            .status-counts { justify-content: center; flex-wrap: wrap; }
+            .tasks-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-main">
+            <h1>系统监控仪表板</h1>
+            <div style="display: flex; align-items: center; gap: 1.5rem;">
+                <div class="auto-refresh">
+                    <span class="auto-refresh-dot"></span>
+                    <span>自动刷新 30s</span>
+                </div>
+                <button class="refresh-btn" onclick="refreshData()">
+                    🔄 立即刷新
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="content">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>正在加载监控数据...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let lastUpdate = null;
+
+        async function fetchHealthData() {
+            try {
+                const [healthRes, tasksRes] = await Promise.all([
+                    fetch('/health'),
+                    fetch('/health/tasks')
+                ]);
+                
+                const healthData = await healthRes.json();
+                const tasksData = await tasksRes.json();
+                
+                return {
+                    services: healthData.data?.services || {},
+                    app_initialized: healthData.data?.app_initialized,
+                    tasks: tasksData.data || {}
+                };
+            } catch (error) {
+                console.error('Failed to fetch health data:', error);
+                return null;
+            }
+        }
+
+        function formatTime(isoString) {
+            if (!isoString) return '从未执行';
+            const date = new Date(isoString);
+            const now = new Date();
+            const diff = (now - date) / 1000 / 60; // minutes
+            
+            if (diff < 1) return '刚刚';
+            if (diff < 60) return `${Math.floor(diff)} 分钟前`;
+            if (diff < 1440) return `${Math.floor(diff / 60)} 小时前`;
+            return `${Math.floor(diff / 1440)} 天前`;
+        }
+
+        function formatDuration(seconds) {
+            if (!seconds) return '-';
+            if (seconds < 1) return `${Math.floor(seconds * 1000)}ms`;
+            if (seconds < 60) return `${seconds.toFixed(1)}s`;
+            return `${Math.floor(seconds / 60)}m ${Math.floor(seconds % 60)}s`;
+        }
+
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'healthy': return '✅';
+                case 'warning': return '⚠️';
+                case 'critical': return '🔴';
+                default: return '❓';
+            }
+        }
+
+        function getStatusText(status) {
+            switch(status) {
+                case 'healthy': return '系统运行正常';
+                case 'warning': return '部分任务存在延迟';
+                case 'critical': return '存在严重问题需要关注';
+                default: return '状态未知';
+            }
+        }
+
+        function calculateSuccessRate(task) {
+            if (!task.run_count) return 0;
+            return Math.round((task.success_count / task.run_count) * 100);
+        }
+
+        function renderDashboard(data) {
+            if (!data) {
+                document.getElementById('content').innerHTML = `
+                    <div class="loading">
+                        <p style="color: #f85149;">⚠️ 无法获取监控数据，请检查服务状态</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const { services, tasks } = data;
+            const overallHealth = tasks.overall_health || 'unknown';
+            const tasksData = tasks.tasks || {};
+
+            let html = `
+                <!-- Overall Status -->
+                <div class="overall-status status-${overallHealth}">
+                    <div class="status-main">
+                        <div class="status-icon">${getStatusIcon(overallHealth)}</div>
+                        <div class="status-text">
+                            <h2>${overallHealth === 'healthy' ? '系统健康' : overallHealth === 'warning' ? '需要注意' : overallHealth === 'critical' ? '严重警告' : '状态未知'}</h2>
+                            <p>${getStatusText(overallHealth)}</p>
+                            <p style="margin-top: 0.5rem; font-size: 0.8rem;">最后更新: ${tasks.timestamp ? new Date(tasks.timestamp).toLocaleString('zh-CN') : '-'}</p>
+                        </div>
+                    </div>
+                    <div class="status-counts">
+                        <div class="count-item count-healthy">
+                            <div class="count-value">${tasks.healthy_tasks || 0}</div>
+                            <div class="count-label">健康</div>
+                        </div>
+                        <div class="count-item count-warning">
+                            <div class="count-value">${tasks.warning_tasks || 0}</div>
+                            <div class="count-label">警告</div>
+                        </div>
+                        <div class="count-item count-critical">
+                            <div class="count-value">${tasks.critical_tasks || 0}</div>
+                            <div class="count-label">严重</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Status -->
+                <div class="services-section">
+                    <h3 class="section-title">🖥️ 核心服务状态</h3>
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <span class="service-indicator ${services.web_server ? 'running' : 'stopped'}"></span>
+                            <div class="service-info">
+                                <div class="service-name">Web 服务器</div>
+                                <div class="service-detail">${services.web_server ? '运行中' : '已停止'}</div>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-indicator ${services.scheduler_running ? 'running' : 'stopped'}"></span>
+                            <div class="service-info">
+                                <div class="service-name">任务调度器</div>
+                                <div class="service-detail">${services.scheduler_running ? '运行中' : '已停止'}</div>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-indicator ${services.monitor_running ? 'running' : 'stopped'}"></span>
+                            <div class="service-info">
+                                <div class="service-name">赔率监控器</div>
+                                <div class="service-detail">${services.monitor_running ? `监控 ${services.monitor_matches || 0} 场比赛` : '已停止'}</div>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-indicator ${services.league_status_monitor_running ? 'running' : 'stopped'}"></span>
+                            <div class="service-info">
+                                <div class="service-name">联赛状态监控</div>
+                                <div class="service-detail">${services.league_status_monitor_running ? '运行中' : '已停止'}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tasks -->
+                <div class="services-section">
+                    <h3 class="section-title">⏱️ 定时任务状态</h3>
+                    <div class="tasks-grid">
+            `;
+
+            // Sort tasks: critical first, then warning, then others
+            const sortedTasks = Object.entries(tasksData).sort((a, b) => {
+                const order = { critical: 0, warning: 1, unknown: 2, healthy: 3 };
+                return (order[a[1].health_status] || 4) - (order[b[1].health_status] || 4);
+            });
+
+            for (const [taskId, task] of sortedTasks) {
+                const successRate = calculateSuccessRate(task);
+                const statusClass = task.health_status || 'unknown';
+                
+                html += `
+                    <div class="task-card ${statusClass}">
+                        <div class="task-header">
+                            <div>
+                                <div class="task-name">${task.task_name || taskId}</div>
+                                <div class="task-id">${taskId}</div>
+                            </div>
+                            <span class="task-status ${statusClass}">${statusClass}</span>
+                        </div>
+                        <div class="task-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">最后执行</div>
+                                <div class="stat-value">${formatTime(task.last_run_time)}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">执行耗时</div>
+                                <div class="stat-value">${formatDuration(task.last_duration_seconds)}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">成功次数</div>
+                                <div class="stat-value success">${task.success_count || 0}</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">失败次数</div>
+                                <div class="stat-value ${task.error_count > 0 ? 'error' : ''}">${task.error_count || 0}</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ${statusClass}" style="width: ${successRate}%"></div>
+                        </div>
+                        <div class="task-footer">
+                            <span>预期间隔: ${task.expected_interval_minutes || '-'}分钟</span>
+                            <span>成功率: ${successRate}%</span>
+                        </div>
+                        ${task.last_error_message ? `<div style="margin-top: 0.8rem; padding: 0.6rem; background: rgba(248, 81, 73, 0.1); border-radius: 4px; font-size: 0.8rem; color: #f85149;">最后错误: ${task.last_error_message}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('content').innerHTML = html;
+        }
+
+        async function refreshData() {
+            const btn = document.querySelector('.refresh-btn');
+            btn.disabled = true;
+            btn.textContent = '⏳ 刷新中...';
+            
+            const data = await fetchHealthData();
+            renderDashboard(data);
+            
+            btn.disabled = false;
+            btn.innerHTML = '🔄 立即刷新';
+        }
+
+        // Initial load
+        refreshData();
+
+        // Auto refresh every 30 seconds
+        setInterval(refreshData, 30000);
+    </script>
+</body>
+</html>
+

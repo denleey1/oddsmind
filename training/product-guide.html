@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OddsMind 产品介绍</title>
+    <link rel="stylesheet" href="unified-module-styles.css">
+    <style>
+        .guide-section {
+            margin-bottom: 40px;
+        }
+        
+        .guide-section h2 {
+            color: #FFD700;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        .guide-section h3 {
+            color: #FFA500;
+            font-size: 1.4em;
+            margin: 25px 0 15px 0;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+            border-left: 4px solid #FFD700;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        .feature-card h4 {
+            color: #FFD700;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .comparison-table th {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .module-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .module-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #FFD700;
+        }
+        
+        .module-item strong {
+            color: #FFA500;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .value-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .value-box h3 {
+            color: #FFD700;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .value-box p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="module-container">
+        <div class="module-header">
+            <h1>🎯 OddsMind 产品介绍</h1>
+            <p class="module-subtitle">数据分析平台 × 系统化培训课程 = 完整学习生态</p>
+        </div>
+
+        <div class="module-content">
+            <!-- 平台概览 -->
+            <div class="guide-section">
+                <h2>🌟 平台概览</h2>
+                <div class="highlight-box">
+                    <h3>什么是 OddsMind?</h3>
+                    <p><strong>OddsMind</strong> 是一个集 <strong>专业数据分析</strong> + <strong>系统化培训</strong> 于一体的足球赛事分析生态系统。</p>
+                </div>
+
+                <h3>🎯 双核心体系</h3>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>📊 数据分析平台</h4>
+                        <ul>
+                            <li>实时赛事数据</li>
+                            <li>多维度分析工具</li>
+                            <li>智能推荐系统</li>
+                            <li>可视化决策支持</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📖 培训系统</h4>
+                        <ul>
+                            <li>8大核心模块</li>
+                            <li>系统化知识体系</li>
+                            <li>循序渐进课程</li>
+                            <li>实战案例演练</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 为什么需要双轨系统 -->
+            <div class="guide-section">
+                <h2>🔄 为什么需要双轨系统?</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>单一方案问题</th>
+                            <th>OddsMind 双轨解决方案</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>❌ 只有数据,不懂分析逻辑</td>
+                            <td>✅ <strong>培训系统</strong>教授底层分析框架</td>
+                        </tr>
+                        <tr>
+                            <td>❌ 只有理论,缺少实战工具</td>
+                            <td>✅ <strong>数据平台</strong>提供实时分析环境</td>
+                        </tr>
+                        <tr>
+                            <td>❌ 学习曲线陡峭,容易放弃</td>
+                            <td>✅ <strong>循序渐进</strong>的8大模块设计</td>
+                        </tr>
+                        <tr>
+                            <td>❌ 概念抽象,难以理解</td>
+                            <td>✅ <strong>可视化</strong>数据与形象化比喻结合</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 培训课程体系 -->
+            <div class="guide-section">
+                <h2>📖 培训课程体系</h2>
+                <div class="highlight-box">
+                    <h3>完整8大模块</h3>
+                    <p>入门基础(模块1-2) → 核心概念(模块3-4) → 进阶应用(模块5-6) → 实战技巧(模块7-8)</p>
+                </div>
+
+                <div class="module-list">
+                    <div class="module-item">
+                        <strong>模块一: 理解广义实力与开盘基本手法</strong>
+                        <p>掌握球队实力分类与盘口基础逻辑</p>
+                        <p><em>对应平台: 广义实力/开盘区间指标</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块二: 一赔与三赔的理解及应用</strong>
+                        <p>掌握不同庄家的特点与策略</p>
+                        <p><em>对应平台: 赔率对比/公司态度</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块三: 平赔的全面解析</strong>
+                        <p>深入理解平赔的核心作用与策略</p>
+                        <p><em>对应平台: 平局区间/可视化卡片</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块四: 平赔的形象化理解</strong>
+                        <p>通过形象比喻理解筹码流动规律</p>
+                        <p><em>对应平台: 三色卡片系统</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块五: 基本面拉力与变盘影响</strong>
+                        <p>理解投注信心对盘口的影响机制</p>
+                        <p><em>对应平台: 信心值/变注数据</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块六: 基本面拉力与理想赔率区间的对应</strong>
+                        <p>掌握信心与赔率的对应关系</p>
+                        <p><em>对应平台: 信心+开盘区间联动</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块七: 解读"第一推荐"与规则差 🔥</strong>
+                        <p>理解规则差与推荐结果的含义</p>
+                        <p><em>对应平台: <strong>规则差值/首选推荐</strong>(核心!)</em></p>
+                    </div>
+                    <div class="module-item">
+                        <strong>模块八: 盘口难易度的选择 ⭐</strong>
+                        <p>选择适合的盘口类型与难度等级</p>
+                        <p><em>对应平台: <strong>星级难度系统</strong>(新手必学!)</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心价值 -->
+            <div class="guide-section">
+                <h2>💡 产品优势</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>1. 完整学习生态</h4>
+                        <p>数据+培训双轨系统,理论与实战即时验证</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>2. 理论与实践完美结合</h4>
+                        <p>每个培训模块都对应平台具体功能</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>3. 数据权威+算法专业</h4>
+                        <p>整合128家博彩公司数据,独家算法支持</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>4. 用户友好+可访问性</h4>
+                        <p>三色卡片可视化,进度追踪,键盘快捷键</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>5. 降低学习门槛</h4>
+                        <p>星级系统从简单开始,8大模块结构化整理</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>6. 新手进阶兼顾</h4>
+                        <p>明确的学习路径,适合不同水平用户</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心概念速查 -->
+            <div class="guide-section">
+                <h2>📚 核心概念速查表</h2>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>术语</th>
+                            <th>培训来源</th>
+                            <th>平台位置</th>
+                            <th>快速理解</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>星级</strong></td>
+                            <td>模块八</td>
+                            <td>赛事列表/详情顶部</td>
+                            <td>星越多越简单</td>
+                        </tr>
+                        <tr>
+                            <td><strong>规则差值</strong></td>
+                            <td>模块七</td>
+                            <td>分析表格</td>
+                            <td>正数→客队,负数→主队</td>
+                        </tr>
+                        <tr>
+                            <td><strong>广义实力</strong></td>
+                            <td>模块一</td>
+                            <td>分析表格</td>
+                            <td>球队综合评分</td>
+                        </tr>
+                        <tr>
+                            <td><strong>开盘区间</strong></td>
+                            <td>模块一</td>
+                            <td>分析表格</td>
+                            <td>庄家初盘态度</td>
+                        </tr>
+                        <tr>
+                            <td><strong>平赔位置</strong></td>
+                            <td>模块三/四</td>
+                            <td>黄色卡片/平局区间</td>
+                            <td>九层级划分</td>
+                        </tr>
+                        <tr>
+                            <td><strong>信心区间</strong></td>
+                            <td>模块五/六</td>
+                            <td>基本面分析卡片</td>
+                            <td>投注信心量化</td>
+                        </tr>
+                        <tr>
+                            <td><strong>变注/作用</strong></td>
+                            <td>模块五</td>
+                            <td>分析表格</td>
+                            <td>资金流向</td>
+                        </tr>
+                        <tr>
+                            <td><strong>首选推荐</strong></td>
+                            <td>模块七</td>
+                            <td>分析表格</td>
+                            <td>AI智能结果</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 价值主张 -->
+            <div class="value-box">
+                <h3>🎁 核心价值主张</h3>
+                <p><strong>对新手用户:</strong></p>
+                <p>✨ 零基础也能快速上手 | 系统化避免走弯路 | 理论+实战双保险 | 星级筛选降低难度</p>
+                <p style="margin-top: 20px;"><strong>对进阶用户:</strong></p>
+                <p>🚀 深度理论体系支撑 | 多维数据交叉验证 | 专业工具提升效率 | 持续优化分析框架</p>
+            </div>
+
+            <!-- 总结 -->
+            <div class="guide-section">
+                <h2>🌟 为什么选择 OddsMind?</h2>
+                <div class="highlight-box">
+                    <ol style="line-height: 2;">
+                        <li><strong>唯一的培训+平台双轨系统</strong></li>
+                        <li><strong>8大模块系统化知识体系</strong></li>
+                        <li><strong>理论与功能一一对应</strong></li>
+                        <li><strong>星级系统降低学习门槛</strong></li>
+                        <li><strong>128家公司数据权威性</strong></li>
+                        <li><strong>可视化降低理解难度</strong></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px; padding: 30px; background: rgba(255,215,0,0.1); border-radius: 15px;">
+                <h3 style="color: #FFD700; font-size: 1.8em; margin-bottom: 15px;">
+                    🚀 开始你的学习之旅吧!
+                </h3>
+                <p style="font-size: 1.2em;">从入门到精通,我们陪你一起成长</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

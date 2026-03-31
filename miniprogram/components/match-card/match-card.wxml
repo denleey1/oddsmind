@@ -1,0 +1,111 @@
+<!--components/match-card/match-card.wxml-->
+<view class="match-card {{signalDisplay.visible ? 'has-signal' : ''}} {{signalDisplay.cardClass}}" bindtap="onTap">
+  <view class="signal-tag signal-tag-{{signalDisplay.key}}" wx:if="{{signalDisplay.visible}}">
+    <text class="signal-tag-icon">{{signalDisplay.icon}}</text>
+    <text class="signal-tag-label">{{signalDisplay.label}}</text>
+    <text class="signal-tag-grade" wx:if="{{signalDisplay.gradeSummary}}">{{signalDisplay.gradeSummary}}</text>
+    <text class="signal-tag-cross" wx:if="{{signalDisplay.crossConfirm}}">跨体系</text>
+  </view>
+
+  <view class="fire-badge" wx:if="{{alertInfo && alertInfo.ruleCount}}">
+    <text>命中{{alertInfo.ruleCount}}条</text>
+  </view>
+
+  <view class="match-header">
+    <view class="league-info">
+      <text class="league-name">{{match.leagueName}}</text>
+      <text class="match-time">{{matchTime}}</text>
+    </view>
+    <view class="match-status" style="background: {{statusColor}};">
+      {{statusText}}
+    </view>
+  </view>
+
+  <view class="match-body">
+    <view class="team home-team">
+      <view class="team-logo">
+        <text>{{homeTeamShort}}</text>
+      </view>
+      <text class="team-name">{{match.homeTeam}}</text>
+    </view>
+
+    <view class="score-container">
+      <block wx:if="{{match.matchStatus === '已结束' || match.matchStatus === '进行中' || match.matchStatus === 'finished' || match.matchStatus === 'live'}}">
+        <view class="score-box">
+          <text class="score-value">{{match.homeScore !== null ? match.homeScore : '-'}}</text>
+          <text class="score-separator">:</text>
+          <text class="score-value">{{match.awayScore !== null ? match.awayScore : '-'}}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="vs-box">
+          <text class="vs-text">VS</text>
+        </view>
+      </block>
+    </view>
+
+    <view class="team away-team">
+      <view class="team-logo">
+        <text>{{awayTeamShort}}</text>
+      </view>
+      <text class="team-name">{{match.awayTeam}}</text>
+    </view>
+  </view>
+
+  <view class="alert-quick" wx:if="{{alertInfo && alertInfo.ruleCount}}">
+    <view class="alert-quick-row">
+      <text class="alert-quick-main">{{getQuickSuggestion(alertInfo)}}</text>
+      <view class="alert-quick-toggle-wrap" catchtap="toggleAlertDetails">
+        <text class="alert-quick-toggle">{{isAlertExpanded ? '收起详情' : '展开详情'}}</text>
+        <text class="alert-quick-arrow {{isAlertExpanded ? 'expanded' : ''}}">▼</text>
+      </view>
+    </view>
+    <view class="alert-quick-row meta">
+      <text class="alert-quick-meta">置信度 {{alertInfo.confidence || '--'}} · 命中{{alertInfo.ruleCount}}条</text>
+      <text class="alert-quick-meta" wx:if="{{alertInfo.gradeSummary}}">规则汇总 {{alertInfo.gradeSummary}}</text>
+    </view>
+  </view>
+
+  <view class="alert-detail-wrap {{isAlertExpanded ? 'expanded' : ''}}" wx:if="{{alertInfo && alertInfo.ruleCount}}">
+    <view class="alert-panel">
+      <view class="alert-line">
+        <text class="alert-label">赔率:</text>
+        <text class="alert-value">{{alertInfo.oddsStr || '--'}}</text>
+      </view>
+
+      <view class="alert-line">
+        <text class="alert-label">让球方:</text>
+        <text class="alert-value">{{alertInfo.handicapTeam || '--'}}({{alertInfo.hOddsText || '--'}})</text>
+        <text class="alert-divider"> | </text>
+        <text class="alert-label">受让方:</text>
+        <text class="alert-value">{{alertInfo.receiverTeam || '--'}}({{alertInfo.rOddsText || '--'}})</text>
+      </view>
+
+      <view class="alert-line">
+        <text class="alert-label">盘型:</text>
+        <text class="alert-value">让方={{(alertInfo.ranges && alertInfo.ranges.handicap) || '--'}}</text>
+        <text class="alert-space">  </text>
+        <text class="alert-value">受让方={{(alertInfo.ranges && alertInfo.ranges.receiver) || '--'}}</text>
+        <text class="alert-space">  </text>
+        <text class="alert-value">平局={{(alertInfo.ranges && alertInfo.ranges.draw) || '--'}}</text>
+      </view>
+
+      <view class="alert-line">
+        <text class="alert-label">变化:</text>
+        <text class="alert-value">让方={{(alertInfo.changes && alertInfo.changes.handicap) || '--'}}</text>
+        <text class="alert-space">  </text>
+        <text class="alert-value">受让方={{(alertInfo.changes && alertInfo.changes.receiver) || '--'}}</text>
+        <text class="alert-space">  </text>
+        <text class="alert-value">平赔={{(alertInfo.changes && alertInfo.changes.draw) || '--'}}</text>
+        <text class="alert-divider"> | </text>
+        <text class="alert-value">力量差={{alertInfo.power || '--'}}</text>
+      </view>
+
+      <view class="rule-list" wx:if="{{alertInfo.rules && alertInfo.rules.length}}">
+        <view class="rule-item" wx:for="{{alertInfo.rules}}" wx:key="rule_id" wx:for-item="rule">
+          <text class="rule-text">>>> {{rule.target}} [{{rule.accuracy_pct}} | 样本{{rule.sample}}] {{rule.rule_name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

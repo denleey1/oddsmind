@@ -1,0 +1,262 @@
+{
+  "generated_at": "2026-01-30 22:54:18",
+  "total_matches": 661,
+  "big5_matches": 123,
+  "other_matches": 538,
+  "perfect_rules": [
+    {
+      "name": "即时让方韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 8,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "即时让方超韬",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "即时让方超散",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时让方超实",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 7,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 8,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "即时让方韬光+让方赔率升",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 6,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 10,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "初让方高开→即时韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时让方超实+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 5,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 6,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "让方低Kelly",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 6,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+即时让方超实",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 23,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "初让方高开→即时韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 7,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+即时让方超实+让方赔率降",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 9,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+即时让方超实+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 12,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "让方低Kelly",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 6,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时让方超实",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 30,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "初让方高开→即时韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 11,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时让方超实+让方赔率降",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 11,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时让方超实+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 1.0,
+      "total": 17,
+      "league_type": "全部联赛"
+    }
+  ],
+  "high_accuracy_rules": [
+    {
+      "name": "强让+让方赔率稳",
+      "predict": "让方不输",
+      "accuracy": 0.9130434782608695,
+      "total": 23,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光+受让方升",
+      "predict": "让方必赢",
+      "accuracy": 0.8333333333333334,
+      "total": 6,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "即时让方超韬+让方赔率升",
+      "predict": "受让方必赢",
+      "accuracy": 0.75,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光",
+      "predict": "让方不输",
+      "accuracy": 0.9166666666666666,
+      "total": 24,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+让方赔率稳",
+      "predict": "让方不输",
+      "accuracy": 0.9642857142857143,
+      "total": 56,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "初让方实开→即时超实",
+      "predict": "让方不输",
+      "accuracy": 0.9411764705882353,
+      "total": 17,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "初让方实开→即时超实+让方赔率降",
+      "predict": "让方不输",
+      "accuracy": 0.9411764705882353,
+      "total": 17,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+即时让方超实+让方降",
+      "predict": "让方必赢",
+      "accuracy": 0.7777777777777778,
+      "total": 9,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+即时受让方超韬",
+      "predict": "让方必赢",
+      "accuracy": 0.8,
+      "total": 5,
+      "league_type": "其他联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光",
+      "predict": "让方不输",
+      "accuracy": 0.9375,
+      "total": 32,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+让方赔率稳",
+      "predict": "让方不输",
+      "accuracy": 0.9493670886075949,
+      "total": 79,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 0.9024390243902439,
+      "total": 41,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光+受让方赔率升",
+      "predict": "让方不输",
+      "accuracy": 0.9,
+      "total": 20,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时让方超实+让方降",
+      "predict": "让方必赢",
+      "accuracy": 0.8181818181818182,
+      "total": 11,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时受让方超韬",
+      "predict": "让方必赢",
+      "accuracy": 0.8333333333333334,
+      "total": 6,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "强让+即时受让方韬光+受让方升",
+      "predict": "让方必赢",
+      "accuracy": 0.75,
+      "total": 20,
+      "league_type": "全部联赛"
+    }
+  ]
+}

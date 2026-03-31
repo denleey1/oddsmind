@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OddsMind - 激活码</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .result-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .status-icon { font-size: 64px; margin-bottom: 16px; }
+        .status-title { font-size: 22px; font-weight: bold; margin-bottom: 8px; }
+        .status-title.success { color: #2ecc71; }
+        .status-title.pending { color: #f39c12; }
+        .status-title.failed { color: #e74c3c; }
+        .status-desc { font-size: 14px; color: #999; margin-bottom: 32px; }
+        .code-section {
+            background: linear-gradient(135deg, #f5f7fa, #eef2f7);
+            border-radius: 16px;
+            padding: 24px 16px;
+            margin-bottom: 24px;
+        }
+        .code-label { font-size: 13px; color: #999; margin-bottom: 12px; }
+        .code-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 4px;
+            word-break: break-all;
+            margin-bottom: 12px;
+            user-select: all;
+        }
+        .code-hint { font-size: 12px; color: #aaa; }
+        .copy-btn {
+            width: 100%;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .copy-btn:active { opacity: 0.85; }
+        .back-btn {
+            width: 100%;
+            height: 48px;
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 24px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .back-btn:active { background: #667eea; color: #fff; }
+        .order-info {
+            margin-top: 24px;
+            font-size: 13px;
+            color: #bbb;
+            line-height: 2;
+        }
+        .order-info span { color: #999; }
+        .important-notice {
+            background: #fff3e6;
+            border: 1px solid #ffe0b2;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 13px;
+            color: #e65100;
+            line-height: 1.8;
+        }
+        .polling-container { text-align: center; padding: 60px 24px; }
+        .polling-spinner {
+            width: 48px; height: 48px;
+            border: 4px solid #eee; border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .polling-text { font-size: 16px; color: #666; }
+        .toast {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.75); color: #fff;
+            padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 2000;
+        }
+        .toast.show { display: block; }
+    </style>
+</head>
+<body>
+    <div class="result-card">
+        {% if order and order.status == 'paid' and order.invite_code %}
+        <div class="status-icon">&#10004;&#65039;</div>
+        <div class="status-title success">获取成功</div>
+        <div class="status-desc">您的激活码已生成</div>
+
+        <div class="important-notice">
+            <strong>重要提示：</strong>请立即复制激活码！<br>
+            返回小程序登录页面，粘贴激活码即可完成激活。<br>
+            本页已自动保存记录，下次访问仍可查看。
+        </div>
+
+        <div class="code-section">
+            <div class="code-label">您的激活码</div>
+            <div class="code-value" id="inviteCode">{{ order.invite_code }}</div>
+            <div class="code-hint">有效期30天，仅限使用1次</div>
+        </div>
+
+        <button class="copy-btn" onclick="copyCode()">复制激活码</button>
+        <button class="back-btn" onclick="goBack()">获取更多激活码</button>
+
+        <div class="order-info">
+            订单号：<span>{{ order.order_no }}</span><br>
+            套餐：<span>
+                {% if order.plan_type == 'day' %}日卡
+                {% elif order.plan_type == 'week' %}周卡
+                {% elif order.plan_type == 'month' %}月卡
+                {% elif order.plan_type == 'year' %}年卡
+                {% endif %}
+            </span><br>
+            金额：<span>&yen;{{ "%.2f"|format(order.amount_cents / 100) }}</span><br>
+            时间：<span>{{ order.paid_at.strftime('%Y-%m-%d %H:%M') if order.paid_at else '-' }}</span>
+        </div>
+
+        {% elif order and order.status == 'pending' %}
+        <div class="polling-container" id="pollingArea">
+            <div class="polling-spinner"></div>
+            <div class="polling-text">正在查询结果...</div>
+            <div style="margin-top:12px;font-size:13px;color:#999;">订单号：{{ order.order_no }}</div>
+        </div>
+
+        {% elif order and order.status == 'failed' %}
+        <div class="status-icon">&#10060;</div>
+        <div class="status-title failed">获取失败</div>
+        <div class="status-desc">订单号：{{ order.order_no }}</div>
+        <button class="back-btn" onclick="goBack()" style="margin-top:24px;">重新获取</button>
+
+        {% else %}
+        <div class="status-icon">&#10068;</div>
+        <div class="status-title" style="color:#999;">订单未找到</div>
+        <div class="status-desc">
+            {% if order_no %}
+            订单号 {{ order_no }} 不存在或已过期
+            {% else %}
+            请从获取页面发起操作
+            {% endif %}
+        </div>
+        <button class="back-btn" onclick="goBack()" style="margin-top:24px;">去获取激活码</button>
+        {% endif %}
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        function showToast(msg, dur) {
+            const t = document.getElementById('toast');
+            t.textContent = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), dur || 2000);
+        }
+
+        function copyCode() {
+            const el = document.getElementById('inviteCode');
+            if (!el) return;
+            const text = el.textContent.trim();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => showToast('激活码已复制！')).catch(() => fbCopy(text));
+            } else { fbCopy(text); }
+        }
+
+        function fbCopy(text) {
+            const ta = document.createElement('textarea'); ta.value = text;
+            ta.style.position = 'fixed'; ta.style.left = '-9999px';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); showToast('激活码已复制！'); }
+            catch(e) { showToast('复制失败，请手动选择复制'); }
+            document.body.removeChild(ta);
+        }
+
+        function goBack() { window.location.href = '/pay/'; }
+
+        // 保存到 localStorage
+        (function saveToHistory() {
+            const codeEl = document.getElementById('inviteCode');
+            if (!codeEl) return;
+            const code = codeEl.textContent.trim();
+            const orderNo = '{{ order.order_no if order else "" }}';
+            const planType = '{{ order.plan_type if order else "" }}';
+            if (!code || !orderNo) return;
+            try {
+                let history = JSON.parse(localStorage.getItem('oddsmind_orders') || '[]');
+                history = history.filter(o => o.order_no !== orderNo);
+                history.unshift({
+                    order_no: orderNo,
+                    invite_code: code,
+                    plan_type: planType,
+                    time: new Date().toLocaleString('zh-CN')
+                });
+                if (history.length > 20) history = history.slice(0, 20);
+                localStorage.setItem('oddsmind_orders', JSON.stringify(history));
+            } catch(e) {}
+        })();
+
+        // 轮询（pending 状态）
+        {% if order and order.status == 'pending' %}
+        (function poll() {
+            const orderNo = '{{ order.order_no }}';
+            let retries = 0;
+            function check() {
+                if (retries >= 60) {
+                    document.getElementById('pollingArea').innerHTML =
+                        '<div style="font-size:48px;margin-bottom:16px;">&#9203;</div>' +
+                        '<div style="font-size:16px;color:#f39c12;">等待超时</div>' +
+                        '<div style="font-size:13px;color:#999;margin-top:8px;">如已完成，请稍后刷新页面</div>' +
+                        '<button class="back-btn" onclick="location.reload()" style="margin-top:20px;max-width:200px;">刷新</button>';
+                    return;
+                }
+                fetch('/api/payment/query/' + orderNo).then(r => r.json()).then(res => {
+                    if (res.success && res.data) {
+                        if (res.data.status === 'paid' || res.data.status === 'failed') { location.reload(); return; }
+                    }
+                    retries++; setTimeout(check, 5000);
+                }).catch(() => { retries++; setTimeout(check, 5000); });
+            }
+            setTimeout(check, 3000);
+        })();
+        {% endif %}
+    </script>
+</body>
+</html>

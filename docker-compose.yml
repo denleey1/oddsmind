@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  oddsmind:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oddsmind-app
+    restart: unless-stopped
+    ports:
+      - "8889:8889"
+    environment:
+      # 数据库配置（从环境变量或 docker-compose 覆盖）
+      - DB_HOST=${DB_HOST:-mysql}
+      - DB_PORT=${DB_PORT:-3306}
+      - DB_USER=${DB_USER:-root}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME:-oddsmind}
+      
+      # Redis 配置
+      - REDIS_HOST=${REDIS_HOST:-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_DB=${REDIS_DB:-0}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      
+      # 应用配置
+      - FLASK_ENV=${FLASK_ENV:-production}
+      - ODDSMIND_PORT=${ODDSMIND_PORT:-8889}
+      
+      # 微信小程序配置（如果需要）
+      - WECHAT_APPID=${WECHAT_APPID:-}
+      - WECHAT_APPSECRET=${WECHAT_APPSECRET:-}
+      
+      # 其他配置
+      - WEB_ACCESS_PASSWORD=${WEB_ACCESS_PASSWORD:-oddsmind2024}
+      - SESSION_SECRET_KEY=${SESSION_SECRET_KEY:-}
+    volumes:
+      # 日志目录
+      - ./logs:/app/logs
+      # 数据目录（如果需要持久化）
+      - ./data:/app/data
+      # 备份目录
+      - ./backups:/app/backups
+      # 环境变量文件（可选，如果使用文件配置）
+      - ./oddsmind.env:/app/oddsmind.env:ro
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - oddsmind-network
+
+  mysql:
+    image: mysql:8.0
+    container_name: oddsmind-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-your_password}
+      MYSQL_DATABASE: ${DB_NAME:-oddsmind}
+      MYSQL_USER: ${DB_USER:-oddsmind_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-your_password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+    networks:
+      - oddsmind-network
+    command: --default-authentication-plugin=mysql_native_password
+
+  redis:
+    image: redis:7-alpine
+    container_name: oddsmind-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - oddsmind-network
+    command: redis-server --appendonly yes
+
+networks:
+  oddsmind-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  redis_data:
+
+

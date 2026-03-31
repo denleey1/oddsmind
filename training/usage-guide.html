@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OddsMind 使用方法 - 八步解盘法</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 0 0 40px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3));
+            border-bottom: 2px solid rgba(255,215,0,0.3);
+        }
+        .header h1 {
+            font-size: 26px;
+            color: #FFD700;
+            margin-bottom: 8px;
+        }
+        .header p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+        .steps-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+        .step-card {
+            background: linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,165,0,0.04));
+            border-left: 4px solid #FFD700;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1a1a2e;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(255,215,0,0.4);
+        }
+        .step-title {
+            color: #FFD700;
+            font-size: 17px;
+            font-weight: bold;
+            margin: 8px 0 10px 40px;
+        }
+        .step-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            padding-left: 4px;
+        }
+        .step-content .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        .step-content .keyword {
+            color: #FFA500;
+            font-weight: 600;
+        }
+        .step-content .tip {
+            display: block;
+            margin-top: 8px;
+            padding: 10px 14px;
+            background: rgba(255,215,0,0.08);
+            border-radius: 8px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,215,0,0.15);
+        }
+        .nav-links {
+            max-width: 700px;
+            margin: 20px auto 0;
+            padding: 0 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .nav-link {
+            flex: 1;
+            min-width: 140px;
+            display: block;
+            padding: 14px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .nav-link:active { background: rgba(255,255,255,0.15); }
+        .nav-link .icon { display: block; font-size: 24px; margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>八步解盘法</h1>
+        <p>OddsMind 实战使用方法</p>
+    </div>
+
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-title">确定拉力方向</div>
+            <div class="step-content">
+                确定<span class="highlight">基本面拉力</span>的方向，一定要记好拉力最高的一方。
+                <span class="tip">信心充足降低赔付是必然，信心不足拉低必然可以增强信心。</span>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-title">确定广义让方</div>
+            <div class="step-content">
+                通过<span class="highlight">广义实力</span>确定让方。
+                <span class="tip">这里的让方和赔率中的让方不是同一个意思。</span>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-title">判断强弱队</div>
+            <div class="step-content">
+                确定主客双方<span class="highlight">是否强队</span>。
+                <span class="tip">强队与弱队的开盘方式不同。</span>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-title">模拟分散方向</div>
+            <div class="step-content">
+                假定让方获胜，模拟出庄家对于另外两个方向的分散，确定<span class="keyword">第一分散</span>和<span class="keyword">第二分散</span>，确定让方是需要<span class="highlight">降低赔付</span>还是需要<span class="highlight">加阻力</span>。
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">5</div>
+            <div class="step-title">初赔态度判读</div>
+            <div class="step-content">
+                通过<span class="keyword">澳门的一赔</span>确定庄家对于让方能否打出的态度。通过<span class="keyword">马会的三赔</span>确定庄家对于受让方是否分散的态度。
+                <span class="tip">通常意义下的初赔：<span class="highlight">低开表认可，高开表否认</span>。</span>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">6</div>
+            <div class="step-title">变盘验证分散</div>
+            <div class="step-content">
+                <span class="highlight">初盘是态度，变盘是结果。</span>通过澳门、马会、威廉（或明陞、易胜博、18bet）即时盘口来验证第四步中的分散方向（特别是第一分散）。
+                <span class="tip">起分散作用就是正路打出，反之非正路。</span>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">7</div>
+            <div class="step-title">平赔态度确认</div>
+            <div class="step-content">
+                确定<span class="keyword">平赔</span>的态度：
+                <span class="tip">
+                    ● 降低赔付 → 大概率打出<br>
+                    ● 增强分散 → 基本无了<br>
+                    ● 无动于衷 → 小概率打出<br>
+                    ● 加强阻力 → 与让方打出五五开
+                </span>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">8</div>
+            <div class="step-title">临场跳车观察</div>
+            <div class="step-content">
+                有时间的话可以观察<span class="highlight">欧洲庄临场赔率</span>是否对让方进行跳车。
+                <span class="tip">临场大幅变动往往是最终态度的表达。</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="product-guide.html" class="nav-link">
+            <span class="icon">📖</span>
+            产品介绍
+        </a>
+        <a href="quick-start.html" class="nav-link">
+            <span class="icon">🚀</span>
+            快速开始
+        </a>
+        <a href="index.html" class="nav-link">
+            <span class="icon">📚</span>
+            培训课程
+        </a>
+        <a href="betting_analyzer.html" class="nav-link">
+            <span class="icon">🔍</span>
+            模拟分析
+        </a>
+    </div>
+</body>
+</html>

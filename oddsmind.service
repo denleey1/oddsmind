@@ -1,0 +1,24 @@
+[Unit]
+Description=OddsMind Application Service
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/oddsmind
+Environment="PATH=/home/ubuntu/oddsmind/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/ubuntu/oddsmind/venv/bin/python3 /home/ubuntu/oddsmind/app.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# 资源限制
+LimitNOFILE=65535
+
+# 环境变量
+EnvironmentFile=/home/ubuntu/oddsmind/oddsmind.env
+
+[Install]
+WantedBy=multi-user.target
+

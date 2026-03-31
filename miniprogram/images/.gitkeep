@@ -1,0 +1,21 @@
+# TabBar图标占位文件
+
+由于微信小程序要求TabBar必须有图标，您需要准备以下图标文件：
+
+## 必需的图标文件（放在images目录下）：
+1. tab-home.png (首页图标-未选中)
+2. tab-home-active.png (首页图标-已选中)
+3. tab-matches.png (比赛图标-未选中)
+4. tab-matches-active.png (比赛图标-已选中)
+5. tab-profile.png (我的图标-未选中)
+6. tab-profile-active.png (我的图标-已选中)
+
+## 图标规格要求：
+- 尺寸：81px * 81px（推荐）
+- 格式：PNG（支持透明）
+- 大小：不超过40KB
+
+## 临时解决方案：
+如果暂时没有图标，可以先注释掉app.json中的tabBar配置，等准备好图标后再启用。
+
+

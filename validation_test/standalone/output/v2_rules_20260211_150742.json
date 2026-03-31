@@ -1,0 +1,5349 @@
+[
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "wl_hc_diff",
+        "<=",
+        -0.0564
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8191,
+    "cv_acc": 0.8191,
+    "oos_acc": 1.0,
+    "oos_n": 23,
+    "oos_ci_lo": 0.8569,
+    "description": "威廉受让方>4.000 + 威立让方变化差<=-0.056"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        2.0367
+      ],
+      [
+        "m_r",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8218,
+    "cv_acc": 0.8218,
+    "oos_acc": 1.0,
+    "oos_n": 18,
+    "oos_ci_lo": 0.8241,
+    "description": "三公司赔率差均值<=2.037 + 澳门受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_h",
+        ">",
+        1.85
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8592,
+    "cv_acc": 0.8592,
+    "oos_acc": 1.0,
+    "oos_n": 15,
+    "oos_ci_lo": 0.7961,
+    "description": "威廉受让方>4.000 + 立博让方>1.850"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0488
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8239,
+    "cv_acc": 0.8239,
+    "oos_acc": 0.9583,
+    "oos_n": 48,
+    "oos_ci_lo": 0.8602,
+    "description": "威廉受让方>4.000 + 立博让方变化>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.4
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8074,
+    "cv_acc": 0.8074,
+    "oos_acc": 0.9516,
+    "oos_n": 62,
+    "oos_ci_lo": 0.8671,
+    "description": "立博受让方>3.400 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        1.75
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8132,
+    "cv_acc": 0.8132,
+    "oos_acc": 0.94,
+    "oos_n": 50,
+    "oos_ci_lo": 0.8378,
+    "description": "立博赔率差>1.750 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        ">",
+        3.15
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8061,
+    "cv_acc": 0.8061,
+    "oos_acc": 0.9375,
+    "oos_n": 48,
+    "oos_ci_lo": 0.8316,
+    "description": "澳门受让方>3.150 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0513
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8011,
+    "cv_acc": 0.8011,
+    "oos_acc": 0.9333,
+    "oos_n": 30,
+    "oos_ci_lo": 0.7868,
+    "description": "澳门赔率差>1.840 + 立博让方变化>0.051"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.17
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0488
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8131,
+    "cv_acc": 0.8131,
+    "oos_acc": 0.9273,
+    "oos_n": 55,
+    "oos_ci_lo": 0.8274,
+    "description": "威廉赔率差>2.170 + 立博让方变化>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "w_h",
+        ">",
+        2.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8156,
+    "cv_acc": 0.8156,
+    "oos_acc": 0.9211,
+    "oos_n": 38,
+    "oos_ci_lo": 0.792,
+    "description": "立博受让方>3.600 + 威廉让方>2.000"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.45
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8062,
+    "cv_acc": 0.8062,
+    "oos_acc": 0.9211,
+    "oos_n": 38,
+    "oos_ci_lo": 0.792,
+    "description": "澳门赔率差>1.450 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "w_hc",
+        "<=",
+        0.0
+      ],
+      [
+        "w_ir",
+        ">",
+        4.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8264,
+    "cv_acc": 0.8264,
+    "oos_acc": 0.9211,
+    "oos_n": 38,
+    "oos_ci_lo": 0.792,
+    "description": "威廉让方变化<=0.000 + 威廉初盘受让方>4.200"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_rc",
+        "<=",
+        -0.0933
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8319,
+    "cv_acc": 0.8319,
+    "oos_acc": 0.9189,
+    "oos_n": 37,
+    "oos_ci_lo": 0.787,
+    "description": "威廉受让方>4.000 + 立博受让方变化<=-0.093"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        "<=",
+        1.8
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8233,
+    "cv_acc": 0.8233,
+    "oos_acc": 0.9167,
+    "oos_n": 36,
+    "oos_ci_lo": 0.7817,
+    "description": "立博让方<=1.800 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0294
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8391,
+    "cv_acc": 0.8391,
+    "oos_acc": 0.913,
+    "oos_n": 46,
+    "oos_ci_lo": 0.7968,
+    "description": "澳门赔率差>1.840 + 威廉让方变化>0.029"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8023,
+    "cv_acc": 0.8023,
+    "oos_acc": 0.9123,
+    "oos_n": 57,
+    "oos_ci_lo": 0.8105,
+    "description": "立博受让方>3.900 + 立博受让方变化<=-0.054"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        "<=",
+        1.85
+      ],
+      [
+        "w_rc",
+        "<=",
+        -0.1333
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8074,
+    "cv_acc": 0.8074,
+    "oos_acc": 0.9091,
+    "oos_n": 44,
+    "oos_ci_lo": 0.7884,
+    "description": "威廉让方<=1.850 + 威廉受让方变化<=-0.133"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        2.1
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0513
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8045,
+    "cv_acc": 0.8045,
+    "oos_acc": 0.9091,
+    "oos_n": 44,
+    "oos_ci_lo": 0.7884,
+    "description": "立博赔率差>2.100 + 立博让方变化>0.051"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_dc",
+        ">",
+        0.0333
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8207,
+    "cv_acc": 0.8207,
+    "oos_acc": 0.907,
+    "oos_n": 43,
+    "oos_ci_lo": 0.784,
+    "description": "威廉受让方>4.000 + 立博平赔变化>0.033"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_r",
+        ">",
+        3.1833
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8013,
+    "cv_acc": 0.8013,
+    "oos_acc": 0.9054,
+    "oos_n": 74,
+    "oos_ci_lo": 0.8174,
+    "description": "三公司受让方均值>3.183 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "w_rc",
+        "<=",
+        -0.0927
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8462,
+    "cv_acc": 0.8462,
+    "oos_acc": 0.9048,
+    "oos_n": 42,
+    "oos_ci_lo": 0.7793,
+    "description": "立博受让方>3.900 + 威廉受让方变化<=-0.093"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.69
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8343,
+    "cv_acc": 0.8343,
+    "oos_acc": 0.9048,
+    "oos_n": 42,
+    "oos_ci_lo": 0.7793,
+    "description": "澳门初盘受让方>3.650 + 威澳返还率差>3.690"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8375,
+    "cv_acc": 0.8375,
+    "oos_acc": 0.9038,
+    "oos_n": 52,
+    "oos_ci_lo": 0.7939,
+    "description": "威廉受让方>4.000 + 立博受让方变化<=-0.054"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.69
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8174,
+    "cv_acc": 0.8174,
+    "oos_acc": 0.9,
+    "oos_n": 50,
+    "oos_ci_lo": 0.7864,
+    "description": "澳门赔率差>1.840 + 威澳返还率差>3.690"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.9
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        4.3075
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.802,
+    "cv_acc": 0.802,
+    "oos_acc": 0.8983,
+    "oos_n": 59,
+    "oos_ci_lo": 0.7954,
+    "description": "澳门让方<=1.900 + 威澳返还率差>4.307"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        "<=",
+        1.8
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0486
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8022,
+    "cv_acc": 0.8022,
+    "oos_acc": 0.898,
+    "oos_n": 49,
+    "oos_ci_lo": 0.7824,
+    "description": "立博让方<=1.800 + 三公司让方变化均值>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8291,
+    "cv_acc": 0.8291,
+    "oos_acc": 0.8971,
+    "oos_n": 68,
+    "oos_ci_lo": 0.8024,
+    "description": "澳门赔率差>1.840 + 威廉让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_hc",
+        ">",
+        0.0068
+      ],
+      [
+        "m_spread",
+        ">",
+        1.84
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8133,
+    "cv_acc": 0.8133,
+    "oos_acc": 0.8955,
+    "oos_n": 67,
+    "oos_ci_lo": 0.7997,
+    "description": "三公司让方变化均值>0.007 + 澳门赔率差>1.840"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_dc",
+        ">",
+        0.0156
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8198,
+    "cv_acc": 0.8198,
+    "oos_acc": 0.8947,
+    "oos_n": 57,
+    "oos_ci_lo": 0.7888,
+    "description": "威廉受让方>4.000 + 立博平赔变化>0.016"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0488
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8006,
+    "cv_acc": 0.8006,
+    "oos_acc": 0.8913,
+    "oos_n": 92,
+    "oos_ci_lo": 0.8114,
+    "description": "立博受让方>3.600 + 立博让方变化>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        2.1
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.69
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8487,
+    "cv_acc": 0.8487,
+    "oos_acc": 0.8871,
+    "oos_n": 62,
+    "oos_ci_lo": 0.7848,
+    "description": "立博赔率差>2.100 + 威澳返还率差>3.690"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8036,
+    "cv_acc": 0.8036,
+    "oos_acc": 0.8871,
+    "oos_n": 62,
+    "oos_ci_lo": 0.7848,
+    "description": "澳门赔率差>1.840 + 立博让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_rc",
+        "<=",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8014,
+    "cv_acc": 0.8014,
+    "oos_acc": 0.8866,
+    "oos_n": 97,
+    "oos_ci_lo": 0.8083,
+    "description": "威廉受让方>4.000 + 立博受让方变化<=0.000"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_dc",
+        "<=",
+        -0.0154
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8076,
+    "cv_acc": 0.8076,
+    "oos_acc": 0.8864,
+    "oos_n": 88,
+    "oos_ci_lo": 0.8033,
+    "description": "威廉受让方>4.000 + 立博平赔变化<=-0.015"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0294
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8328,
+    "cv_acc": 0.8328,
+    "oos_acc": 0.8824,
+    "oos_n": 68,
+    "oos_ci_lo": 0.7846,
+    "description": "澳门让方<=1.800 + 威廉让方变化>0.029"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        "<=",
+        1.8
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.69
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8184,
+    "cv_acc": 0.8184,
+    "oos_acc": 0.8824,
+    "oos_n": 68,
+    "oos_ci_lo": 0.7846,
+    "description": "立博让方<=1.800 + 威澳返还率差>3.690"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_hc",
+        "<=",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8056,
+    "cv_acc": 0.8056,
+    "oos_acc": 0.8803,
+    "oos_n": 117,
+    "oos_ci_lo": 0.8091,
+    "description": "威廉受让方>4.000 + 立博让方变化<=0.000"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        2.1
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8185,
+    "cv_acc": 0.8185,
+    "oos_acc": 0.8795,
+    "oos_n": 83,
+    "oos_ci_lo": 0.7922,
+    "description": "立博赔率差>2.100 + 立博让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "w_hc",
+        "<=",
+        0.0828
+      ],
+      [
+        "w_ir",
+        ">",
+        4.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8139,
+    "cv_acc": 0.8139,
+    "oos_acc": 0.8785,
+    "oos_n": 107,
+    "oos_ci_lo": 0.8032,
+    "description": "威廉让方变化<=0.083 + 威廉初盘受让方>4.200"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0068
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8248,
+    "cv_acc": 0.8248,
+    "oos_acc": 0.8784,
+    "oos_n": 74,
+    "oos_ci_lo": 0.7847,
+    "description": "威廉受让方>4.000 + 三公司让方变化均值>0.007"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "w_hc",
+        "<=",
+        0.0233
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8022,
+    "cv_acc": 0.8022,
+    "oos_acc": 0.8769,
+    "oos_n": 130,
+    "oos_ci_lo": 0.8094,
+    "description": "威廉受让方>4.000 + 威廉让方变化<=0.023"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "l_hc",
+        ">",
+        -0.0217
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.809,
+    "cv_acc": 0.809,
+    "oos_acc": 0.8763,
+    "oos_n": 97,
+    "oos_ci_lo": 0.7961,
+    "description": "澳门赔率差>1.840 + 立博让方变化>-0.022"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8236,
+    "cv_acc": 0.8236,
+    "oos_acc": 0.8761,
+    "oos_n": 113,
+    "oos_ci_lo": 0.8027,
+    "description": "澳门受让方>3.650 + 威澳返还率差>2.910"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "w_r",
+        ">",
+        4.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8208,
+    "cv_acc": 0.8208,
+    "oos_acc": 0.875,
+    "oos_n": 144,
+    "oos_ci_lo": 0.8111,
+    "description": "澳门让方<=1.800 + 威廉受让方>4.000"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "avg3_hc",
+        ">",
+        -0.0133
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8098,
+    "cv_acc": 0.8098,
+    "oos_acc": 0.875,
+    "oos_n": 96,
+    "oos_ci_lo": 0.7941,
+    "description": "威廉受让方>4.000 + 三公司让方变化均值>-0.013"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        1.84
+      ],
+      [
+        "w_ir",
+        ">",
+        4.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8004,
+    "cv_acc": 0.8004,
+    "oos_acc": 0.8742,
+    "oos_n": 159,
+    "oos_ci_lo": 0.8137,
+    "description": "威廉赔率差>1.840 + 威廉初盘受让方>4.200"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_ir",
+        ">",
+        3.6
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8008,
+    "cv_acc": 0.8008,
+    "oos_acc": 0.8742,
+    "oos_n": 151,
+    "oos_ci_lo": 0.8118,
+    "description": "威廉受让方>4.000 + 立博初盘受让方>3.600"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "w_ir",
+        ">",
+        4.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.804,
+    "cv_acc": 0.804,
+    "oos_acc": 0.873,
+    "oos_n": 126,
+    "oos_ci_lo": 0.8037,
+    "description": "立博受让方>3.900 + 威廉初盘受让方>4.200"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "w_hc",
+        "<=",
+        0.0828
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8,
+    "cv_acc": 0.8,
+    "oos_acc": 0.8721,
+    "oos_n": 172,
+    "oos_ci_lo": 0.8139,
+    "description": "威廉受让方>4.000 + 威廉让方变化<=0.083"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "w_ih",
+        "<=",
+        1.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8051,
+    "cv_acc": 0.8051,
+    "oos_acc": 0.8718,
+    "oos_n": 156,
+    "oos_ci_lo": 0.8103,
+    "description": "威廉受让方>4.000 + 威廉初盘让方<=1.910"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.27
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8143,
+    "cv_acc": 0.8143,
+    "oos_acc": 0.8713,
+    "oos_n": 101,
+    "oos_ci_lo": 0.7922,
+    "description": "澳门赔率差>1.840 + 威澳返还率差>3.270"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0294
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8062,
+    "cv_acc": 0.8062,
+    "oos_acc": 0.8707,
+    "oos_n": 116,
+    "oos_ci_lo": 0.7976,
+    "description": "澳门初盘受让方>3.650 + 威廉让方变化>0.029"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "m_ir",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8381,
+    "cv_acc": 0.8381,
+    "oos_acc": 0.8699,
+    "oos_n": 123,
+    "oos_ci_lo": 0.7991,
+    "description": "澳门赔率差>1.840 + 澳门初盘受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "w_rc",
+        ">",
+        -0.0938
+      ],
+      [
+        "w_ir",
+        ">",
+        4.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8147,
+    "cv_acc": 0.8147,
+    "oos_acc": 0.8696,
+    "oos_n": 92,
+    "oos_ci_lo": 0.7857,
+    "description": "威廉受让方变化>-0.094 + 威廉初盘受让方>4.200"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_dc",
+        ">",
+        -0.0313
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8046,
+    "cv_acc": 0.8046,
+    "oos_acc": 0.8692,
+    "oos_n": 130,
+    "oos_ci_lo": 0.8005,
+    "description": "威廉受让方>4.000 + 立博平赔变化>-0.031"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "m_ir",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8372,
+    "cv_acc": 0.8372,
+    "oos_acc": 0.8689,
+    "oos_n": 122,
+    "oos_ci_lo": 0.7975,
+    "description": "威廉受让方>4.000 + 澳门初盘受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0068
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8328,
+    "cv_acc": 0.8328,
+    "oos_acc": 0.8687,
+    "oos_n": 99,
+    "oos_ci_lo": 0.7882,
+    "description": "立博受让方>3.900 + 三公司让方变化均值>0.007"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.17
+      ],
+      [
+        "w_ir",
+        ">",
+        4.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8091,
+    "cv_acc": 0.8091,
+    "oos_acc": 0.8672,
+    "oos_n": 128,
+    "oos_ci_lo": 0.7976,
+    "description": "威廉赔率差>2.170 + 威廉初盘受让方>4.200"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_r",
+        ">",
+        3.8567
+      ],
+      [
+        "avg3_hc",
+        ">",
+        -0.0133
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8128,
+    "cv_acc": 0.8128,
+    "oos_acc": 0.8661,
+    "oos_n": 112,
+    "oos_ci_lo": 0.7907,
+    "description": "三公司受让方均值>3.857 + 三公司让方变化均值>-0.013"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        2.1
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.27
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8455,
+    "cv_acc": 0.8455,
+    "oos_acc": 0.8661,
+    "oos_n": 112,
+    "oos_ci_lo": 0.7907,
+    "description": "立博赔率差>2.100 + 威澳返还率差>3.270"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8067,
+    "cv_acc": 0.8067,
+    "oos_acc": 0.866,
+    "oos_n": 97,
+    "oos_ci_lo": 0.7841,
+    "description": "立博受让方>3.600 + 立博受让方变化<=-0.054"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8028,
+    "cv_acc": 0.8028,
+    "oos_acc": 0.8655,
+    "oos_n": 171,
+    "oos_ci_lo": 0.8063,
+    "description": "威廉赔率差>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8296,
+    "cv_acc": 0.8296,
+    "oos_acc": 0.8649,
+    "oos_n": 111,
+    "oos_ci_lo": 0.789,
+    "description": "澳门初盘受让方>3.650 + 威澳返还率差>2.910"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "l_hc",
+        "<=",
+        0.0833
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8303,
+    "cv_acc": 0.8303,
+    "oos_acc": 0.8645,
+    "oos_n": 155,
+    "oos_ci_lo": 0.8018,
+    "description": "澳门初盘受让方>3.650 + 立博让方变化<=0.083"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.69
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8165,
+    "cv_acc": 0.8165,
+    "oos_acc": 0.8641,
+    "oos_n": 103,
+    "oos_ci_lo": 0.7847,
+    "description": "立博受让方>3.600 + 威澳返还率差>3.690"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.12
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8089,
+    "cv_acc": 0.8089,
+    "oos_acc": 0.8636,
+    "oos_n": 176,
+    "oos_ci_lo": 0.8051,
+    "description": "澳门初盘受让方>3.650 + 威澳返还率差>2.120"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_hc",
+        ">",
+        -0.0333
+      ],
+      [
+        "m_spread",
+        ">",
+        1.84
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8062,
+    "cv_acc": 0.8062,
+    "oos_acc": 0.8632,
+    "oos_n": 117,
+    "oos_ci_lo": 0.7894,
+    "description": "三公司让方变化均值>-0.033 + 澳门赔率差>1.840"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8148,
+    "cv_acc": 0.8148,
+    "oos_acc": 0.8632,
+    "oos_n": 95,
+    "oos_ci_lo": 0.7798,
+    "description": "澳门让方<=1.800 + 威廉让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.17
+      ],
+      [
+        "w_rc",
+        "<=",
+        0.0182
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8256,
+    "cv_acc": 0.8256,
+    "oos_acc": 0.8629,
+    "oos_n": 124,
+    "oos_ci_lo": 0.7914,
+    "description": "威廉赔率差>2.170 + 威廉受让方变化<=0.018"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8429,
+    "cv_acc": 0.8429,
+    "oos_acc": 0.8627,
+    "oos_n": 102,
+    "oos_ci_lo": 0.7827,
+    "description": "立博受让方>3.900 + 威廉让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "avg3_hc",
+        ">",
+        -0.0133
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.827,
+    "cv_acc": 0.827,
+    "oos_acc": 0.8626,
+    "oos_n": 131,
+    "oos_ci_lo": 0.7932,
+    "description": "立博受让方>3.900 + 三公司让方变化均值>-0.013"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "m_ir",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8399,
+    "cv_acc": 0.8399,
+    "oos_acc": 0.8621,
+    "oos_n": 145,
+    "oos_ci_lo": 0.7965,
+    "description": "立博受让方>3.900 + 澳门初盘受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        "<=",
+        1.91
+      ],
+      [
+        "w_rc",
+        "<=",
+        -0.0303
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8041,
+    "cv_acc": 0.8041,
+    "oos_acc": 0.8611,
+    "oos_n": 144,
+    "oos_ci_lo": 0.7952,
+    "description": "立博让方<=1.910 + 威廉受让方变化<=-0.030"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "w_rc",
+        "<=",
+        0.0556
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8128,
+    "cv_acc": 0.8128,
+    "oos_acc": 0.8607,
+    "oos_n": 122,
+    "oos_ci_lo": 0.7881,
+    "description": "威廉受让方>4.000 + 威廉受让方变化<=0.056"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        4.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.804,
+    "cv_acc": 0.804,
+    "oos_acc": 0.8606,
+    "oos_n": 165,
+    "oos_ci_lo": 0.7995,
+    "description": "立博受让方>4.000"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        ">",
+        2.2667
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8312,
+    "cv_acc": 0.8312,
+    "oos_acc": 0.86,
+    "oos_n": 150,
+    "oos_ci_lo": 0.7954,
+    "description": "三公司赔率差均值>2.267"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_hc",
+        ">",
+        0.0068
+      ],
+      [
+        "m_h",
+        "<=",
+        1.8
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8034,
+    "cv_acc": 0.8034,
+    "oos_acc": 0.86,
+    "oos_n": 100,
+    "oos_ci_lo": 0.7786,
+    "description": "三公司让方变化均值>0.007 + 澳门让方<=1.800"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8224,
+    "cv_acc": 0.8224,
+    "oos_acc": 0.8599,
+    "oos_n": 157,
+    "oos_ci_lo": 0.7969,
+    "description": "澳门让方<=1.800 + 威澳返还率差>2.910"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        "<=",
+        1.85
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8022,
+    "cv_acc": 0.8022,
+    "oos_acc": 0.8594,
+    "oos_n": 128,
+    "oos_ci_lo": 0.7886,
+    "description": "威廉让方<=1.850 + 威廉让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        ">",
+        2.0377
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8265,
+    "cv_acc": 0.8265,
+    "oos_acc": 0.8592,
+    "oos_n": 142,
+    "oos_ci_lo": 0.7924,
+    "description": "三公司赔率差均值>2.038 + 威澳返还率差>2.910"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        "<=",
+        1.8
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8241,
+    "cv_acc": 0.8241,
+    "oos_acc": 0.8592,
+    "oos_n": 142,
+    "oos_ci_lo": 0.7924,
+    "description": "立博让方<=1.800 + 威澳返还率差>2.910"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.17
+      ],
+      [
+        "w_ir",
+        ">",
+        3.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8049,
+    "cv_acc": 0.8049,
+    "oos_acc": 0.859,
+    "oos_n": 227,
+    "oos_ci_lo": 0.8078,
+    "description": "威廉赔率差>2.170 + 威廉初盘受让方>3.000"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.75
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8253,
+    "cv_acc": 0.8253,
+    "oos_acc": 0.859,
+    "oos_n": 156,
+    "oos_ci_lo": 0.7957,
+    "description": "澳门让方<=1.750"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        3.5
+      ],
+      [
+        "m_ir",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8195,
+    "cv_acc": 0.8195,
+    "oos_acc": 0.8557,
+    "oos_n": 201,
+    "oos_ci_lo": 0.8005,
+    "description": "威廉受让方>3.500 + 澳门初盘受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        "<=",
+        1.83
+      ],
+      [
+        "w_rc",
+        "<=",
+        0.0182
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8,
+    "cv_acc": 0.8,
+    "oos_acc": 0.8552,
+    "oos_n": 145,
+    "oos_ci_lo": 0.7887,
+    "description": "威廉让方<=1.830 + 威廉受让方变化<=0.018"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "m_ir",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.824,
+    "cv_acc": 0.824,
+    "oos_acc": 0.8551,
+    "oos_n": 138,
+    "oos_ci_lo": 0.7867,
+    "description": "澳门让方<=1.800 + 澳门初盘受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        ">",
+        3.65
+      ],
+      [
+        "l_hc",
+        ">",
+        -0.0455
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8078,
+    "cv_acc": 0.8078,
+    "oos_acc": 0.8547,
+    "oos_n": 117,
+    "oos_ci_lo": 0.7796,
+    "description": "澳门受让方>3.650 + 立博让方变化>-0.045"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "m_ir",
+        ">",
+        3.38
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8225,
+    "cv_acc": 0.8225,
+    "oos_acc": 0.8543,
+    "oos_n": 151,
+    "oos_ci_lo": 0.7893,
+    "description": "澳门赔率差>1.840 + 澳门初盘受让方>3.380"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "w_ih",
+        "<=",
+        1.8
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.804,
+    "cv_acc": 0.804,
+    "oos_acc": 0.8541,
+    "oos_n": 185,
+    "oos_ci_lo": 0.796,
+    "description": "立博受让方>3.600 + 威廉初盘让方<=1.800"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.17
+      ],
+      [
+        "w_ih",
+        "<=",
+        1.8
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8186,
+    "cv_acc": 0.8186,
+    "oos_acc": 0.8538,
+    "oos_n": 130,
+    "oos_ci_lo": 0.783,
+    "description": "威廉赔率差>2.170 + 威廉初盘让方<=1.800"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "m_r",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8239,
+    "cv_acc": 0.8239,
+    "oos_acc": 0.8537,
+    "oos_n": 164,
+    "oos_ci_lo": 0.7915,
+    "description": "澳门让方<=1.800 + 澳门受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        1.75
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8021,
+    "cv_acc": 0.8021,
+    "oos_acc": 0.8537,
+    "oos_n": 164,
+    "oos_ci_lo": 0.7915,
+    "description": "立博赔率差>1.750 + 威廉让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "l_hc",
+        ">",
+        -0.0455
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.815,
+    "cv_acc": 0.815,
+    "oos_acc": 0.8537,
+    "oos_n": 123,
+    "oos_ci_lo": 0.7805,
+    "description": "威廉受让方>4.000 + 立博让方变化>-0.045"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "avg3_hc",
+        ">",
+        -0.0333
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8174,
+    "cv_acc": 0.8174,
+    "oos_acc": 0.8527,
+    "oos_n": 129,
+    "oos_ci_lo": 0.7814,
+    "description": "威廉受让方>4.000 + 三公司让方变化均值>-0.033"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "l_hc",
+        ">",
+        -0.0217
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8281,
+    "cv_acc": 0.8281,
+    "oos_acc": 0.8527,
+    "oos_n": 129,
+    "oos_ci_lo": 0.7814,
+    "description": "立博受让方>3.900 + 立博让方变化>-0.022"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "l_r",
+        ">",
+        3.9
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.832,
+    "cv_acc": 0.832,
+    "oos_acc": 0.8523,
+    "oos_n": 176,
+    "oos_ci_lo": 0.7923,
+    "description": "澳门让方<=1.800 + 立博受让方>3.900"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        2.067
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8273,
+    "cv_acc": 0.8273,
+    "oos_acc": 0.8521,
+    "oos_n": 142,
+    "oos_ci_lo": 0.7845,
+    "description": "澳门赔率差>2.067"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        ">",
+        4.0
+      ],
+      [
+        "wl_hc_diff",
+        ">",
+        -0.0286
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8065,
+    "cv_acc": 0.8065,
+    "oos_acc": 0.8516,
+    "oos_n": 155,
+    "oos_ci_lo": 0.7872,
+    "description": "威廉受让方>4.000 + 威立让方变化差>-0.029"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        5.04
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.817,
+    "cv_acc": 0.817,
+    "oos_acc": 0.8515,
+    "oos_n": 202,
+    "oos_ci_lo": 0.7959,
+    "description": "澳门初盘受让方>3.650 + 威澳返还率差<=5.040"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        3.27
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8213,
+    "cv_acc": 0.8213,
+    "oos_acc": 0.8503,
+    "oos_n": 187,
+    "oos_ci_lo": 0.7921,
+    "description": "立博受让方>3.600 + 威澳返还率差>3.270"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.9
+      ],
+      [
+        "w_ir",
+        ">",
+        3.75
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8042,
+    "cv_acc": 0.8042,
+    "oos_acc": 0.85,
+    "oos_n": 180,
+    "oos_ci_lo": 0.7906,
+    "description": "立博受让方>3.900 + 威廉初盘受让方>3.750"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.48
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8183,
+    "cv_acc": 0.8183,
+    "oos_acc": 0.85,
+    "oos_n": 160,
+    "oos_ci_lo": 0.7865,
+    "description": "澳门赔率差>1.840 + 威澳返还率差>2.480"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        ">",
+        1.84
+      ],
+      [
+        "w_rc",
+        "<=",
+        0.1154
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8039,
+    "cv_acc": 0.8039,
+    "oos_acc": 0.8487,
+    "oos_n": 152,
+    "oos_ci_lo": 0.7832,
+    "description": "澳门赔率差>1.840 + 威廉受让方变化<=0.115"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        ">",
+        3.65
+      ],
+      [
+        "l_hc",
+        ">",
+        -0.0455
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8002,
+    "cv_acc": 0.8002,
+    "oos_acc": 0.8478,
+    "oos_n": 184,
+    "oos_ci_lo": 0.7889,
+    "description": "澳门初盘受让方>3.650 + 立博让方变化>-0.045"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        ">",
+        1.3433
+      ],
+      [
+        "w_rc",
+        "<=",
+        -0.0303
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8049,
+    "cv_acc": 0.8049,
+    "oos_acc": 0.8474,
+    "oos_n": 190,
+    "oos_ci_lo": 0.7894,
+    "description": "三公司赔率差均值>1.343 + 威廉受让方变化<=-0.030"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.9
+      ],
+      [
+        "m_spread",
+        ">",
+        1.84
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8152,
+    "cv_acc": 0.8152,
+    "oos_acc": 0.8472,
+    "oos_n": 216,
+    "oos_ci_lo": 0.7932,
+    "description": "澳门让方<=1.900 + 澳门赔率差>1.840"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        ">",
+        3.65
+      ],
+      [
+        "w_hc",
+        ">",
+        -0.0714
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8126,
+    "cv_acc": 0.8126,
+    "oos_acc": 0.8467,
+    "oos_n": 150,
+    "oos_ci_lo": 0.7804,
+    "description": "澳门受让方>3.650 + 威廉让方变化>-0.071"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        "<=",
+        1.85
+      ],
+      [
+        "m_ir",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.818,
+    "cv_acc": 0.818,
+    "oos_acc": 0.8457,
+    "oos_n": 162,
+    "oos_ci_lo": 0.7821,
+    "description": "威廉让方<=1.850 + 澳门初盘受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.12
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.818,
+    "cv_acc": 0.818,
+    "oos_acc": 0.8451,
+    "oos_n": 213,
+    "oos_ci_lo": 0.7904,
+    "description": "澳门让方<=1.800 + 威澳返还率差>2.120"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_r",
+        ">",
+        3.8567
+      ],
+      [
+        "l_h",
+        "<=",
+        1.8
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8289,
+    "cv_acc": 0.8289,
+    "oos_acc": 0.8448,
+    "oos_n": 174,
+    "oos_ci_lo": 0.7836,
+    "description": "三公司受让方均值>3.857 + 立博让方<=1.800"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "w_ir",
+        ">",
+        3.75
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8004,
+    "cv_acc": 0.8004,
+    "oos_acc": 0.8448,
+    "oos_n": 277,
+    "oos_ci_lo": 0.7974,
+    "description": "立博受让方>3.600 + 威廉初盘受让方>3.750"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        1.68
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8181,
+    "cv_acc": 0.8181,
+    "oos_acc": 0.8429,
+    "oos_n": 191,
+    "oos_ci_lo": 0.7846,
+    "description": "澳门受让方>3.650 + 威澳返还率差>1.680"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        ">",
+        3.65
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        5.04
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8228,
+    "cv_acc": 0.8228,
+    "oos_acc": 0.8424,
+    "oos_n": 203,
+    "oos_ci_lo": 0.7859,
+    "description": "澳门受让方>3.650 + 威澳返还率差<=5.040"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_hc",
+        "<=",
+        0.0749
+      ],
+      [
+        "m_r",
+        ">",
+        3.65
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8241,
+    "cv_acc": 0.8241,
+    "oos_acc": 0.841,
+    "oos_n": 195,
+    "oos_ci_lo": 0.7832,
+    "description": "三公司让方变化均值<=0.075 + 澳门受让方>3.650"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.8
+      ],
+      [
+        "m_ir",
+        ">",
+        3.38
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8111,
+    "cv_acc": 0.8111,
+    "oos_acc": 0.8409,
+    "oos_n": 176,
+    "oos_ci_lo": 0.7797,
+    "description": "澳门让方<=1.800 + 澳门初盘受让方>3.380"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        1.9
+      ],
+      [
+        "avg3_r",
+        ">",
+        3.8567
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8215,
+    "cv_acc": 0.8215,
+    "oos_acc": 0.84,
+    "oos_n": 225,
+    "oos_ci_lo": 0.7865,
+    "description": "澳门让方<=1.900 + 三公司受让方均值>3.857"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        2.1
+      ],
+      [
+        "m_spread",
+        ">",
+        1.84
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8234,
+    "cv_acc": 0.8234,
+    "oos_acc": 0.8387,
+    "oos_n": 186,
+    "oos_ci_lo": 0.7791,
+    "description": "立博赔率差>2.100 + 澳门赔率差>1.840"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "avg3_hc",
+        ">",
+        -0.0133
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8064,
+    "cv_acc": 0.8064,
+    "oos_acc": 0.8369,
+    "oos_n": 233,
+    "oos_ci_lo": 0.7841,
+    "description": "立博受让方>3.600 + 三公司让方变化均值>-0.013"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "m_h",
+        "<=",
+        1.8
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8224,
+    "cv_acc": 0.8224,
+    "oos_acc": 0.8369,
+    "oos_n": 233,
+    "oos_ci_lo": 0.7841,
+    "description": "立博受让方>3.600 + 澳门让方<=1.800"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        "<=",
+        1.8
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.12
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8228,
+    "cv_acc": 0.8228,
+    "oos_acc": 0.8358,
+    "oos_n": 201,
+    "oos_ci_lo": 0.7784,
+    "description": "立博让方<=1.800 + 威澳返还率差>2.120"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "w_hc",
+        ">",
+        -0.0164
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8,
+    "cv_acc": 0.8,
+    "oos_acc": 0.8355,
+    "oos_n": 231,
+    "oos_ci_lo": 0.7823,
+    "description": "立博受让方>3.600 + 威廉让方变化>-0.016"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        1.75
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.91
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8131,
+    "cv_acc": 0.8131,
+    "oos_acc": 0.8355,
+    "oos_n": 231,
+    "oos_ci_lo": 0.7823,
+    "description": "立博赔率差>1.750 + 威澳返还率差>2.910"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        ">",
+        2.0
+      ]
+    ],
+    "side": "H",
+    "requires": "wm",
+    "train_acc": 0.8009,
+    "cv_acc": 0.8009,
+    "oos_acc": 0.8312,
+    "oos_n": 308,
+    "oos_ci_lo": 0.7853,
+    "description": "威廉赔率差>2.000"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.48
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8175,
+    "cv_acc": 0.8175,
+    "oos_acc": 0.829,
+    "oos_n": 310,
+    "oos_ci_lo": 0.7832,
+    "description": "立博受让方>3.600 + 威澳返还率差>2.480"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.8
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8105,
+    "cv_acc": 0.8105,
+    "oos_acc": 0.8276,
+    "oos_n": 319,
+    "oos_ci_lo": 0.7823,
+    "description": "立博受让方>3.800"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        ">",
+        1.75
+      ],
+      [
+        "m_h",
+        "<=",
+        1.9
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8026,
+    "cv_acc": 0.8026,
+    "oos_acc": 0.8254,
+    "oos_n": 355,
+    "oos_ci_lo": 0.7824,
+    "description": "立博赔率差>1.750 + 澳门让方<=1.900"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        1.68
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8066,
+    "cv_acc": 0.8066,
+    "oos_acc": 0.8249,
+    "oos_n": 394,
+    "oos_ci_lo": 0.7843,
+    "description": "立博受让方>3.600 + 威澳返还率差>1.680"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        ">",
+        3.6
+      ],
+      [
+        "l_hc",
+        "<=",
+        0.0833
+      ]
+    ],
+    "side": "H",
+    "requires": "wl",
+    "train_acc": 0.8119,
+    "cv_acc": 0.8119,
+    "oos_acc": 0.8216,
+    "oos_n": 398,
+    "oos_ci_lo": 0.781,
+    "description": "立博受让方>3.600 + 立博让方变化<=0.083"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        ">",
+        1.3433
+      ],
+      [
+        "m_ir",
+        ">",
+        3.2
+      ]
+    ],
+    "side": "H",
+    "requires": "wml",
+    "train_acc": 0.8016,
+    "cv_acc": 0.8016,
+    "oos_acc": 0.8208,
+    "oos_n": 452,
+    "oos_ci_lo": 0.7828,
+    "description": "三公司赔率差均值>1.343 + 澳门初盘受让方>3.200"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.37
+      ],
+      [
+        "avg3_hc",
+        "<=",
+        -0.0333
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.7556,
+    "cv_acc": 0.7556,
+    "oos_acc": 0.9333,
+    "oos_n": 15,
+    "oos_ci_lo": 0.7018,
+    "description": "立博让方>2.370 + 三公司让方变化均值<=-0.033"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.1364
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7576,
+    "cv_acc": 0.7576,
+    "oos_acc": 0.875,
+    "oos_n": 16,
+    "oos_ci_lo": 0.6398,
+    "description": "立博让方变化>0.136 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "w_ih",
+        ">",
+        2.45
+      ],
+      [
+        "w_hc",
+        ">",
+        0.1319
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6941,
+    "cv_acc": 0.6941,
+    "oos_acc": 0.8636,
+    "oos_n": 22,
+    "oos_ci_lo": 0.6666,
+    "description": "威廉初盘让方>2.450 + 威廉让方变化>0.132"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "l_r",
+        ">",
+        2.75
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6598,
+    "cv_acc": 0.6598,
+    "oos_acc": 0.8333,
+    "oos_n": 18,
+    "oos_ci_lo": 0.6078,
+    "description": "威廉让方>2.500 + 立博受让方>2.750"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "m_ir",
+        ">",
+        2.78
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6508,
+    "cv_acc": 0.6508,
+    "oos_acc": 0.8148,
+    "oos_n": 27,
+    "oos_ci_lo": 0.633,
+    "description": "立博让方>2.500 + 澳门初盘受让方>2.780"
+  },
+  {
+    "conditions": [
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7478,
+    "cv_acc": 0.7478,
+    "oos_acc": 0.8125,
+    "oos_n": 32,
+    "oos_ci_lo": 0.6469,
+    "description": "立博受让方变化<=-0.054 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.087
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7547,
+    "cv_acc": 0.7547,
+    "oos_acc": 0.8077,
+    "oos_n": 26,
+    "oos_ci_lo": 0.6212,
+    "description": "立博让方变化>0.087 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.37
+      ],
+      [
+        "l_hc",
+        "<=",
+        -0.0217
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6636,
+    "cv_acc": 0.6636,
+    "oos_acc": 0.8056,
+    "oos_n": 36,
+    "oos_ci_lo": 0.6497,
+    "description": "立博让方>2.370 + 立博让方变化<=-0.022"
+  },
+  {
+    "conditions": [
+      [
+        "w_hc",
+        ">",
+        0.1319
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7317,
+    "cv_acc": 0.7317,
+    "oos_acc": 0.8056,
+    "oos_n": 36,
+    "oos_ci_lo": 0.6497,
+    "description": "威廉让方变化>0.132 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "w_hc",
+        ">",
+        0.1319
+      ],
+      [
+        "w_irr",
+        ">",
+        91.42
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6791,
+    "cv_acc": 0.6791,
+    "oos_acc": 0.8056,
+    "oos_n": 36,
+    "oos_ci_lo": 0.6497,
+    "description": "威廉让方变化>0.132 + 威廉初盘返还率>91.420"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.1364
+      ],
+      [
+        "l_ih",
+        ">",
+        2.3
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7217,
+    "cv_acc": 0.7217,
+    "oos_acc": 0.8,
+    "oos_n": 25,
+    "oos_ci_lo": 0.6087,
+    "description": "立博让方变化>0.136 + 立博初盘让方>2.300"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.1364
+      ],
+      [
+        "l_rc",
+        ">",
+        -0.1471
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6646,
+    "cv_acc": 0.6646,
+    "oos_acc": 0.775,
+    "oos_n": 40,
+    "oos_ci_lo": 0.625,
+    "description": "立博让方变化>0.136 + 立博受让方变化>-0.147"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        "<=",
+        2.4
+      ],
+      [
+        "w_h",
+        ">",
+        2.5
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.7143,
+    "cv_acc": 0.7143,
+    "oos_acc": 0.7714,
+    "oos_n": 35,
+    "oos_ci_lo": 0.6098,
+    "description": "澳门让方<=2.400 + 威廉让方>2.500"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "l_hc",
+        ">",
+        0.1286
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6675,
+    "cv_acc": 0.6675,
+    "oos_acc": 0.7683,
+    "oos_n": 82,
+    "oos_ci_lo": 0.6662,
+    "description": "立博让方>2.500 + 立博让方变化>0.129"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.0488
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7279,
+    "cv_acc": 0.7279,
+    "oos_acc": 0.7674,
+    "oos_n": 43,
+    "oos_ci_lo": 0.6226,
+    "description": "立博让方变化>0.049 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "m_h",
+        "<=",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6614,
+    "cv_acc": 0.6614,
+    "oos_acc": 0.766,
+    "oos_n": 47,
+    "oos_ci_lo": 0.6278,
+    "description": "三公司赔率差均值<=0.147 + 澳门让方<=2.400"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.1364
+      ],
+      [
+        "l_ih",
+        ">",
+        2.1
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7164,
+    "cv_acc": 0.7164,
+    "oos_acc": 0.76,
+    "oos_n": 50,
+    "oos_ci_lo": 0.6259,
+    "description": "立博让方变化>0.136 + 立博初盘让方>2.100"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.1364
+      ],
+      [
+        "l_ih",
+        ">",
+        2.2
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7196,
+    "cv_acc": 0.7196,
+    "oos_acc": 0.75,
+    "oos_n": 44,
+    "oos_ci_lo": 0.6056,
+    "description": "立博让方变化>0.136 + 立博初盘让方>2.200"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        "<=",
+        2.5
+      ],
+      [
+        "wl_hc_diff",
+        "<=",
+        -0.0136
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6583,
+    "cv_acc": 0.6583,
+    "oos_acc": 0.7458,
+    "oos_n": 59,
+    "oos_ci_lo": 0.622,
+    "description": "澳门受让方<=2.500 + 威立让方变化差<=-0.014"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_r",
+        "<=",
+        2.5867
+      ],
+      [
+        "m_ir",
+        ">",
+        2.57
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.673,
+    "cv_acc": 0.673,
+    "oos_acc": 0.7424,
+    "oos_n": 66,
+    "oos_ci_lo": 0.6257,
+    "description": "三公司受让方均值<=2.587 + 澳门初盘受让方>2.570"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        "<=",
+        2.6
+      ],
+      [
+        "w_irr",
+        "<=",
+        89.81
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6722,
+    "cv_acc": 0.6722,
+    "oos_acc": 0.7412,
+    "oos_n": 85,
+    "oos_ci_lo": 0.6391,
+    "description": "立博受让方<=2.600 + 威廉初盘返还率<=89.810"
+  },
+  {
+    "conditions": [
+      [
+        "l_r",
+        "<=",
+        2.6
+      ],
+      [
+        "w_irr",
+        "<=",
+        89.41
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7218,
+    "cv_acc": 0.7218,
+    "oos_acc": 0.7385,
+    "oos_n": 65,
+    "oos_ci_lo": 0.6205,
+    "description": "立博受让方<=2.600 + 威廉初盘返还率<=89.410"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        "<=",
+        2.68
+      ],
+      [
+        "l_hc",
+        ">",
+        0.1286
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6753,
+    "cv_acc": 0.6753,
+    "oos_acc": 0.7353,
+    "oos_n": 68,
+    "oos_ci_lo": 0.6199,
+    "description": "澳门初盘受让方<=2.680 + 立博让方变化>0.129"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        "<=",
+        2.5
+      ],
+      [
+        "m_ir",
+        ">",
+        2.57
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6691,
+    "cv_acc": 0.6691,
+    "oos_acc": 0.7342,
+    "oos_n": 79,
+    "oos_ci_lo": 0.6276,
+    "description": "澳门受让方<=2.500 + 澳门初盘受让方>2.570"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        "<=",
+        0.17
+      ],
+      [
+        "w_irr",
+        "<=",
+        89.81
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6516,
+    "cv_acc": 0.6516,
+    "oos_acc": 0.7326,
+    "oos_n": 86,
+    "oos_ci_lo": 0.6305,
+    "description": "立博赔率差<=0.170 + 威廉初盘返还率<=89.810"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.28
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6931,
+    "cv_acc": 0.6931,
+    "oos_acc": 0.7315,
+    "oos_n": 108,
+    "oos_ci_lo": 0.641,
+    "description": "威廉让方>2.500 + 威澳返还率差<=3.280"
+  },
+  {
+    "conditions": [
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ],
+      [
+        "l_ih",
+        ">",
+        2.3
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6835,
+    "cv_acc": 0.6835,
+    "oos_acc": 0.7258,
+    "oos_n": 62,
+    "oos_ci_lo": 0.6041,
+    "description": "立博受让方变化<=-0.054 + 立博初盘让方>2.300"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.48
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6545,
+    "cv_acc": 0.6545,
+    "oos_acc": 0.7255,
+    "oos_n": 153,
+    "oos_ci_lo": 0.6499,
+    "description": "三公司赔率差均值<=0.147 + 威澳返还率差>2.480"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "l_hc",
+        ">",
+        0.1286
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6577,
+    "cv_acc": 0.6577,
+    "oos_acc": 0.7255,
+    "oos_n": 102,
+    "oos_ci_lo": 0.6319,
+    "description": "威廉让方>2.400 + 立博让方变化>0.129"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        "<=",
+        2.91
+      ],
+      [
+        "l_hc",
+        ">",
+        0.1286
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.679,
+    "cv_acc": 0.679,
+    "oos_acc": 0.7228,
+    "oos_n": 101,
+    "oos_ci_lo": 0.6285,
+    "description": "澳门初盘受让方<=2.910 + 立博让方变化>0.129"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        "<=",
+        0.18
+      ],
+      [
+        "w_irr",
+        "<=",
+        89.81
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6504,
+    "cv_acc": 0.6504,
+    "oos_acc": 0.7215,
+    "oos_n": 79,
+    "oos_ci_lo": 0.6142,
+    "description": "威廉赔率差<=0.180 + 威廉初盘返还率<=89.810"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.28
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.671,
+    "cv_acc": 0.671,
+    "oos_acc": 0.7209,
+    "oos_n": 129,
+    "oos_ci_lo": 0.638,
+    "description": "三公司赔率差均值<=0.147 + 威澳返还率差<=3.280"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "m_ir",
+        ">",
+        2.57
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6938,
+    "cv_acc": 0.6938,
+    "oos_acc": 0.7209,
+    "oos_n": 86,
+    "oos_ci_lo": 0.6183,
+    "description": "立博让方>2.500 + 澳门初盘受让方>2.570"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        "<=",
+        0.17
+      ],
+      [
+        "w_irr",
+        "<=",
+        89.41
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6835,
+    "cv_acc": 0.6835,
+    "oos_acc": 0.7206,
+    "oos_n": 68,
+    "oos_ci_lo": 0.6044,
+    "description": "立博赔率差<=0.170 + 威廉初盘返还率<=89.410"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.087
+      ],
+      [
+        "l_ih",
+        ">",
+        2.2
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.7097,
+    "cv_acc": 0.7097,
+    "oos_acc": 0.72,
+    "oos_n": 75,
+    "oos_ci_lo": 0.6096,
+    "description": "立博让方变化>0.087 + 立博初盘让方>2.200"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.1153
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6633,
+    "cv_acc": 0.6633,
+    "oos_acc": 0.7176,
+    "oos_n": 85,
+    "oos_ci_lo": 0.6142,
+    "description": "立博让方>2.500 + 三公司让方变化均值>0.115"
+  },
+  {
+    "conditions": [
+      [
+        "w_hc",
+        ">",
+        0.0488
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6781,
+    "cv_acc": 0.6781,
+    "oos_acc": 0.7162,
+    "oos_n": 74,
+    "oos_ci_lo": 0.6048,
+    "description": "威廉让方变化>0.049 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "m_r",
+        "<=",
+        2.5
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6518,
+    "cv_acc": 0.6518,
+    "oos_acc": 0.7158,
+    "oos_n": 190,
+    "oos_ci_lo": 0.6479,
+    "description": "三公司赔率差均值<=0.147 + 澳门受让方<=2.500"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0749
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.666,
+    "cv_acc": 0.666,
+    "oos_acc": 0.7154,
+    "oos_n": 123,
+    "oos_ci_lo": 0.6301,
+    "description": "立博让方>2.500 + 三公司让方变化均值>0.075"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        "<=",
+        2.5
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0749
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6603,
+    "cv_acc": 0.6603,
+    "oos_acc": 0.7153,
+    "oos_n": 137,
+    "oos_ci_lo": 0.6347,
+    "description": "澳门受让方<=2.500 + 三公司让方变化均值>0.075"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        1.68
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6519,
+    "cv_acc": 0.6519,
+    "oos_acc": 0.7128,
+    "oos_n": 188,
+    "oos_ci_lo": 0.6443,
+    "description": "三公司赔率差均值<=0.147 + 威澳返还率差>1.680"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        "<=",
+        2.5
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.1153
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6769,
+    "cv_acc": 0.6769,
+    "oos_acc": 0.7128,
+    "oos_n": 94,
+    "oos_ci_lo": 0.6144,
+    "description": "澳门受让方<=2.500 + 三公司让方变化均值>0.115"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        "<=",
+        -0.05
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.65,
+    "cv_acc": 0.65,
+    "oos_acc": 0.7114,
+    "oos_n": 149,
+    "oos_ci_lo": 0.6341,
+    "description": "澳门赔率差<=-0.050"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.38
+      ],
+      [
+        "w_kr",
+        ">",
+        0.91
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6688,
+    "cv_acc": 0.6688,
+    "oos_acc": 0.7113,
+    "oos_n": 97,
+    "oos_ci_lo": 0.6145,
+    "description": "威廉让方>2.380 + 威廉受让方Kelly>0.910"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        "<=",
+        0.15
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.27
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6608,
+    "cv_acc": 0.6608,
+    "oos_acc": 0.7111,
+    "oos_n": 135,
+    "oos_ci_lo": 0.6297,
+    "description": "澳门赔率差<=0.150 + 威澳返还率差<=3.270"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wl_hc_diff",
+        "<=",
+        0.007
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6511,
+    "cv_acc": 0.6511,
+    "oos_acc": 0.71,
+    "oos_n": 100,
+    "oos_ci_lo": 0.6146,
+    "description": "三公司赔率差均值<=0.147 + 威立让方变化差<=0.007"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "m_ir",
+        ">",
+        2.57
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6819,
+    "cv_acc": 0.6819,
+    "oos_acc": 0.7093,
+    "oos_n": 86,
+    "oos_ci_lo": 0.606,
+    "description": "三公司赔率差均值<=0.147 + 澳门初盘受让方>2.570"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.48
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6704,
+    "cv_acc": 0.6704,
+    "oos_acc": 0.7087,
+    "oos_n": 127,
+    "oos_ci_lo": 0.6244,
+    "description": "立博让方>2.500 + 威澳返还率差>2.480"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.45
+      ],
+      [
+        "l_hc",
+        ">",
+        0.087
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.68,
+    "cv_acc": 0.68,
+    "oos_acc": 0.7079,
+    "oos_n": 89,
+    "oos_ci_lo": 0.6064,
+    "description": "立博让方>2.450 + 立博让方变化>0.087"
+  },
+  {
+    "conditions": [
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ],
+      [
+        "l_ih",
+        ">",
+        2.2
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6868,
+    "cv_acc": 0.6868,
+    "oos_acc": 0.7075,
+    "oos_n": 106,
+    "oos_ci_lo": 0.6149,
+    "description": "立博受让方变化<=-0.054 + 立博初盘让方>2.200"
+  },
+  {
+    "conditions": [
+      [
+        "w_r",
+        "<=",
+        2.5
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6524,
+    "cv_acc": 0.6524,
+    "oos_acc": 0.7067,
+    "oos_n": 150,
+    "oos_ci_lo": 0.6294,
+    "description": "威廉受让方<=2.500"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        1.68
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6672,
+    "cv_acc": 0.6672,
+    "oos_acc": 0.7063,
+    "oos_n": 160,
+    "oos_ci_lo": 0.6315,
+    "description": "立博让方>2.500 + 威澳返还率差>1.680"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.28
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6905,
+    "cv_acc": 0.6905,
+    "oos_acc": 0.7043,
+    "oos_n": 115,
+    "oos_ci_lo": 0.6154,
+    "description": "立博让方>2.500 + 威澳返还率差<=3.280"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "m_ir",
+        ">",
+        2.57
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6893,
+    "cv_acc": 0.6893,
+    "oos_acc": 0.7033,
+    "oos_n": 91,
+    "oos_ci_lo": 0.6028,
+    "description": "威廉让方>2.500 + 澳门初盘受让方>2.570"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.28
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6518,
+    "cv_acc": 0.6518,
+    "oos_acc": 0.703,
+    "oos_n": 202,
+    "oos_ci_lo": 0.6366,
+    "description": "威廉让方>2.400 + 威澳返还率差<=3.280"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6956,
+    "cv_acc": 0.6956,
+    "oos_acc": 0.7021,
+    "oos_n": 94,
+    "oos_ci_lo": 0.6032,
+    "description": "威廉让方>2.500 + 立博受让方变化<=-0.054"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.087
+      ],
+      [
+        "l_ih",
+        ">",
+        2.1
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6952,
+    "cv_acc": 0.6952,
+    "oos_acc": 0.701,
+    "oos_n": 97,
+    "oos_ci_lo": 0.6037,
+    "description": "立博让方变化>0.087 + 立博初盘让方>2.100"
+  },
+  {
+    "conditions": [
+      [
+        "m_ir",
+        "<=",
+        2.91
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.1153
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6757,
+    "cv_acc": 0.6757,
+    "oos_acc": 0.7009,
+    "oos_n": 107,
+    "oos_ci_lo": 0.6084,
+    "description": "澳门初盘受让方<=2.910 + 三公司让方变化均值>0.115"
+  },
+  {
+    "conditions": [
+      [
+        "w_ih",
+        ">",
+        2.25
+      ],
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6707,
+    "cv_acc": 0.6707,
+    "oos_acc": 0.7008,
+    "oos_n": 127,
+    "oos_ci_lo": 0.6162,
+    "description": "威廉初盘让方>2.250 + 立博受让方变化<=-0.054"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.69
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6656,
+    "cv_acc": 0.6656,
+    "oos_acc": 0.7,
+    "oos_n": 170,
+    "oos_ci_lo": 0.6273,
+    "description": "威廉赔率差<=0.130 + 威澳返还率差<=3.690"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        "<=",
+        0.7
+      ],
+      [
+        "w_irr",
+        ">",
+        91.42
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6642,
+    "cv_acc": 0.6642,
+    "oos_acc": 0.7,
+    "oos_n": 110,
+    "oos_ci_lo": 0.6088,
+    "description": "立博赔率差<=0.700 + 威廉初盘返还率>91.420"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.48
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6607,
+    "cv_acc": 0.6607,
+    "oos_acc": 0.6986,
+    "oos_n": 146,
+    "oos_ci_lo": 0.6199,
+    "description": "威廉让方>2.500 + 威澳返还率差>2.480"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        ">",
+        2.4
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.28
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6603,
+    "cv_acc": 0.6603,
+    "oos_acc": 0.6984,
+    "oos_n": 126,
+    "oos_ci_lo": 0.6134,
+    "description": "澳门让方>2.400 + 威澳返还率差<=3.280"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        5.04
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6601,
+    "cv_acc": 0.6601,
+    "oos_acc": 0.698,
+    "oos_n": 202,
+    "oos_ci_lo": 0.6315,
+    "description": "三公司赔率差均值<=0.147 + 威澳返还率差<=5.040"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "m_r",
+        "<=",
+        2.5
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6678,
+    "cv_acc": 0.6678,
+    "oos_acc": 0.698,
+    "oos_n": 149,
+    "oos_ci_lo": 0.6201,
+    "description": "威廉让方>2.500 + 澳门受让方<=2.500"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        "<=",
+        0.15
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.12
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6506,
+    "cv_acc": 0.6506,
+    "oos_acc": 0.6979,
+    "oos_n": 192,
+    "oos_ci_lo": 0.6296,
+    "description": "澳门赔率差<=0.150 + 威澳返还率差>2.120"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.45
+      ],
+      [
+        "w_r",
+        "<=",
+        2.63
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6777,
+    "cv_acc": 0.6777,
+    "oos_acc": 0.6977,
+    "oos_n": 129,
+    "oos_ci_lo": 0.6136,
+    "description": "立博让方>2.450 + 威廉受让方<=2.630"
+  },
+  {
+    "conditions": [
+      [
+        "m_r",
+        "<=",
+        2.5
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6535,
+    "cv_acc": 0.6535,
+    "oos_acc": 0.6968,
+    "oos_n": 188,
+    "oos_ci_lo": 0.6277,
+    "description": "澳门受让方<=2.500 + 立博让方变化>0.000"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.45
+      ],
+      [
+        "w_irr",
+        "<=",
+        90.93
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6569,
+    "cv_acc": 0.6569,
+    "oos_acc": 0.6967,
+    "oos_n": 122,
+    "oos_ci_lo": 0.6102,
+    "description": "立博让方>2.450 + 威廉初盘返还率<=90.930"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        -0.0476
+      ],
+      [
+        "l_ih",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6812,
+    "cv_acc": 0.6812,
+    "oos_acc": 0.6964,
+    "oos_n": 112,
+    "oos_ci_lo": 0.6059,
+    "description": "立博让方变化>-0.048 + 立博初盘让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "m_ir",
+        "<=",
+        2.68
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6559,
+    "cv_acc": 0.6559,
+    "oos_acc": 0.6961,
+    "oos_n": 181,
+    "oos_ci_lo": 0.6256,
+    "description": "三公司赔率差均值<=0.147 + 澳门初盘受让方<=2.680"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        ">",
+        2.47
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6525,
+    "cv_acc": 0.6525,
+    "oos_acc": 0.6959,
+    "oos_n": 148,
+    "oos_ci_lo": 0.6177,
+    "description": "澳门让方>2.470"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0749
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6635,
+    "cv_acc": 0.6635,
+    "oos_acc": 0.6957,
+    "oos_n": 138,
+    "oos_ci_lo": 0.6144,
+    "description": "立博赔率差<=0.130 + 三公司让方变化均值>0.075"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        2.12
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6526,
+    "cv_acc": 0.6526,
+    "oos_acc": 0.6954,
+    "oos_n": 174,
+    "oos_ci_lo": 0.6234,
+    "description": "威廉赔率差<=0.130 + 威澳返还率差>2.120"
+  },
+  {
+    "conditions": [
+      [
+        "l_rc",
+        "<=",
+        -0.0541
+      ],
+      [
+        "l_ih",
+        ">",
+        2.1
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6783,
+    "cv_acc": 0.6783,
+    "oos_acc": 0.695,
+    "oos_n": 141,
+    "oos_ci_lo": 0.6147,
+    "description": "立博受让方变化<=-0.054 + 立博初盘让方>2.100"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.0
+      ],
+      [
+        "l_ih",
+        ">",
+        2.3
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6597,
+    "cv_acc": 0.6597,
+    "oos_acc": 0.6949,
+    "oos_n": 118,
+    "oos_ci_lo": 0.6068,
+    "description": "立博让方变化>0.000 + 立博初盘让方>2.300"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        5.04
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.672,
+    "cv_acc": 0.672,
+    "oos_acc": 0.6944,
+    "oos_n": 180,
+    "oos_ci_lo": 0.6237,
+    "description": "立博让方>2.500 + 威澳返还率差<=5.040"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wl_hc_diff",
+        ">",
+        -0.0263
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6547,
+    "cv_acc": 0.6547,
+    "oos_acc": 0.6944,
+    "oos_n": 180,
+    "oos_ci_lo": 0.6237,
+    "description": "三公司赔率差均值<=0.147 + 威立让方变化差>-0.026"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        "<=",
+        -0.05
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6667,
+    "cv_acc": 0.6667,
+    "oos_acc": 0.6943,
+    "oos_n": 157,
+    "oos_ci_lo": 0.6183,
+    "description": "威廉赔率差<=-0.050"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.6
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6543,
+    "cv_acc": 0.6543,
+    "oos_acc": 0.6939,
+    "oos_n": 147,
+    "oos_ci_lo": 0.6152,
+    "description": "立博让方>2.600"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        ">",
+        1.68
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6625,
+    "cv_acc": 0.6625,
+    "oos_acc": 0.6927,
+    "oos_n": 179,
+    "oos_ci_lo": 0.6217,
+    "description": "威廉让方>2.500 + 威澳返还率差>1.680"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "l_r",
+        "<=",
+        2.6
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6508,
+    "cv_acc": 0.6508,
+    "oos_acc": 0.6923,
+    "oos_n": 182,
+    "oos_ci_lo": 0.6219,
+    "description": "威廉让方>2.400 + 立博受让方<=2.600"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.63
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6566,
+    "cv_acc": 0.6566,
+    "oos_acc": 0.6923,
+    "oos_n": 130,
+    "oos_ci_lo": 0.6084,
+    "description": "威廉让方>2.630"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.0488
+      ],
+      [
+        "l_ih",
+        ">",
+        2.1
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6698,
+    "cv_acc": 0.6698,
+    "oos_acc": 0.6899,
+    "oos_n": 158,
+    "oos_ci_lo": 0.614,
+    "description": "立博让方变化>0.049 + 立博初盘让方>2.100"
+  },
+  {
+    "conditions": [
+      [
+        "w_ih",
+        ">",
+        2.25
+      ],
+      [
+        "l_r",
+        "<=",
+        2.6
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6629,
+    "cv_acc": 0.6629,
+    "oos_acc": 0.6897,
+    "oos_n": 174,
+    "oos_ci_lo": 0.6174,
+    "description": "威廉初盘让方>2.250 + 立博受让方<=2.600"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        ">",
+        2.4
+      ],
+      [
+        "w_r",
+        "<=",
+        2.63
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6578,
+    "cv_acc": 0.6578,
+    "oos_acc": 0.6887,
+    "oos_n": 151,
+    "oos_ci_lo": 0.611,
+    "description": "澳门让方>2.400 + 威廉受让方<=2.630"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_r",
+        "<=",
+        2.8833
+      ],
+      [
+        "l_hc",
+        ">",
+        0.1286
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6689,
+    "cv_acc": 0.6689,
+    "oos_acc": 0.6885,
+    "oos_n": 122,
+    "oos_ci_lo": 0.6017,
+    "description": "三公司受让方均值<=2.883 + 立博让方变化>0.129"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        5.04
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6745,
+    "cv_acc": 0.6745,
+    "oos_acc": 0.6872,
+    "oos_n": 179,
+    "oos_ci_lo": 0.6159,
+    "description": "威廉让方>2.500 + 威澳返还率差<=5.040"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.45
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0488
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6753,
+    "cv_acc": 0.6753,
+    "oos_acc": 0.687,
+    "oos_n": 131,
+    "oos_ci_lo": 0.6032,
+    "description": "立博让方>2.450 + 威廉让方变化>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        -0.0476
+      ],
+      [
+        "l_ih",
+        ">",
+        2.3
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6537,
+    "cv_acc": 0.6537,
+    "oos_acc": 0.6865,
+    "oos_n": 185,
+    "oos_ci_lo": 0.6164,
+    "description": "立博让方变化>-0.048 + 立博初盘让方>2.300"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "w_h",
+        ">",
+        2.5
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6607,
+    "cv_acc": 0.6607,
+    "oos_acc": 0.6845,
+    "oos_n": 168,
+    "oos_ci_lo": 0.6108,
+    "description": "立博让方>2.500 + 威廉让方>2.500"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.5
+      ],
+      [
+        "l_r",
+        "<=",
+        2.6
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6673,
+    "cv_acc": 0.6673,
+    "oos_acc": 0.6842,
+    "oos_n": 133,
+    "oos_ci_lo": 0.601,
+    "description": "立博让方>2.500 + 立博受让方<=2.600"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "m_ir",
+        "<=",
+        2.68
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6706,
+    "cv_acc": 0.6706,
+    "oos_acc": 0.6821,
+    "oos_n": 151,
+    "oos_ci_lo": 0.6041,
+    "description": "威廉让方>2.500 + 澳门初盘受让方<=2.680"
+  },
+  {
+    "conditions": [
+      [
+        "l_hc",
+        ">",
+        0.0238
+      ],
+      [
+        "l_ih",
+        ">",
+        2.2
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.651,
+    "cv_acc": 0.651,
+    "oos_acc": 0.6818,
+    "oos_n": 154,
+    "oos_ci_lo": 0.6046,
+    "description": "立博让方变化>0.024 + 立博初盘让方>2.200"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.45
+      ],
+      [
+        "w_irr",
+        "<=",
+        91.89
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6677,
+    "cv_acc": 0.6677,
+    "oos_acc": 0.6815,
+    "oos_n": 157,
+    "oos_ci_lo": 0.6051,
+    "description": "立博让方>2.450 + 威廉初盘返还率<=91.890"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        "<=",
+        0.15
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        4.3075
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6564,
+    "cv_acc": 0.6564,
+    "oos_acc": 0.681,
+    "oos_n": 210,
+    "oos_ci_lo": 0.6151,
+    "description": "澳门赔率差<=0.150 + 威澳返还率差<=4.307"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "w_h",
+        ">",
+        2.5
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6676,
+    "cv_acc": 0.6676,
+    "oos_acc": 0.6809,
+    "oos_n": 188,
+    "oos_ci_lo": 0.6112,
+    "description": "威廉赔率差<=0.130 + 威廉让方>2.500"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_r",
+        "<=",
+        2.5867
+      ],
+      [
+        "l_hc",
+        ">",
+        0.0513
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6522,
+    "cv_acc": 0.6522,
+    "oos_acc": 0.6803,
+    "oos_n": 147,
+    "oos_ci_lo": 0.6011,
+    "description": "三公司受让方均值<=2.587 + 立博让方变化>0.051"
+  },
+  {
+    "conditions": [
+      [
+        "w_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "w_h",
+        ">",
+        2.4
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6547,
+    "cv_acc": 0.6547,
+    "oos_acc": 0.68,
+    "oos_n": 225,
+    "oos_ci_lo": 0.6165,
+    "description": "威廉赔率差<=0.130 + 威廉让方>2.400"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0486
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6542,
+    "cv_acc": 0.6542,
+    "oos_acc": 0.68,
+    "oos_n": 175,
+    "oos_ci_lo": 0.6077,
+    "description": "三公司赔率差均值<=0.147 + 三公司让方变化均值>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "m_ir",
+        "<=",
+        2.68
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6506,
+    "cv_acc": 0.6506,
+    "oos_acc": 0.6797,
+    "oos_n": 231,
+    "oos_ci_lo": 0.617,
+    "description": "威廉让方>2.400 + 澳门初盘受让方<=2.680"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "avg3_hc",
+        ">",
+        0.0486
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6676,
+    "cv_acc": 0.6676,
+    "oos_acc": 0.6786,
+    "oos_n": 168,
+    "oos_ci_lo": 0.6046,
+    "description": "威廉让方>2.500 + 三公司让方变化均值>0.049"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.37
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        2.92
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6526,
+    "cv_acc": 0.6526,
+    "oos_acc": 0.6782,
+    "oos_n": 174,
+    "oos_ci_lo": 0.6055,
+    "description": "立博让方>2.370 + 威澳返还率差<=2.920"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.5
+      ],
+      [
+        "wl_hc_diff",
+        ">",
+        -0.0263
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6593,
+    "cv_acc": 0.6593,
+    "oos_acc": 0.6782,
+    "oos_n": 174,
+    "oos_ci_lo": 0.6055,
+    "description": "威廉让方>2.500 + 威立让方变化差>-0.026"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "m_spread",
+        "<=",
+        0.15
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6529,
+    "cv_acc": 0.6529,
+    "oos_acc": 0.678,
+    "oos_n": 236,
+    "oos_ci_lo": 0.6159,
+    "description": "威廉让方>2.400 + 澳门赔率差<=0.150"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        4.31
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6608,
+    "cv_acc": 0.6608,
+    "oos_acc": 0.6771,
+    "oos_n": 192,
+    "oos_ci_lo": 0.608,
+    "description": "立博赔率差<=0.130 + 威澳返还率差<=4.310"
+  },
+  {
+    "conditions": [
+      [
+        "avg3_spread",
+        "<=",
+        0.1467
+      ],
+      [
+        "wl_hc_diff",
+        "<=",
+        0.0571
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.659,
+    "cv_acc": 0.659,
+    "oos_acc": 0.6768,
+    "oos_n": 164,
+    "oos_ci_lo": 0.6019,
+    "description": "三公司赔率差均值<=0.147 + 威立让方变化差<=0.057"
+  },
+  {
+    "conditions": [
+      [
+        "w_ih",
+        ">",
+        2.25
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0233
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6784,
+    "cv_acc": 0.6784,
+    "oos_acc": 0.6763,
+    "oos_n": 173,
+    "oos_ci_lo": 0.6034,
+    "description": "威廉初盘让方>2.250 + 威廉让方变化>0.023"
+  },
+  {
+    "conditions": [
+      [
+        "m_spread",
+        "<=",
+        0.15
+      ],
+      [
+        "wl_hc_diff",
+        "<=",
+        0.0571
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6529,
+    "cv_acc": 0.6529,
+    "oos_acc": 0.676,
+    "oos_n": 179,
+    "oos_ci_lo": 0.6043,
+    "description": "澳门赔率差<=0.150 + 威立让方变化差<=0.057"
+  },
+  {
+    "conditions": [
+      [
+        "l_rc",
+        "<=",
+        0.0
+      ],
+      [
+        "l_ih",
+        ">",
+        2.2
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.656,
+    "cv_acc": 0.656,
+    "oos_acc": 0.6712,
+    "oos_n": 222,
+    "oos_ci_lo": 0.6069,
+    "description": "立博受让方变化<=0.000 + 立博初盘让方>2.200"
+  },
+  {
+    "conditions": [
+      [
+        "m_h",
+        ">",
+        2.28
+      ],
+      [
+        "w_r",
+        "<=",
+        2.63
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.659,
+    "cv_acc": 0.659,
+    "oos_acc": 0.67,
+    "oos_n": 200,
+    "oos_ci_lo": 0.6022,
+    "description": "澳门让方>2.280 + 威廉受让方<=2.630"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        4.31
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6513,
+    "cv_acc": 0.6513,
+    "oos_acc": 0.6689,
+    "oos_n": 296,
+    "oos_ci_lo": 0.6134,
+    "description": "威廉让方>2.400 + 威澳返还率差<=4.310"
+  },
+  {
+    "conditions": [
+      [
+        "l_h",
+        ">",
+        2.37
+      ],
+      [
+        "wm_crr_diff",
+        "<=",
+        3.69
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6512,
+    "cv_acc": 0.6512,
+    "oos_acc": 0.6667,
+    "oos_n": 273,
+    "oos_ci_lo": 0.6088,
+    "description": "立博让方>2.370 + 威澳返还率差<=3.690"
+  },
+  {
+    "conditions": [
+      [
+        "l_spread",
+        "<=",
+        0.13
+      ],
+      [
+        "avg3_hc",
+        ">",
+        -0.0133
+      ]
+    ],
+    "side": "R",
+    "requires": "wml",
+    "train_acc": 0.6524,
+    "cv_acc": 0.6524,
+    "oos_acc": 0.6667,
+    "oos_n": 216,
+    "oos_ci_lo": 0.6014,
+    "description": "立博赔率差<=0.130 + 三公司让方变化均值>-0.013"
+  },
+  {
+    "conditions": [
+      [
+        "w_ih",
+        ">",
+        2.1
+      ],
+      [
+        "w_hc",
+        ">",
+        0.0233
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6545,
+    "cv_acc": 0.6545,
+    "oos_acc": 0.6653,
+    "oos_n": 236,
+    "oos_ci_lo": 0.6028,
+    "description": "威廉初盘让方>2.100 + 威廉让方变化>0.023"
+  },
+  {
+    "conditions": [
+      [
+        "w_h",
+        ">",
+        2.4
+      ],
+      [
+        "m_ir",
+        "<=",
+        3.03
+      ]
+    ],
+    "side": "R",
+    "requires": "wm",
+    "train_acc": 0.6511,
+    "cv_acc": 0.6511,
+    "oos_acc": 0.6647,
+    "oos_n": 331,
+    "oos_ci_lo": 0.6122,
+    "description": "威廉让方>2.400 + 澳门初盘受让方<=3.030"
+  },
+  {
+    "conditions": [
+      [
+        "l_rc",
+        "<=",
+        0.0
+      ],
+      [
+        "l_ih",
+        ">",
+        2.1
+      ]
+    ],
+    "side": "R",
+    "requires": "wl",
+    "train_acc": 0.6597,
+    "cv_acc": 0.6597,
+    "oos_acc": 0.6581,
+    "oos_n": 313,
+    "oos_ci_lo": 0.604,
+    "description": "立博受让方变化<=0.000 + 立博初盘让方>2.100"
+  }
+]

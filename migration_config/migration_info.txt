@@ -1,0 +1,18 @@
+OddsMind 迁移信息
+==================
+
+导出时间: Fri Nov 14 11:56:25 PM CST 2025
+源服务器: VM-20-15-ubuntu
+源IP地址: 10.1.20.15
+操作系统: Ubuntu 24.04 LTS
+Python版本: Python 3.12.3
+MySQL版本: mysql  Ver 8.0.43-0ubuntu0.24.04.2 for Linux on x86_64 ((Ubuntu))
+
+项目路径: /home/ubuntu/oddsmind
+导出路径: /home/ubuntu/oddsmind/migration_export
+
+注意事项:
+1. 请在新服务器上检查并更新 oddsmind.env 中的配置
+2. 请确保新服务器已安装所有依赖（requirements.txt）
+3. 请在新服务器上恢复数据库备份
+4. 请根据实际情况配置 systemd 服务和 Nginx（如果使用）

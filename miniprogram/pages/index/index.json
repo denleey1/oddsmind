@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "match-card": "/components/match-card/match-card",
+    "empty-state": "/components/empty-state/empty-state"
+  },
+  "navigationBarTitleText": "OddsMind",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}
+
+

@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>欧核数据分析</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .header h1::before {
+            content: "⚽";
+            font-size: 2.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .header-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-auth {
+            font-size: 0.9rem;
+        }
+
+        .user-auth a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .user-auth a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .user-auth span {
+            margin-right: 1rem;
+        }
+
+        .status-info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #4ade80;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 15px rgba(74, 222, 128, 0.8);
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 2rem 3rem;
+        }
+
+        .filters {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-size: 0.9rem;
+            color: #cccccc;
+        }
+
+        .filter-select, .filter-input {
+            padding: 0.9rem 1.2rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.95);
+            color: #2c3e50;
+            font-size: 1rem;
+            min-width: 160px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-select:focus, .filter-input:focus {
+            outline: none;
+            border-color: white;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+        }
+
+        .matches-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: stretch;
+        }
+
+        .match-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%);
+            border-radius: 20px;
+            padding: 1.8rem;
+            border: 2px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .match-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .match-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .match-time {
+            font-size: 0.9rem;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .league-name {
+            font-size: 0.9rem;
+            color: #4b5563;
+            background: rgba(75, 85, 99, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-weight: 500;
+        }
+
+        .teams-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 1;
+        }
+
+        .team-logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .team-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .team-name {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #1e293b;
+        }
+
+        .team-rank {
+            color: #f59e0b;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .vs-divider {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 1rem;
+        }
+
+        .detail-page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .detail-page.active {
+            display: block;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.95);
+            border: 2px solid transparent;
+            color: #667eea;
+            padding: 0.9rem 1.8rem;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn::before {
+            content: "←";
+            font-size: 1.2rem;
+        }
+
+        .back-btn:hover {
+            background: white;
+            border-color: #667eea;
+            transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .detail-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .detail-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.95) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            min-width: 0; /* 允许内容在grid中缩小 */
+            overflow: visible; /* 允许内容可见 */
+        }
+
+        .detail-grid > .loading {
+            grid-column: 1 / -1;
+            padding: 2rem;
+        }
+
+        /* 泊松分析按钮容器跨越整行 */
+        #poisson-analysis-container {
+            grid-column: 1 / -1 !important;
+        }
+
+        .detail-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+        }
+
+        .detail-card h3 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #667eea, #764ba2) 1;
+            padding-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.8rem 0;
+            padding: 0.7rem 1rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            color: #1e293b;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .stats-row:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .analysis-section {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .analysis-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .analysis-section h4 {
+            color: #667eea;
+            margin: 1rem 0 0.8rem 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        
+        .analysis-section:first-child h4 {
+            margin-top: 0;
+        }
+
+        /* 公司筛选器样式 */
+        .company-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+        }
+
+        .company-select {
+            background: white;
+            color: #1e293b;
+            border: 2px solid #e2e8f0;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .company-select:hover {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .company-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-icon {
+            font-size: 1.2rem;
+            color: #667eea;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .search-icon:hover {
+            transform: scale(1.1);
+            color: #764ba2;
+        }
+
+        /* 表格样式 */
+        .odds-table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            /* 美化滚动条 */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(102, 126, 234, 0.5) rgba(102, 126, 234, 0.1);
+        }
+        
+        .odds-table-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .odds-table-container::-webkit-scrollbar-track {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 4px;
+        }
+        
+        .odds-table-container::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.5);
+            border-radius: 4px;
+        }
+        
+        .odds-table-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(102, 126, 234, 0.7);
+        }
+        
+        .odds-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            table-layout: auto;
+        }
+
+        .odds-table th,
+        .odds-table td {
+            padding: 0.8rem 0.6rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            border-right: 1px solid rgba(102, 126, 234, 0.05);
+        }
+        
+        /* 桌面端不换行 */
+        @media (min-width: 769px) {
+            .odds-table th,
+            .odds-table td {
+                white-space: nowrap;
+            }
+        }
+
+        .odds-table th {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            color: #1e293b;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .odds-table td {
+            color: #1e293b;
+        }
+
+        /* 赔率表格优化 - 固定第一列 */
+        .odds-table th:first-child,
+        .odds-table td:first-child {
+            position: sticky;
+            left: 0;
+            z-index: 2;
+            background: white;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .odds-table th:first-child {
+            z-index: 3;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+        }
+
+        /* 行悬浮效果 */
+        .odds-table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .odds-table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.08);
+            transform: scale(1.01);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 隔行背景 */
+        .odds-table tbody tr:nth-child(odd) {
+            background: rgba(248, 250, 252, 0.5);
+        }
+
+        /* 首选推荐样式 */
+        .recommendation-cell {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* 规则值颜色样式 */
+        .rule-red {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%) !important;
+            color: #dc2626 !important;
+            font-weight: 700 !important;
+        }
+
+        .rule-orange {
+            background: linear-gradient(135deg, rgba(251, 146, 60, 0.2) 0%, rgba(249, 115, 22, 0.2) 100%) !important;
+            color: #ea580c !important;
+            font-weight: 700 !important;
+        }
+
+        .rule-yellow {
+            background: linear-gradient(135deg, rgba(250, 204, 21, 0.2) 0%, rgba(234, 179, 8, 0.2) 100%) !important;
+            color: #ca8a04 !important;
+            font-weight: 700 !important;
+        }
+
+        .rule-green {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(22, 163, 74, 0.2) 100%) !important;
+            color: #16a34a !important;
+            font-weight: 700 !important;
+        }
+
+        /* 广义实力差值颜色 */
+        .strength-high {
+            background: rgba(76, 175, 80, 0.4) !important;
+            color: #4caf50 !important;
+            font-weight: bold;
+        }
+
+        .strength-low {
+            background: rgba(255, 193, 7, 0.4) !important;
+            color: #ffc107 !important;
+            font-weight: bold;
+        }
+
+        /* 公司总结样式 */
+        .company-summary {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .company-summary h4 {
+            font-size: 1.1rem !important;
+            margin-bottom: 1rem !important;
+        }
+        
+        .company-summary h5 {
+            font-size: 0.9rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.9);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .stat-title {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-percent {
+            font-size: 0.95rem;
+            opacity: 0.75;
+            font-weight: 500;
+        }
+
+        .home-stat {
+            border-color: #4caf50;
+        }
+
+        .home-stat .stat-number {
+            color: #4caf50;
+        }
+
+        .draw-stat {
+            border-color: #ffc107;
+        }
+
+        .draw-stat .stat-number {
+            color: #ffc107;
+        }
+
+        .away-stat {
+            border-color: #ff5722;
+        }
+
+        .away-stat .stat-number {
+            color: #ff5722;
+        }
+
+        .summary-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            display: flex;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .bar-segment {
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .home-bar {
+            background: #4caf50;
+        }
+
+        .draw-bar {
+            background: #ffc107;
+        }
+
+        .away-bar {
+            background: #ff5722;
+        }
+
+        .company-details {
+            font-size: 0.85rem;
+            color: #64748b;
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .company-details div {
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-details {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+
+        .summary-details p {
+            margin-bottom: 0.8rem;
+            color: #1e293b;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .summary-details strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* 赔率卡片样式 */
+        .odds-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .odds-card-header {
+            text-align: center;
+            margin-bottom: 1.2rem;
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .odds-card-header::before {
+            content: "📊";
+            font-size: 1.3rem;
+        }
+
+        .odds-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .odds-item {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .odds-item:hover {
+            background: white;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .odds-item.home-odds {
+            border-color: #10b981;
+        }
+
+        .odds-item.home-odds:hover {
+            border-color: #059669;
+        }
+
+        .odds-item.draw-odds {
+            border-color: #f59e0b;
+        }
+
+        .odds-item.draw-odds:hover {
+            border-color: #d97706;
+        }
+
+        .odds-item.away-odds {
+            border-color: #ef4444;
+        }
+
+        .odds-item.away-odds:hover {
+            border-color: #dc2626;
+        }
+
+        .odds-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .odds-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            line-height: 1.2;
+        }
+
+        .home-odds .odds-value {
+            color: #10b981;
+        }
+
+        .draw-odds .odds-value {
+            color: #f59e0b;
+        }
+
+        .away-odds .odds-value {
+            color: #ef4444;
+        }
+
+        .odds-change {
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+        }
+
+        .odds-change.down {
+            color: #ff6b6b;
+        }
+
+        .odds-change.up {
+            color: #4ecdc4;
+        }
+
+        .odds-change.same {
+            color: #95a5a6;
+        }
+
+        .odds-change-arrow {
+            font-size: 0.8rem;
+        }
+
+        .odds-company-info {
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.8rem;
+            color: #aaaaaa;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #667eea;
+        }
+
+        .loading p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 大小球卡片脉冲动画 */
+        @keyframes pulse-glow-red {
+            0%, 100% { 
+                box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 6px 35px rgba(239, 68, 68, 0.45);
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes pulse-glow-blue {
+            0%, 100% { 
+                box-shadow: 0 4px 20px rgba(59, 130, 246, 0.25);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 6px 35px rgba(59, 130, 246, 0.45);
+                transform: scale(1.02);
+            }
+        }
+        
+        /* 平板优化 (481px - 768px) */
+        @media (max-width: 768px) and (min-width: 481px) {
+            .odds-table {
+                font-size: 0.55rem;
+            }
+            
+            .odds-table th,
+            .odds-table td {
+                padding: 0.45rem 0.2rem;
+                font-size: 0.55rem;
+                word-wrap: break-word;
+                white-space: normal;
+                line-height: 1.35;
+            }
+            
+            .odds-table th {
+                font-size: 0.52rem;
+                padding: 0.5rem 0.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .matches-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .detail-grid {
+                gap: 1rem;
+            }
+            
+            .detail-card {
+                padding: 1rem;
+                border-radius: 12px;
+            }
+
+            .teams-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .vs-divider {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            /* 移动端表格样式优化 - 所有列都显示 */
+            .odds-table-container {
+                margin: 0 -1rem;
+                padding: 0 0.25rem;
+                border-radius: 0;
+                overflow-x: hidden;
+            }
+
+            .odds-table {
+                font-size: 0.45rem;
+                border-radius: 0;
+                table-layout: fixed;
+                width: 100%;
+            }
+
+            .odds-table th,
+            .odds-table td {
+                padding: 0.35rem 0.1rem;
+                font-size: 0.45rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                white-space: normal;
+                line-height: 1.3;
+            }
+            
+            .odds-table th {
+                font-size: 0.42rem;
+                letter-spacing: 0;
+                padding: 0.4rem 0.1rem;
+                line-height: 1.2;
+                height: auto;
+                min-height: 2.5em;
+            }
+            
+            /* 调整列宽比例 */
+            .odds-table th:nth-child(1),
+            .odds-table td:nth-child(1) {
+                width: 8%;
+            }
+            
+            .odds-table th:nth-child(2),
+            .odds-table td:nth-child(2),
+            .odds-table th:nth-child(6),
+            .odds-table td:nth-child(6) {
+                width: 7%;
+            }
+            
+            .odds-table th:nth-child(3),
+            .odds-table td:nth-child(3),
+            .odds-table th:nth-child(7),
+            .odds-table td:nth-child(7) {
+                width: 11%;
+            }
+            
+            .odds-table th:nth-child(4),
+            .odds-table td:nth-child(4),
+            .odds-table th:nth-child(8),
+            .odds-table td:nth-child(8) {
+                width: 9%;
+            }
+            
+            .odds-table th:nth-child(5),
+            .odds-table td:nth-child(5) {
+                width: 9%;
+            }
+            
+            .odds-table th:nth-child(9),
+            .odds-table td:nth-child(9),
+            .odds-table th:nth-child(10),
+            .odds-table td:nth-child(10) {
+                width: 8%;
+            }
+            
+            .odds-table th:nth-child(11),
+            .odds-table td:nth-child(11) {
+                width: 9%;
+            }
+            
+            .stat-card {
+                padding: 0.8rem;
+            }
+            
+            .stat-number {
+                font-size: 1.4rem;
+            }
+            
+            .stat-title {
+                font-size: 0.7rem;
+            }
+            
+            .stat-percent {
+                font-size: 0.75rem;
+            }
+            
+            .company-select {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
+        }
+        
+        /* 超小屏幕优化 (≤480px) - 所有列都显示 */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.5rem 0.2rem;
+            }
+            
+            .detail-card {
+                padding: 0.7rem;
+            }
+            
+            .odds-table-container {
+                margin: 0 -0.7rem;
+                padding: 0 0.15rem;
+            }
+            
+            .odds-table {
+                font-size: 0.38rem;
+            }
+            
+            .odds-table th,
+            .odds-table td {
+                padding: 0.3rem 0.05rem;
+                font-size: 0.38rem;
+            }
+            
+            .odds-table th {
+                font-size: 0.36rem;
+                padding: 0.35rem 0.05rem;
+                line-height: 1.15;
+                min-height: 2.3em;
+            }
+            
+            h3 {
+                font-size: 1rem;
+            }
+            
+            .analysis-section h4 {
+                font-size: 0.9rem;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .match-card {
+                padding: 1rem;
+            }
+            
+            .team-name {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 比赛列表页 -->
+    <div id="listPage">
+        <div class="header">
+            <div class="header-main">
+                <h1>欧核数据分析</h1>
+                <div class="user-auth">
+                    {% if session.user %}
+                        <span>欢迎, {{ session.user.name }}</span>
+                        <a href="{{ url_for('auth.logout') }}">登出</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}">登录</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="status-info">
+                <div>
+                    <span class="status-indicator"></span>
+                    <span>系统运行中</span>
+                </div>
+                <div id="last-update">更新时间: --</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="filters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>联赛筛选</label>
+                        <select class="filter-select" id="leagueFilter">
+                            <option value="">全部联赛</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>日期筛选</label>
+                        <select class="filter-select" id="dateFilter">
+                            <option value="today">今天</option>
+                            <option value="tomorrow">明天</option>
+                            <option value="week">本周</option>
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>自定义日期</label>
+                        <input type="date" class="filter-input" id="customDate">
+                    </div>
+                    <div class="filter-group">
+                        <label>比赛状态</label>
+                        <select class="filter-select" id="statusFilter">
+                            <option value="">全部状态</option>
+                            <option value="scheduled">未开始</option>
+                            <option value="live">进行中</option>
+                            <option value="finished">已结束</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="matches-grid" id="matchesList">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 比赛详情页 -->
+    <div id="detailPage" class="detail-page">
+        <div class="header">
+            <div class="header-main">
+                <h1>比赛详情</h1>
+                <div class="user-auth">
+                    {% if session.user %}
+                        <span>欢迎, {{ session.user.name }}</span>
+                        <a href="{{ url_for('auth.logout') }}">登出</a>
+                    {% else %}
+                        <a href="{{ url_for('auth.login') }}">登录</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <button class="back-btn" onclick="showList()">← 返回比赛列表</button>
+
+            <!-- 比赛基本信息 -->
+            <div class="match-card" style="margin-bottom: 2rem;" id="detailMatchCard">
+                <!-- 动态生成比赛信息 -->
+            </div>
+
+            <!-- 详细分析 -->
+            <div class="detail-grid" id="detailContent">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>加载详情中...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [新增] 泊松分布预测模态框 (原生JS控制) -->
+    <div id="poisson-modal-backdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9998; backdrop-filter: blur(5px);"></div>
+    <div id="poisson-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; overflow-y: auto; background: rgba(255,255,255,0.98); padding: 2rem;">
+        <div style="max-width: 1400px; margin: 0 auto; background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 id="poisson-modal-title" style="margin: 0; color: #667eea; font-size: 1.5rem;">泊松分布预测</h3>
+                <button id="poisson-modal-close" style="background: #ef4444; border: none; font-size: 1.5rem; color: white; cursor: pointer; padding: 0.8rem 1.5rem; border-radius: 12px; transition: all 0.3s ease; font-weight: 600; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);" onmouseover="this.style.background='#dc2626'" onmouseout="this.style.background='#ef4444'">关闭</button>
+            </div>
+        <div class="detail-grid">
+            <div class="analysis-section" style="border: none;">
+                <h4>预期进球</h4>
+                <div class="stats-row"><span>主队:</span> <strong id="poisson-expected-home-goals">--</strong></div>
+                <div class="stats-row"><span>客队:</span> <strong id="poisson-expected-away-goals">--</strong></div>
+                <div class="stats-row"><span>总计:</span> <strong id="poisson-expected-total-goals">--</strong></div>
+            </div>
+            <div class="analysis-section" style="border: none;">
+                <h4>比赛结果概率</h4>
+                <div class="stats-row"><span>主胜:</span> <strong id="poisson-home-win-prob">--%</strong></div>
+                <div class="stats-row"><span>平局:</span> <strong id="poisson-draw-prob">--%</strong></div>
+                <div class="stats-row"><span>客胜:</span> <strong id="poisson-away-win-prob">--%</strong></div>
+            </div>
+        </div>
+        <div class="analysis-section">
+            <h4>最可能比分</h4>
+            <div class="stats-row"><strong id="poisson-most-likely-score">--</strong></div>
+        </div>
+        <!-- [增强] 总进球分布 & 模型信息 -->
+        <div class="detail-grid">
+            <div class="analysis-section" style="border: none;">
+                <h4>总进球分布 <span id="poisson-method-badge" style="background: rgba(102, 126, 234, 0.15); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem;">--</span></h4>
+                <div class="stats-row"><span>≤3球</span> <strong id="poisson-s-le3">--%</strong></div>
+                <div class="stats-row"><span>>3球</span> <strong id="poisson-s-gt3">--%</strong></div>
+            </div>
+            <div class="analysis-section" style="border: none;">
+                <h4>模型信息</h4>
+                <div class="stats-row" id="poisson-dc-info" style="display: none;"><span>DC修正 (ρ)</span> <strong id="poisson-dc-rho">--</strong></div>
+                <div class="stats-row" id="poisson-decay-info" style="display: none;"><span>时间衰减</span> <strong>已启用 ⏱️</strong></div>
+                <div class="stats-row" id="poisson-fusion-info" style="display: none;"><span>市场融合</span> <strong id="poisson-fusion-status">--</strong></div>
+            </div>
+        </div>
+        <div class="detail-grid">
+            <div class="analysis-section" style="border: none;">
+                <h4>大小球概率</h4>
+                <ul id="poisson-over-under-list" style="list-style: none; padding: 0; color: #1e293b; font-size: 0.95rem; line-height: 2;">
+                    <!-- JS动态填充 -->
+                </ul>
+            </div>
+            <div class="analysis-section" style="border: none;">
+                <h4>比分概率 (Top 10)</h4>
+                <table class="odds-table" style="font-size: 0.8rem;">
+                    <thead>
+                        <tr>
+                            <th>比分</th>
+                            <th>概率</th>
+                            <th>赔率</th>
+                        </tr>
+                    </thead>
+                    <tbody id="poisson-probabilities-tbody">
+                        <!-- JS动态填充 -->
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // 内联加载标准赔率表 v2 数据
+    fetch('/static/js/standard_odds_v2.json').then(r => r.json()).then(d => {
+        window._standardOddsV2 = d;
+    }).catch(e => console.warn('标准赔率表加载失败:', e));
+    </script>
+    <script src="/static/js/frontend_odds_lookup_v2.js"></script>
+    <script src="/static/js/app_modern_1758900000.js?v=20260331ouwater"></script>
+    <script src="/static/js/enhancements.js"></script>
+    <script src="/static/js/rule_alerts.js"></script>
+</body>
+</html>

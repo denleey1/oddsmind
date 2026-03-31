@@ -1,0 +1,87 @@
+version: "ruleset_v1.2"
+
+thresholds:
+  tao: 0.08        # Δodds >= +8% 认为韬
+  real: -0.08      # Δodds <= -8% 认为实
+  draw_spill_pp: 0.02   # Δp(D) >= +2pp 平局分洪
+  draw_block_pp: -0.02  # Δp(D) <= -2pp 阻平
+  move_confirm: -0.03   # Δmove <= -3% 认为"确认走强"
+  move_reverse: 0.03    # Δmove >= +3% 认为"反做/诱导"
+
+rules:
+  - id: "DogReal+DrawSpill+FavTao"
+    when:
+      all:
+        - "delta_odds_live_dog <= real"
+        - "delta_p_live_D >= draw_spill_pp"
+        - "delta_odds_live_fav >= tao"
+    output:
+      pick: "{dog}"
+      hedge: "D"
+      market_pick: "X2"
+      confidence_base: 72
+      intent: "弱势方向降赔付保护，平赔做分洪口，热门方向抬赔阻信心"
+      explain:
+        - "弱势方向压赔=降赔付保护"
+        - "平局Δp为正=平做分洪口"
+        - "热门方向抬赔=阻信心/诱导"
+
+  - id: "FavReal+DogTao"
+    when:
+      all:
+        - "delta_odds_live_fav <= real"
+        - "delta_odds_live_dog >= tao"
+    output:
+      pick: "{fav}"
+      hedge: "D_if_draw_spill_else_1X"
+      market_pick: "1X"
+      confidence_base: 70
+      intent: "热门方向降赔付保护，冷门方向抬赔阻信心"
+      explain:
+        - "热门方向压赔=降低赔付风险"
+        - "冷门方向抬赔=阻信心/任人博取"
+
+  - id: "FavReal+DrawSpill"
+    when:
+      all:
+        - "delta_odds_live_fav <= real"
+        - "delta_p_live_D >= draw_spill_pp"
+    output:
+      pick: "{fav}"
+      hedge: "D"
+      market_pick: "1X"
+      confidence_base: 74
+      intent: "热门方向降赔付保护，平赔做分洪口"
+      explain:
+        - "热门方向压赔=降低赔付风险"
+        - "平局Δp为正=分洪口（桥梁吸筹）"
+        - "欧赔两项可分一项，平赔桥梁生效"
+
+  - id: "DrawBlock+EdgeReal"
+    when:
+      all:
+        - "delta_p_live_D <= draw_block_pp"
+        - "(delta_odds_live_fav <= real or delta_odds_live_dog <= real)"
+    output:
+      pick: "fav_if_fav_real_else_dog"
+      hedge: "none_or_small"
+      market_pick: "12"
+      confidence_base: 66
+      intent: "阻平拉边，结果倾向落在胜负一侧"
+      explain:
+        - "平局Δp为负=阻平"
+        - "一侧压赔=倾向该侧"
+
+  - id: "FallbackByDeltaP"
+    when:
+      all:
+        - "1 == 1"  # 总是匹配（作为fallback）
+    output:
+      pick: "max_delta_p"
+      hedge: "1X2_mix"
+      market_pick: "1X2"
+      confidence_base: 50
+      intent: "基于概率偏移最大项判断"
+      explain:
+        - "未匹配到明确结构，基于Δp最大项判断"
+

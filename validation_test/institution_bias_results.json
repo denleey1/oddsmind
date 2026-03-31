@@ -1,0 +1,601 @@
+{
+  "run_time": "2026-02-23T00:41:53.386249",
+  "all_leagues": {
+    "sample_size": 21729,
+    "dim_a": {
+      "80_HIGH_BIAS": {
+        "company": "澳门",
+        "type": "HIGH_BIAS",
+        "sample": 5976,
+        "rate": 0.7464859437751004
+      },
+      "80_LOW_BIAS": {
+        "company": "澳门",
+        "type": "LOW_BIAS",
+        "sample": 2116,
+        "rate": 0.5193761814744802
+      },
+      "110_HIGH_BIAS": {
+        "company": "SNAI(意大利)",
+        "type": "HIGH_BIAS",
+        "sample": 3699,
+        "rate": 0.6453095431197621
+      },
+      "110_LOW_BIAS": {
+        "company": "SNAI(意大利)",
+        "type": "LOW_BIAS",
+        "sample": 1604,
+        "rate": 0.435785536159601
+      },
+      "545_HIGH_BIAS": {
+        "company": "皇冠",
+        "type": "HIGH_BIAS",
+        "sample": 6426,
+        "rate": 0.7578586990351697
+      },
+      "545_LOW_BIAS": {
+        "company": "皇冠",
+        "type": "LOW_BIAS",
+        "sample": 1205,
+        "rate": 0.5261410788381743
+      },
+      "432_HIGH_BIAS": {
+        "company": "HKJC香港马会",
+        "type": "HIGH_BIAS",
+        "sample": 2402,
+        "rate": 0.5591174021648626
+      },
+      "432_LOW_BIAS": {
+        "company": "HKJC香港马会",
+        "type": "LOW_BIAS",
+        "sample": 437,
+        "rate": 0.41418764302059496
+      }
+    },
+    "dim_b": {
+      "80_REVERSE_HOLD": {
+        "company": "澳门",
+        "signal": "REVERSE_HOLD",
+        "sample": 3719,
+        "rate": 0.6248991664425921,
+        "label": "目标方向未出"
+      },
+      "80_LEAD_MOVE": {
+        "company": "澳门",
+        "signal": "LEAD_MOVE",
+        "sample": 2640,
+        "rate": 0.34734848484848485,
+        "label": "目标方向跑出"
+      },
+      "80_OVER_FOLLOW": {
+        "company": "澳门",
+        "signal": "OVER_FOLLOW",
+        "sample": 616,
+        "rate": 0.3555194805194805,
+        "label": "目标方向跑出"
+      },
+      "545_REVERSE_HOLD": {
+        "company": "皇冠",
+        "signal": "REVERSE_HOLD",
+        "sample": 2345,
+        "rate": 0.6264392324093817,
+        "label": "目标方向未出"
+      },
+      "545_LEAD_MOVE": {
+        "company": "皇冠",
+        "signal": "LEAD_MOVE",
+        "sample": 6815,
+        "rate": 0.34526779163609683,
+        "label": "目标方向跑出"
+      },
+      "545_OVER_FOLLOW": {
+        "company": "皇冠",
+        "signal": "OVER_FOLLOW",
+        "sample": 2095,
+        "rate": 0.38424821002386633,
+        "label": "目标方向跑出"
+      },
+      "432_REVERSE_HOLD": {
+        "company": "HKJC香港马会",
+        "signal": "REVERSE_HOLD",
+        "sample": 2397,
+        "rate": 0.6253650396328744,
+        "label": "目标方向未出"
+      },
+      "432_LEAD_MOVE": {
+        "company": "HKJC香港马会",
+        "signal": "LEAD_MOVE",
+        "sample": 1321,
+        "rate": 0.3777441332323997,
+        "label": "目标方向跑出"
+      },
+      "432_OVER_FOLLOW": {
+        "company": "HKJC香港马会",
+        "signal": "OVER_FOLLOW",
+        "sample": 250,
+        "rate": 0.416,
+        "label": "目标方向跑出"
+      },
+      "110_REVERSE_HOLD": {
+        "company": "SNAI(意大利)",
+        "signal": "REVERSE_HOLD",
+        "sample": 2714,
+        "rate": 0.6282240235814296,
+        "label": "目标方向未出"
+      },
+      "110_LEAD_MOVE": {
+        "company": "SNAI(意大利)",
+        "signal": "LEAD_MOVE",
+        "sample": 3826,
+        "rate": 0.3442237323575536,
+        "label": "目标方向跑出"
+      },
+      "110_OVER_FOLLOW": {
+        "company": "SNAI(意大利)",
+        "signal": "OVER_FOLLOW",
+        "sample": 1135,
+        "rate": 0.3973568281938326,
+        "label": "目标方向跑出"
+      }
+    },
+    "dim_c": {
+      "80_LATE_HIGH": {
+        "company": "澳门",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 2002,
+        "rate": 0.7502497502497503,
+        "prediction": "未出"
+      },
+      "80_LATE_LOW": {
+        "company": "澳门",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 1588,
+        "rate": 0.4792191435768262,
+        "prediction": "跑出"
+      },
+      "80_CONSISTENT_LOW": {
+        "company": "澳门",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 668,
+        "rate": 0.5269461077844312,
+        "prediction": "跑出"
+      },
+      "80_CONSISTENT_HIGH": {
+        "company": "澳门",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 966,
+        "rate": 0.7763975155279503,
+        "prediction": "未出"
+      },
+      "432_LATE_HIGH": {
+        "company": "HKJC香港马会",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 464,
+        "rate": 0.5905172413793104,
+        "prediction": "未出"
+      },
+      "432_LATE_LOW": {
+        "company": "HKJC香港马会",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 330,
+        "rate": 0.37575757575757573,
+        "prediction": "跑出"
+      },
+      "432_CONSISTENT_LOW": {
+        "company": "HKJC香港马会",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 227,
+        "rate": 0.3392070484581498,
+        "prediction": "跑出"
+      },
+      "432_CONSISTENT_HIGH": {
+        "company": "HKJC香港马会",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 590,
+        "rate": 0.5101694915254237,
+        "prediction": "未出"
+      },
+      "545_LATE_HIGH": {
+        "company": "皇冠",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 1542,
+        "rate": 0.7587548638132295,
+        "prediction": "未出"
+      },
+      "545_LATE_LOW": {
+        "company": "皇冠",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 969,
+        "rate": 0.5201238390092879,
+        "prediction": "跑出"
+      },
+      "545_CONSISTENT_LOW": {
+        "company": "皇冠",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 570,
+        "rate": 0.48947368421052634,
+        "prediction": "跑出"
+      },
+      "545_CONSISTENT_HIGH": {
+        "company": "皇冠",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 927,
+        "rate": 0.749730312837109,
+        "prediction": "未出"
+      },
+      "110_LATE_HIGH": {
+        "company": "SNAI(意大利)",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 1518,
+        "rate": 0.650197628458498,
+        "prediction": "未出"
+      },
+      "110_LATE_LOW": {
+        "company": "SNAI(意大利)",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 1319,
+        "rate": 0.39651250947687644,
+        "prediction": "跑出"
+      },
+      "110_CONSISTENT_LOW": {
+        "company": "SNAI(意大利)",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 251,
+        "rate": 0.4581673306772908,
+        "prediction": "跑出"
+      },
+      "110_CONSISTENT_HIGH": {
+        "company": "SNAI(意大利)",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 413,
+        "rate": 0.6368038740920097,
+        "prediction": "未出"
+      }
+    },
+    "sensitivity": {
+      "80": {
+        "name": "澳门",
+        "total": 976,
+        "hits": 110,
+        "score": 0.11270491803278689,
+        "rank": 1
+      },
+      "545": {
+        "name": "皇冠",
+        "total": 1951,
+        "hits": 81,
+        "score": 0.041517170681701694,
+        "rank": 2
+      },
+      "110": {
+        "name": "SNAI(意大利)",
+        "total": 1194,
+        "hits": 46,
+        "score": 0.038525963149078725,
+        "rank": 3
+      },
+      "432": {
+        "name": "HKJC香港马会",
+        "total": 601,
+        "hits": 10,
+        "score": 0.016638935108153077,
+        "rank": 4
+      }
+    }
+  },
+  "elite_leagues": {
+    "sample_size": 5348,
+    "dim_a": {
+      "80_HIGH_BIAS": {
+        "company": "澳门",
+        "type": "HIGH_BIAS",
+        "sample": 2397,
+        "rate": 0.7400917813934085
+      },
+      "80_LOW_BIAS": {
+        "company": "澳门",
+        "type": "LOW_BIAS",
+        "sample": 742,
+        "rate": 0.5053908355795148
+      },
+      "432_HIGH_BIAS": {
+        "company": "HKJC香港马会",
+        "type": "HIGH_BIAS",
+        "sample": 1222,
+        "rate": 0.5482815057283142
+      },
+      "432_LOW_BIAS": {
+        "company": "HKJC香港马会",
+        "type": "LOW_BIAS",
+        "sample": 174,
+        "rate": 0.41954022988505746
+      },
+      "110_HIGH_BIAS": {
+        "company": "SNAI(意大利)",
+        "type": "HIGH_BIAS",
+        "sample": 1089,
+        "rate": 0.6262626262626263
+      },
+      "110_LOW_BIAS": {
+        "company": "SNAI(意大利)",
+        "type": "LOW_BIAS",
+        "sample": 443,
+        "rate": 0.39503386004514673
+      },
+      "545_HIGH_BIAS": {
+        "company": "皇冠",
+        "type": "HIGH_BIAS",
+        "sample": 983,
+        "rate": 0.7517802644964394
+      },
+      "545_LOW_BIAS": {
+        "company": "皇冠",
+        "type": "LOW_BIAS",
+        "sample": 104,
+        "rate": 0.6538461538461539
+      }
+    },
+    "dim_b": {
+      "432_REVERSE_HOLD": {
+        "company": "HKJC香港马会",
+        "signal": "REVERSE_HOLD",
+        "sample": 1245,
+        "rate": 0.6337349397590362,
+        "label": "目标方向未出"
+      },
+      "432_LEAD_MOVE": {
+        "company": "HKJC香港马会",
+        "signal": "LEAD_MOVE",
+        "sample": 821,
+        "rate": 0.3800243605359318,
+        "label": "目标方向跑出"
+      },
+      "432_OVER_FOLLOW": {
+        "company": "HKJC香港马会",
+        "signal": "OVER_FOLLOW",
+        "sample": 146,
+        "rate": 0.3972602739726027,
+        "label": "目标方向跑出"
+      },
+      "110_REVERSE_HOLD": {
+        "company": "SNAI(意大利)",
+        "signal": "REVERSE_HOLD",
+        "sample": 952,
+        "rate": 0.6323529411764706,
+        "label": "目标方向未出"
+      },
+      "110_LEAD_MOVE": {
+        "company": "SNAI(意大利)",
+        "signal": "LEAD_MOVE",
+        "sample": 1279,
+        "rate": 0.35418295543393274,
+        "label": "目标方向跑出"
+      },
+      "110_OVER_FOLLOW": {
+        "company": "SNAI(意大利)",
+        "signal": "OVER_FOLLOW",
+        "sample": 398,
+        "rate": 0.3793969849246231,
+        "label": "目标方向跑出"
+      },
+      "80_REVERSE_HOLD": {
+        "company": "澳门",
+        "signal": "REVERSE_HOLD",
+        "sample": 1367,
+        "rate": 0.6196049743964887,
+        "label": "目标方向未出"
+      },
+      "80_LEAD_MOVE": {
+        "company": "澳门",
+        "signal": "LEAD_MOVE",
+        "sample": 1154,
+        "rate": 0.3587521663778163,
+        "label": "目标方向跑出"
+      },
+      "80_OVER_FOLLOW": {
+        "company": "澳门",
+        "signal": "OVER_FOLLOW",
+        "sample": 273,
+        "rate": 0.336996336996337,
+        "label": "目标方向跑出"
+      },
+      "545_REVERSE_HOLD": {
+        "company": "皇冠",
+        "signal": "REVERSE_HOLD",
+        "sample": 349,
+        "rate": 0.6045845272206304,
+        "label": "目标方向未出"
+      },
+      "545_LEAD_MOVE": {
+        "company": "皇冠",
+        "signal": "LEAD_MOVE",
+        "sample": 1544,
+        "rate": 0.3484455958549223,
+        "label": "目标方向跑出"
+      },
+      "545_OVER_FOLLOW": {
+        "company": "皇冠",
+        "signal": "OVER_FOLLOW",
+        "sample": 437,
+        "rate": 0.36613272311212813,
+        "label": "目标方向跑出"
+      }
+    },
+    "dim_c": {
+      "80_LATE_HIGH": {
+        "company": "澳门",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 822,
+        "rate": 0.7518248175182481,
+        "prediction": "未出"
+      },
+      "80_LATE_LOW": {
+        "company": "澳门",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 640,
+        "rate": 0.465625,
+        "prediction": "跑出"
+      },
+      "80_CONSISTENT_LOW": {
+        "company": "澳门",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 258,
+        "rate": 0.5348837209302325,
+        "prediction": "跑出"
+      },
+      "80_CONSISTENT_HIGH": {
+        "company": "澳门",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 365,
+        "rate": 0.7643835616438356,
+        "prediction": "未出"
+      },
+      "432_LATE_HIGH": {
+        "company": "HKJC香港马会",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 224,
+        "rate": 0.5848214285714286,
+        "prediction": "未出"
+      },
+      "432_LATE_LOW": {
+        "company": "HKJC香港马会",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 138,
+        "rate": 0.38405797101449274,
+        "prediction": "跑出"
+      },
+      "432_CONSISTENT_LOW": {
+        "company": "HKJC香港马会",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 89,
+        "rate": 0.3146067415730337,
+        "prediction": "跑出"
+      },
+      "432_CONSISTENT_HIGH": {
+        "company": "HKJC香港马会",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 245,
+        "rate": 0.5020408163265306,
+        "prediction": "未出"
+      },
+      "110_LATE_HIGH": {
+        "company": "SNAI(意大利)",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 469,
+        "rate": 0.5970149253731343,
+        "prediction": "未出"
+      },
+      "110_LATE_LOW": {
+        "company": "SNAI(意大利)",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 399,
+        "rate": 0.3609022556390977,
+        "prediction": "跑出"
+      },
+      "110_CONSISTENT_LOW": {
+        "company": "SNAI(意大利)",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 57,
+        "rate": 0.3684210526315789,
+        "prediction": "跑出"
+      },
+      "110_CONSISTENT_HIGH": {
+        "company": "SNAI(意大利)",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 100,
+        "rate": 0.67,
+        "prediction": "未出"
+      },
+      "545_LATE_HIGH": {
+        "company": "皇冠",
+        "pattern": "LATE_HIGH",
+        "label": "临场拉升（变节→高偏）→ 该向未出",
+        "sample": 224,
+        "rate": 0.8080357142857143,
+        "prediction": "未出"
+      },
+      "545_LATE_LOW": {
+        "company": "皇冠",
+        "pattern": "LATE_LOW",
+        "label": "临场压低（变节→低偏）→ 该向跑出",
+        "sample": 121,
+        "rate": 0.6363636363636364,
+        "prediction": "跑出"
+      },
+      "545_CONSISTENT_LOW": {
+        "company": "皇冠",
+        "pattern": "CONSISTENT_LOW",
+        "label": "全程一致偏低（防御）→ 该向跑出",
+        "sample": 52,
+        "rate": 0.5192307692307693,
+        "prediction": "跑出"
+      },
+      "545_CONSISTENT_HIGH": {
+        "company": "皇冠",
+        "pattern": "CONSISTENT_HIGH",
+        "label": "全程一致偏高（诱导）→ 该向未出",
+        "sample": 126,
+        "rate": 0.7777777777777778,
+        "prediction": "未出"
+      }
+    },
+    "sensitivity": {
+      "80": {
+        "name": "澳门",
+        "total": 445,
+        "hits": 50,
+        "score": 0.11235955056179775,
+        "rank": 1
+      },
+      "110": {
+        "name": "SNAI(意大利)",
+        "total": 404,
+        "hits": 13,
+        "score": 0.03217821782178218,
+        "rank": 2
+      },
+      "545": {
+        "name": "皇冠",
+        "total": 487,
+        "hits": 9,
+        "score": 0.018480492813141684,
+        "rank": 3
+      },
+      "432": {
+        "name": "HKJC香港马会",
+        "total": 373,
+        "hits": 4,
+        "score": 0.010723860589812333,
+        "rank": 4
+      }
+    }
+  }
+}

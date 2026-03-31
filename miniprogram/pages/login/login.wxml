@@ -1,0 +1,68 @@
+<!-- pages/login/login.wxml -->
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-icon">⏳</view>
+    <view class="loading-text">正在登录...</view>
+  </view>
+
+  <!-- 需要激活 -->
+  <view wx:elif="{{needActivate}}" class="activate-container">
+    <view class="title">{{isExpired ? '账号已过期' : '欢迎使用 OddsMind'}}</view>
+    <view class="subtitle">{{isExpired ? '请输入新的激活码续费' : '请输入邀请码激活账号'}}</view>
+
+    <view class="form-container">
+      <view class="input-group">
+        <input
+          class="input"
+          type="text"
+          placeholder="请输入邀请码"
+          value="{{inviteCode}}"
+          bindinput="onInviteCodeInput"
+          maxlength="20"
+          disabled="{{loading}}"
+        />
+      </view>
+
+      <view class="error-message" wx:if="{{errorMessage}}">
+        {{errorMessage}}
+      </view>
+
+      <button
+        class="submit-btn"
+        bindtap="onSubmitActivate"
+        disabled="{{loading}}"
+        loading="{{loading}}"
+      >
+        {{loading ? '激活中...' : '激活账号'}}
+      </button>
+
+      <view class="retry-link" bindtap="onRetryLogin" wx:if="{{!loading}}">
+        重新登录
+      </view>
+    </view>
+
+    <!-- 激活码提示 -->
+    <view class="purchase-section">
+      <view class="purchase-hint">请联系管理员获取激活码</view>
+    </view>
+  </view>
+
+  <!-- 登录失败 -->
+  <view wx:else class="error-container">
+    <view class="error-icon">⚠️</view>
+    <view class="error-title">登录失败</view>
+    <view class="error-message" wx:if="{{errorMessage}}">
+      {{errorMessage}}
+    </view>
+    <button class="retry-btn" bindtap="autoLogin" disabled="{{loading}}">
+      重试
+    </button>
+    <view class="error-purchase-link">
+      请联系管理员获取激活码
+    </view>
+  </view>
+</view>
+
+
+

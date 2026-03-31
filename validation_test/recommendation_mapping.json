@@ -1,0 +1,73 @@
+{
+  "recommendations": {
+    "主让1胜": {
+      "result": "home_win",
+      "description": "主队让1球还能胜"
+    },
+    "主让1平": {
+      "result": "home_win", 
+      "description": "主队让1球平局，实际需赢1球"
+    },
+    "主让1负": {
+      "result": ["draw", "away_win"],
+      "description": "主队让1球负，实际平局或输球"
+    },
+    "主让2胜": {
+      "result": "home_win",
+      "description": "主队至少赢3球以上"
+    },
+    "主让2平": {
+      "result": "home_win",
+      "description": "主队赢2球"
+    },
+    "客让1胜": {
+      "result": "away_win",
+      "description": "客队至少赢2球以上"
+    },
+    "客让1平": {
+      "result": "away_win",
+      "description": "客队让1球平局，实际需赢1球"
+    },
+    "客让2胜": {
+      "result": "away_win", 
+      "description": "客队至少赢3球以上"
+    },
+    "客让2平": {
+      "result": "away_win",
+      "description": "客队赢2球"
+    },
+    "主受1胜": {
+      "result": ["home_win", "draw"],
+      "description": "主队平局或赢球"
+    },
+    "客受1胜": {
+      "result": ["away_win", "draw"],
+      "description": "客队平局或赢球"
+    },
+    "平": {
+      "result": "draw",
+      "description": "平局"
+    },
+    "双平": {
+      "result": ["home_win", "draw", "away_win"],
+      "description": "任意结果都可能"
+    },
+    "双平偏平": {
+      "result": "draw",
+      "description": "主要推荐平局"
+    },
+    "双平偏让平": {
+      "result": "draw",
+      "description": "规则值小的一方获胜，简化为平局"
+    },
+    "双平": {
+      "result": ["home_win", "draw", "away_win"],
+      "description": "任意结果都可能，与'双平'相同"
+    }
+  },
+  "notes": [
+    "让 = 减分，受 = 加分",
+    "双平偏让平需要根据主客队规则值大小动态判断胜负方",
+    "数组形式的result表示多个结果都算正确"
+  ]
+}

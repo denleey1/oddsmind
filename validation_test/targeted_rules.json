@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-01-30 23:05:43",
+  "criteria": "让方必赢 或 受让方不输, 五大100%或全部90%+",
+  "handicap_win_rules": [
+    {
+      "name": "【五大】强让+让方赔率降",
+      "condition": "强让+让方赔率降",
+      "predict": "让方必赢",
+      "accuracy": 1.0,
+      "total": 3,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】强让+让方赔率降+受让方赔率升",
+      "condition": "强让+让方赔率降+受让方赔率升",
+      "predict": "让方必赢",
+      "accuracy": 1.0,
+      "total": 3,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "强让+即时受让方超韬+受让方赔率升",
+      "condition": "强让+即时受让方超韬+受让方赔率升",
+      "predict": "让方必赢",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "全部联赛"
+    }
+  ],
+  "receiver_not_lose_rules": [
+    {
+      "name": "【五大】即时让方韬光",
+      "condition": "即时让方韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 8,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】即时让方超韬",
+      "condition": "即时让方超韬",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】即时让方韬光+让方赔率升",
+      "condition": "即时让方韬光+让方赔率升",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 6,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】即时让方韬光+受让方赔率降",
+      "condition": "即时让方韬光+受让方赔率降",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 6,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】即时让方超韬+让方赔率升",
+      "condition": "即时让方超韬+让方赔率升",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】微让+即时让方韬光",
+      "condition": "微让+即时让方韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】初让方高开→即时韬光",
+      "condition": "初让方高开→即时韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "【五大】即时让方韬光+让方赔率升+受让方赔率降",
+      "condition": "即时让方韬光+让方赔率升+受让方赔率降",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 4,
+      "league_type": "五大联赛"
+    },
+    {
+      "name": "微让+即时让方韬光",
+      "condition": "微让+即时让方韬光",
+      "predict": "受让方不输",
+      "accuracy": 0.9090909090909091,
+      "total": 11,
+      "league_type": "全部联赛"
+    },
+    {
+      "name": "初让方高开→即时韬光",
+      "condition": "初让方高开→即时韬光",
+      "predict": "受让方不输",
+      "accuracy": 1.0,
+      "total": 11,
+      "league_type": "全部联赛"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+<!--pages/matches/matches.wxml-->
+<view class="matches-page">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrapper">
+      <input 
+        class="search-input" 
+        placeholder="搜索球队或联赛" 
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearch"
+      />
+      <view class="search-icon">🔍</view>
+    </view>
+  </view>
+
+  <!-- 状态筛选 -->
+  <view class="status-bar">
+    <block wx:for="{{statusTabs}}" wx:key="value">
+      <view 
+        class="status-tab {{activeStatusTab === item.value ? 'active' : ''}}" 
+        bindtap="onStatusTabTap" 
+        data-value="{{item.value}}"
+      >
+        <text>{{item.label}}</text>
+      </view>
+    </block>
+  </view>
+
+  <!-- 快捷联赛筛选 -->
+  <view class="league-quick-bar" wx:if="{{quickLeagues.length > 0}}">
+    <scroll-view scroll-x class="league-scroll">
+      <view class="league-chips">
+        <text class="league-chips-label">快捷筛选:</text>
+        <view wx:for="{{quickLeagues}}" wx:key="name"
+              class="league-chip {{selectedLeague === item.name ? 'active' : ''}}"
+              bindtap="onQuickLeagueTap" data-name="{{item.name}}">
+          <text>{{item.name}}</text>
+        </view>
+        <view class="league-chip clear-chip {{selectedLeague ? 'show' : ''}}"
+              wx:if="{{selectedLeague}}"
+              bindtap="onClearLeagueFilter">
+          <text>[R] 清除</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 比赛列表 -->
+  <view class="matches-container">
+    <view class="signal-summary" wx:if="{{hasSignalSummary}}">
+      <view class="signal-summary-item all {{selectedSignalLevel === '' ? 'active' : ''}} {{selectedSignalLevel !== '' ? 'inactive' : ''}}" bindtap="onSignalFilterTap" data-level="">
+        <text class="signal-summary-label">全部</text>
+        <text class="signal-summary-count">{{visibleSignalSummary.heavy + visibleSignalSummary.strong + visibleSignalSummary.reference}}场</text>
+      </view>
+      <view class="signal-summary-item heavy {{selectedSignalLevel === '重仓' ? 'active' : ''}} {{selectedSignalLevel && selectedSignalLevel !== '重仓' ? 'inactive' : ''}}" bindtap="onSignalFilterTap" data-level="重仓">
+        <text class="signal-summary-icon">🔴</text>
+        <text class="signal-summary-label">重仓</text>
+        <text class="signal-summary-count">{{visibleSignalSummary.heavy}}场</text>
+      </view>
+      <view class="signal-summary-item strong {{selectedSignalLevel === '强烈' ? 'active' : ''}} {{selectedSignalLevel && selectedSignalLevel !== '强烈' ? 'inactive' : ''}}" bindtap="onSignalFilterTap" data-level="强烈">
+        <text class="signal-summary-icon">🟠</text>
+        <text class="signal-summary-label">强烈</text>
+        <text class="signal-summary-count">{{visibleSignalSummary.strong}}场</text>
+      </view>
+      <view class="signal-summary-item reference {{selectedSignalLevel === '参考' ? 'active' : ''}} {{selectedSignalLevel && selectedSignalLevel !== '参考' ? 'inactive' : ''}}" bindtap="onSignalFilterTap" data-level="参考">
+        <text class="signal-summary-icon">🟡</text>
+        <text class="signal-summary-label">参考</text>
+        <text class="signal-summary-count">{{visibleSignalSummary.reference}}场</text>
+      </view>
+    </view>
+
+    <view class="skeleton-list" wx:if="{{loading && allMatches.length === 0}}">
+      <view class="skeleton-card" wx:for="{{skeletonItems}}" wx:key="index">
+        <view class="skeleton-header"></view>
+        <view class="skeleton-body">
+          <view class="skeleton-team"></view>
+          <view class="skeleton-score"></view>
+          <view class="skeleton-team"></view>
+        </view>
+      </view>
+    </view>
+
+    <view class="loading" wx:elif="{{loading}}">
+      <view class="loading-spinner"></view>
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <empty-state
+      wx:elif="{{!loading && filteredMatches.length === 0}}"
+      icon="📭"
+      title="暂无比赛数据"
+      description="可尝试切换日期、状态或信号等级筛选"
+      action-text="刷新数据"
+      bind:actiontap="onRefresh"
+    ></empty-state>
+
+    <view class="matches-list" wx:else>
+      <block wx:for="{{groupedMatches}}" wx:key="date">
+        <view class="date-group">
+          <view class="date-header">
+            <text class="date-text">{{item.dateText}}</text>
+            <text class="date-count">{{item.matches.length}} 场比赛</text>
+          </view>
+
+          <view class="date-matches">
+            <block wx:for="{{item.matches}}" wx:key="matchId" wx:for-item="match">
+              <match-card
+                match="{{match}}"
+                alert-info="{{alertMap[match.matchId]}}"
+                bind:matchtap="onMatchTap"
+              ></match-card>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="load-more" wx:if="{{!loading && filteredMatches.length && hasMore}}">
+      <button class="load-more-btn" bindtap="loadMore" loading="{{loadingMore}}" disabled="{{loadingMore}}">
+        {{loadingMore ? '加载中...' : '加载更多'}}
+      </button>
+    </view>
+    <view class="load-more-tip" wx:elif="{{!loading && filteredMatches.length && !hasMore}}">
+      <text>没有更多了</text>
+    </view>
+  </view>
+</view>
+

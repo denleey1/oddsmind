@@ -1,0 +1,27 @@
+[Unit]
+Description=OddsMind Football Data Analysis System
+After=network.target mysql.service
+Requires=mysql.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/oddsmind
+Environment=PATH=/home/ubuntu/oddsmind/venv/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=/home/ubuntu/oddsmind/oddsmind.env
+ExecStart=/home/ubuntu/oddsmind/venv/bin/python /home/ubuntu/oddsmind/app.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=oddsmind
+
+# Security settings
+NoNewPrivileges=true
+ReadWritePaths=/home/ubuntu/oddsmind/logs /home/ubuntu/oddsmind/data
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

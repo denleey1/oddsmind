@@ -1,0 +1,96 @@
+<!--pages/index/index.wxml-->
+<view class="index-page">
+  <!-- 头部横幅 -->
+  <view class="header-banner gradient-bg">
+    <view class="banner-content">
+      <text class="banner-title">⚽ OddsMind</text>
+      <text class="banner-subtitle">专业足球赔率分析</text>
+    </view>
+  </view>
+
+  <!-- 快速操作 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="navigateToMatches">
+      <view class="action-icon">📅</view>
+      <text class="action-text">全部比赛</text>
+    </view>
+    <view class="action-item" bindtap="onRefresh">
+      <view class="action-icon">🔄</view>
+      <text class="action-text">刷新数据</text>
+    </view>
+    <view class="action-item" bindtap="showFinishedMatches">
+      <view class="action-icon">📊</view>
+      <text class="action-text">已完成</text>
+    </view>
+    <view class="action-item" bindtap="navigateToProfile">
+      <view class="action-icon">👤</view>
+      <text class="action-text">我的</text>
+    </view>
+  </view>
+
+  <!-- 数据统计 -->
+  <view class="stats-container">
+    <view class="stat-item">
+      <text class="stat-value">{{todayMatchCount}}</text>
+      <text class="stat-label">今日比赛</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">{{liveMatchCount}}</text>
+      <text class="stat-label">进行中</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-value">{{finishedMatchCount}}</text>
+      <text class="stat-label">已完成</text>
+    </view>
+  </view>
+
+  <!-- 即将开始 -->
+  <view class="section">
+    <view class="section-header" bindtap="toggleModule" data-module="upcoming">
+      <text class="section-title">⏱ 即将开始</text>
+      <view class="section-right">
+        <text class="section-more" catchtap="navigateToMatches">更多 ></text>
+        <text class="module-toggle {{collapsedModules.upcoming ? '' : 'expanded'}}">▶</text>
+      </view>
+    </view>
+
+    <view class="section-content" wx:if="{{!collapsedModules.upcoming}}">
+      <empty-state
+        wx:if="{{upcomingMatches.length === 0 && !loading}}"
+        icon="⏱"
+        title="暂无即将开始的比赛"
+        description="建议查看全部比赛或手动刷新"
+        action-text="立即刷新"
+        compact="{{true}}"
+        bind:actiontap="onRefresh"
+      ></empty-state>
+
+      <view class="matches-container" wx:else>
+        <block wx:for="{{upcomingMatches}}" wx:key="matchId">
+          <match-card match="{{item}}" bind:matchtap="onMatchTap"></match-card>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 进行中的比赛 -->
+  <view class="section" wx:if="{{liveMatches.length > 0}}">
+    <view class="section-header" bindtap="toggleModule" data-module="live">
+      <text class="section-title">🏃 进行中</text>
+      <view class="section-right">
+        <text class="section-more" catchtap="navigateToMatches">更多 ></text>
+        <text class="module-toggle {{collapsedModules.live ? '' : 'expanded'}}">▶</text>
+      </view>
+    </view>
+
+    <view class="section-content" wx:if="{{!collapsedModules.live}}">
+      <view class="matches-container">
+        <block wx:for="{{liveMatches}}" wx:key="matchId">
+          <match-card match="{{item}}" bind:matchtap="onMatchTap"></match-card>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

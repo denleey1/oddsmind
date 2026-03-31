@@ -1,0 +1,13 @@
+# Query: OddsMind - 足球预测系统
+# ContextLines: 1
+
+2 个结果 - 1 个文件
+
+templates/index_modern.html:
+    5      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    6:     <title>OddsMind - 足球数据分析</title>
+    7      <style>
+
+  538          <div class="header">
+  539:             <h1>OddsMind - 足球数据分析</h1>
+  540              <div class="status-info">

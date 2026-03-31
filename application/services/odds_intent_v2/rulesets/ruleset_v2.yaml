@@ -1,0 +1,199 @@
+version: "v2.0"
+
+thresholds:
+  real: -0.08        # Δodds <= -8% 认为实
+  real_soft: -0.05  # 轻实阈值（-5%），用于阻平场景
+  tao: 0.08          # Δodds >= +8% 认为韬
+  draw_spill_pp: 0.02   # Δp(D) >= +2pp 平局分洪
+  draw_block_pp: -0.02  # Δp(D) <= -2pp 阻平
+  move_confirm: -0.03   # Δmove <= -3% 认为"确认走强"
+  move_reverse: 0.03    # Δmove >= +3% 认为"反做/诱导"
+
+weights:
+  w_real: 1.0
+  w_tao: 0.8
+  w_draw_spill: 0.4
+  w_move_confirm: 0.6
+  w_tail_penalty: -0.2
+
+# Stage A: 结构标签规则（不决定pick，只产出tags/structure）
+stageA_structure:
+  - id: "PullWinSplitDraw"
+    when:
+      - "draw_role == 'block'"
+      - "is_real(fav)"
+    add:
+      tags: ["PullWinSplitDraw", "DrawBlock"]
+      structure: "PullWinSplitDraw"
+
+  - id: "DoubleSplitDraw"
+    when:
+      - "draw_role == 'spill'"
+      - "split_type == 'double'"
+    add:
+      tags: ["DoubleSplitDraw"]
+      structure: "DoubleSplitDraw"
+
+  - id: "ValleyNotDraw"
+    when:
+      - "draw_role == 'valley'"
+    add:
+      tags: ["Valley"]
+      exclude: ["D"]
+
+# Stage B: 更优解加权规则（更新solutions分数/理由）
+stageB_solutions:
+  - id: "DogReal+DrawSpill+FavTao"
+    when:
+      - "is_real(dog)"
+      - "draw_role == 'spill'"
+      - "is_tao(fav)"
+    add:
+      solution_boost:
+        REAL_solution:
+          target: "{dog}"
+          score_add: 0.8
+          why_add: ["弱势压赔+平分洪+热门抬赔 => 更像保护弱势结果"]
+
+  - id: "FavReal+DogTao"
+    when:
+      - "is_real(fav)"
+      - "is_tao(dog)"
+    add:
+      solution_boost:
+        REAL_solution:
+          target: "{fav}"
+          score_add: 0.7
+          why_add: ["热门压赔+冷门抬赔 => 降低热门方向赔付风险"]
+
+  - id: "FavReal+DrawSpill"
+    when:
+      - "is_real(fav)"
+      - "draw_role == 'spill'"
+    add:
+      solution_boost:
+        REAL_solution:
+          target: "{fav}"
+          score_add: 0.74
+          why_add: ["热门压赔+平分洪 => 降低赔付风险，平做分洪口"]
+
+  - id: "DrawBlock+EdgeSoftReal"
+    when:
+      - "draw_role == 'block'"
+      - "(delta_odds_live_fav <= real_soft or delta_odds_live_dog <= real_soft)"
+    add:
+      solution_boost:
+        REAL_solution:
+          target: "fav_if_fav_soft_real_else_dog"
+          score_add: 0.66
+          why_add: ["阻平拉边+一侧轻实 => 倾向落在胜负一侧"]
+
+# Stage C: 输出决策规则（决定final_pick或NoBet）
+stageC_decision:
+  # 韬开可打出：韬开 + 后续下压确认 + 平赔配合分散
+  - id: "TaoSideCanWin_WhenMoveConfirms"
+    when:
+      - "delta_odds_live_fav >= tao"
+      - "delta_move_fav <= move_confirm"
+      - "(draw_role == 'spill' or draw_role == 'block')"
+    output:
+      status: "ok"
+      pick: "{fav}"
+      market_pick: "1X2"
+      confidence_base: 66
+      intent: "韬盘先阻信心控受注，后续下压确认；平赔配合分散"
+      explain:
+        - "韬开用于先阻信心/控受注（不是否认）"
+        - "后续赔率下压=确认走强"
+        - "平赔参与分散，结构闭环"
+
+  - id: "TaoSideCanWin_WhenMoveConfirms_Dog"
+    when:
+      - "delta_odds_live_dog >= tao"
+      - "delta_move_dog <= move_confirm"
+      - "(draw_role == 'spill' or draw_role == 'block')"
+    output:
+      status: "ok"
+      pick: "{dog}"
+      market_pick: "1X2"
+      confidence_base: 66
+      intent: "韬盘先阻信心控受注，后续下压确认；平赔配合分散"
+      explain:
+        - "韬开用于先阻信心/控受注（不是否认）"
+        - "后续赔率下压=确认走强"
+        - "平赔参与分散，结构闭环"
+
+  # 韬假诱：韬开后继续上升，或另一边强实
+  - id: "TaoSideFake_WhenMoveReverse"
+    when:
+      - "(delta_odds_live_fav >= tao or delta_odds_live_dog >= tao)"
+      - "(delta_move_fav >= move_reverse or delta_move_dog >= move_reverse)"
+      - "(delta_odds_live_fav <= real or delta_odds_live_dog <= real)"
+    output:
+      status: "ok"
+      pick: "fav_if_fav_real_else_dog"
+      market_pick: "12"
+      confidence_base: 58
+      intent: "韬开方向继续上升=假诱，另一边强实保护"
+      explain:
+        - "韬开方向继续上升=假诱（更可能不出）"
+        - "另一边强实保护=降低赔付风险"
+
+  # A) 强阻平但两边都不到 -8% 实盘：输出 12（排平）
+  - id: "DrawBlock+DrawTao"
+    when:
+      - "delta_p_live_D <= draw_block_pp"
+      - "delta_odds_live_D >= tao"
+    output:
+      status: "ok"
+      pick: "max_delta_p_edge"
+      market_pick: "12"
+      confidence_base: 68
+      intent: "强阻平：平赔抬到韬区且Δp显著为负，倾向胜负"
+      explain:
+        - "平赔相对骨架抬升进入韬区=阻平"
+        - "Δp(D)显著为负=平局权重被抽走"
+        - "结果更倾向落在胜负两端（12）"
+
+  # C1) 平局主推：平局被保护且两端无明显倾向
+  - id: "DrawPick+DrawReal+EdgesNeutral"
+    when:
+      - "delta_p_live_D >= draw_spill_pp"
+      - "abs(delta_p_live_H) <= 0.01"
+      - "abs(delta_p_live_A) <= 0.01"
+      - "delta_odds_live_D <= real"
+    output:
+      status: "ok"
+      pick: "D"
+      market_pick: "D"
+      confidence_base: 64
+      intent: "平局权重上升且两端无明显倾向，平局为更优解"
+
+  # C2) 洼地思维：平分洪但胜平负都在吸，平是洼地
+  - id: "ValleyNotDraw"
+    when:
+      - "delta_p_live_D >= draw_spill_pp"
+      - "delta_p_live_H > 0"
+      - "delta_p_live_A > 0"
+    output:
+      status: "ok"
+      pick: "max_delta_p_edge"
+      market_pick: "12"
+      confidence_base: 62
+      intent: "平为分洪洼地结构，优先排除平"
+
+  - id: "NoBetIfTwoSolutionsAndLowConfirm"
+    when:
+      - "two_solutions == True"
+      - "confirm_score < 0.5"
+    output:
+      status: "nobet"
+      reason: "双更优解且确认不足"
+
+  - id: "PickBestSolution"
+    when:
+      - "1==1"  # 总是匹配（作为fallback）
+    output:
+      status: "ok"
+      pick: "best_solution_target"
+

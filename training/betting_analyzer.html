@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赛事分析决策辅助工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+        }
+
+        .panel h2 {
+            font-size: 18px;
+            color: #495057;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #495057;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        .form-group input[type="range"] {
+            padding: 0;
+        }
+
+        .range-value {
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 5px;
+        }
+
+        .result-panel {
+            text-align: center;
+        }
+
+        .signal-display {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .dashboard-display {
+            background: lightgrey;
+            color: black;
+            padding: 40px 20px;
+            border-radius: 10px;
+            font-size: 32px;
+            font-weight: bold;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .history-panel {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+
+        .scroll-hint {
+            display: none;
+            text-align: center;
+            color: #6c757d;
+            font-size: 12px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .history-panel h2 {
+            font-size: 18px;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .history-table thead {
+            background: #667eea;
+            color: white;
+        }
+
+        .history-table th {
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .history-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+
+        .history-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* 触摸优化 */
+        @media (hover: none) and (pointer: coarse) {
+            button:active {
+                transform: scale(0.98);
+            }
+
+            .history-table tbody tr:active {
+                background: #e9ecef;
+            }
+        }
+
+        .row-strong-positive {
+            background-color: #d4edda !important;
+            color: #155724;
+        }
+
+        .row-weak-positive {
+            background-color: #fff3cd !important;
+            color: #856404;
+        }
+
+        .row-negative {
+            background-color: #f8d7da !important;
+            color: #721c24;
+        }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            h1 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .panel {
+                padding: 15px;
+            }
+
+            .panel h2 {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            .signal-display {
+                font-size: 13px;
+                padding: 12px;
+            }
+
+            .dashboard-display {
+                font-size: 24px;
+                padding: 30px 15px;
+                min-height: 150px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+
+            .history-panel {
+                padding: 15px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .scroll-hint {
+                display: block;
+            }
+
+            .history-table {
+                font-size: 12px;
+                min-width: 600px;
+            }
+
+            .history-table th,
+            .history-table td {
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            .panel h2 {
+                font-size: 15px;
+            }
+
+            .dashboard-display {
+                font-size: 20px;
+                padding: 25px 10px;
+                min-height: 120px;
+            }
+
+            button {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+
+            .history-table {
+                font-size: 11px;
+            }
+
+            .history-table th,
+            .history-table td {
+                padding: 6px 4px;
+                font-size: 11px;
+            }
+
+            /* 极小屏幕下隐藏部分列 */
+            .history-table th:nth-child(5),
+            .history-table td:nth-child(5),
+            .history-table th:nth-child(6),
+            .history-table td:nth-child(6) {
+                display: none;
+            }
+
+            .history-table {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚽ 赛事分析决策辅助工具</h1>
+
+        <div class="main-content">
+            <!-- 输入区域 -->
+            <div class="panel">
+                <h2>📝 分析输入区</h2>
+                
+                <div class="form-group">
+                    <label>比赛信息:</label>
+                    <input type="text" id="matchInfo" placeholder="请输入比赛信息">
+                </div>
+
+                <div class="form-group">
+                    <label>步骤1: 拉力</label>
+                    <select id="pullDirection">
+                        <option value="主">主</option>
+                        <option value="平">平</option>
+                        <option value="客">客</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>步骤2: 我定让方</label>
+                    <select id="betSide">
+                        <option value="主">主</option>
+                        <option value="客">客</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>步骤3: 分散方</label>
+                    <input type="text" id="dispersionSide" value="等待计算..." readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>步骤4: 操盘模拟</label>
+                    <select id="operationSimulation">
+                        <option value="需降赔">需降赔</option>
+                        <option value="需加阻">需加阻</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>步骤5: 初盘态度</label>
+                    <select id="initialAttitude">
+                        <option value="✅ 认可">✅ 认可</option>
+                        <option value="❌ 否认">❌ 否认</option>
+                        <option value="❔ 中立">❔ 中立</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>步骤6: 盘路验证</label>
+                    <select id="pathVerification">
+                        <option value="🟢 正路">🟢 正路</option>
+                        <option value="🔴 非正路">🔴 非正路</option>
+                        <option value="❔ 模糊">❔ 模糊</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>步骤7: 平赔态度</label>
+                    <select id="drawOddsAttitude">
+                        <option value="降低赔付">降低赔付</option>
+                        <option value="增强分散">增强分散</option>
+                        <option value="无动于衷">无动于衷</option>
+                        <option value="加强阻力">加强阻力</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>信心指数 (1-5): <span id="confidenceValue" class="range-value">3.0</span></label>
+                    <input type="range" id="confidence" min="1" max="5" step="0.1" value="3">
+                </div>
+            </div>
+
+            <!-- 结果展示区 -->
+            <div class="panel result-panel">
+                <h2>📊 分析结论</h2>
+                <div class="signal-display" id="signalDisplay">---</div>
+                <div class="dashboard-display" id="dashboardDisplay">等待分析...</div>
+            </div>
+        </div>
+
+        <!-- 按钮组 -->
+        <div class="button-group">
+            <button type="button" class="btn-primary" onclick="analyzeAndRecord()">生成分析并记录</button>
+            <button type="button" class="btn-secondary" onclick="clearInputs()">清空输入</button>
+            <button type="button" class="btn-secondary" onclick="resetResults()">重置分析结果</button>
+        </div>
+
+        <!-- 历史记录区 -->
+        <div class="history-panel">
+            <h2>📋 历史分析记录</h2>
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>仪表盘</th>
+                        <th>关键信号</th>
+                        <th>信心</th>
+                        <th>比赛</th>
+                        <th>盘路</th>
+                        <th>态度</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableBody">
+                </tbody>
+            </table>
+            <div class="scroll-hint" id="scrollHint">← 滑动查看更多 →</div>
+        </div>
+    </div>
+
+    <script>
+        // 更新信心指数显示
+        document.getElementById('confidence').addEventListener('input', function() {
+            document.getElementById('confidenceValue').textContent = parseFloat(this.value).toFixed(1);
+        });
+
+        // 更新分散方
+        function updateDispersion() {
+            const pullDirection = document.getElementById('pullDirection').value;
+            const betSide = document.getElementById('betSide').value;
+            const dispersionField = document.getElementById('dispersionSide');
+
+            if (!pullDirection || !betSide) {
+                dispersionField.value = '等待计算...';
+                return;
+            }
+
+            if (pullDirection === betSide) {
+                dispersionField.value = '请确认第二分散方';
+            } else {
+                dispersionField.value = `${pullDirection}(第一分散方)`;
+            }
+        }
+
+        // 为拉力和让方添加事件监听
+        document.getElementById('pullDirection').addEventListener('change', updateDispersion);
+        document.getElementById('betSide').addEventListener('change', updateDispersion);
+
+        // 分析并记录
+        function analyzeAndRecord() {
+            const pullDirection = document.getElementById('pullDirection').value;
+            const betSide = document.getElementById('betSide').value;
+            const attitude = document.getElementById('initialAttitude').value;
+            const path = document.getElementById('pathVerification').value;
+            const confidence = parseFloat(document.getElementById('confidence').value);
+            const matchInfo = document.getElementById('matchInfo').value;
+            const dispersionSide = document.getElementById('dispersionSide').value;
+
+            // 核心逻辑判断
+            let keySignal = '';
+            if (attitude === '✅ 认可' && path === '🟢 正路') {
+                keySignal = '✅ 信号一致';
+            } else if (attitude === '✅ 认可' && path === '🔴 非正路') {
+                keySignal = '❌ 信号冲突';
+            } else {
+                keySignal = '❔ 信号模糊';
+            }
+
+            let dashboardResult = '';
+            let dashboardColor = '';
+            let rowClass = '';
+
+            if (keySignal === '✅ 信号一致') {
+                if (confidence >= 4) {
+                    dashboardResult = '🟢 正路强信';
+                    dashboardColor = '#28a745';
+                    rowClass = 'row-strong-positive';
+                } else {
+                    dashboardResult = '🟡 正路弱信';
+                    dashboardColor = '#ffc107';
+                    rowClass = 'row-weak-positive';
+                }
+            } else {
+                dashboardResult = '🔴 非路存疑';
+                dashboardColor = '#dc3545';
+                rowClass = 'row-negative';
+            }
+
+            // 更新界面显示
+            document.getElementById('signalDisplay').textContent = `分散方: ${dispersionSide} | 信号: ${keySignal}`;
+            const dashboard = document.getElementById('dashboardDisplay');
+            dashboard.textContent = dashboardResult;
+            dashboard.style.backgroundColor = dashboardColor;
+            dashboard.style.color = 'white';
+
+            // 插入历史记录
+            const tbody = document.getElementById('historyTableBody');
+            const row = tbody.insertRow(0);
+            row.className = rowClass;
+            
+            row.insertCell(0).textContent = dashboardResult;
+            row.insertCell(1).textContent = `${dispersionSide} | ${keySignal}`;
+            row.insertCell(2).textContent = `${confidence.toFixed(1)}⭐`;
+            row.insertCell(3).textContent = matchInfo;
+            row.insertCell(4).textContent = path;
+            row.insertCell(5).textContent = attitude;
+        }
+
+        // 清空输入
+        function clearInputs() {
+            document.getElementById('matchInfo').value = '';
+            document.getElementById('pullDirection').selectedIndex = 0;
+            document.getElementById('betSide').selectedIndex = 0;
+            document.getElementById('operationSimulation').selectedIndex = 0;
+            document.getElementById('initialAttitude').selectedIndex = 0;
+            document.getElementById('pathVerification').selectedIndex = 0;
+            document.getElementById('drawOddsAttitude').selectedIndex = 0;
+            document.getElementById('confidence').value = 3;
+            document.getElementById('confidenceValue').textContent = '3.0';
+            // 重新计算分散方
+            updateDispersion();
+            
+            resetResults();
+        }
+
+        // 重置分析结果
+        function resetResults() {
+            document.getElementById('signalDisplay').textContent = '---';
+            const dashboard = document.getElementById('dashboardDisplay');
+            dashboard.textContent = '等待分析...';
+            dashboard.style.backgroundColor = 'lightgrey';
+            dashboard.style.color = 'black';
+            // 清空历史记录表格
+            const tbody = document.getElementById('historyTableBody');
+            if (tbody) tbody.innerHTML = '';
+        }
+
+        // 初始化时更新分散方
+        updateDispersion();
+    </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+/**app.wxss**/
+/* 全局样式 - 体育竞技风格优化版 */
+
+/* ========== 设计Token - 统一管理颜色、阴影、圆角等 ========== */
+page {
+  /* 主题色 */
+  --primary-color: #FF6B35;
+  --primary-light: #FF8C61;
+  --primary-dark: #E05A2C;
+  --secondary-color: #004E89;
+  --accent-color: #F7B731;
+  
+  /* 状态色 */
+  --success-color: #2ECC71;
+  --success-light: #A8E6CF;
+  --danger-color: #E74C3C;
+  --danger-light: #FFCDD2;
+  --warning-color: #F39C12;
+  --info-color: #3498DB;
+  
+  /* 文本色 */
+  --text-primary: #2C3E50;
+  --text-secondary: #7F8C8D;
+  --text-tertiary: #BDC3C7;
+  --text-disabled: #D5DBDB;
+  --text-inverse: #FFFFFF;
+  
+  /* 背景色 */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8F9FA;
+  --bg-tertiary: #F1F3F5;
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  
+  /* 边框色 */
+  --border-color: #E0E0E0;
+  --border-light: #F0F0F0;
+  --border-dark: #CACACA;
+  
+  /* 阴影 - 更加柔和、扩散范围更大 */
+  --shadow-xs: 0 2rpx 8rpx rgba(0,0,0,0.02);
+  --shadow-sm: 0 4rpx 12rpx rgba(0,0,0,0.03);
+  --shadow-md: 0 8rpx 24rpx rgba(0,0,0,0.04);
+  --shadow-lg: 0 12rpx 32rpx rgba(0,0,0,0.06);
+  --shadow-xl: 0 16rpx 48rpx rgba(0,0,0,0.08);
+  --shadow-primary: 0 8rpx 24rpx rgba(255, 107, 53, 0.15);
+  --shadow: var(--shadow-sm);
+  --shadow-hover: var(--shadow-md);
+  
+  /* 圆角 - 增加圆角半径，更显现代感 */
+  --radius-xs: 6rpx;
+  --radius-sm: 10rpx;
+  --radius-md: 16rpx;
+  --radius-lg: 24rpx;
+  --radius-xl: 32rpx;
+  --radius-full: 9999rpx;
+  
+  /* 间距 */
+  --spacing-xs: 8rpx;
+  --spacing-sm: 12rpx;
+  --spacing-md: 16rpx;
+  --spacing-lg: 20rpx;
+  --spacing-xl: 24rpx;
+  --spacing-2xl: 30rpx;
+  --spacing-3xl: 40rpx;
+  
+  /* 字体大小 */
+  --font-xs: 20rpx;
+  --font-sm: 22rpx;
+  --font-base: 28rpx;
+  --font-md: 26rpx;
+  --font-lg: 30rpx;
+  --font-xl: 32rpx;
+  --font-2xl: 36rpx;
+  --font-3xl: 40rpx;
+  
+  /* 字重 */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* 过渡时间 */
+  --transition-fast: 0.2s;
+  --transition-base: 0.3s;
+  --transition-slow: 0.4s;
+  --safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+/* 全局重置 */
+page {
+  height: 100%;
+  background-color: var(--bg-secondary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* 容器 */
+.container {
+  padding: 30rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 卡片样式 */
+.card {
+  background: var(--bg-primary);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card-hover:active {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4rpx);
+}
+
+/* 标题 */
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 20rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  margin-bottom: 10rpx;
+}
+
+/* 按钮样式 */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 40rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), #FF8C61);
+  color: #FFFFFF;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 2rpx solid var(--border-color);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2rpx solid var(--primary-color);
+}
+
+/* 徽章 */
+.badge {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.badge-primary {
+  background: var(--primary-color);
+  color: #FFFFFF;
+}
+
+.badge-success {
+  background: var(--success-color);
+  color: #FFFFFF;
+}
+
+.badge-danger {
+  background: var(--danger-color);
+  color: #FFFFFF;
+}
+
+.badge-warning {
+  background: var(--accent-color);
+  color: #FFFFFF;
+}
+
+.badge-secondary {
+  background: var(--text-secondary);
+  color: #FFFFFF;
+}
+
+/* 分隔线 */
+.divider {
+  height: 1rpx;
+  background: var(--border-color);
+  margin: 30rpx 0;
+}
+
+/* Flex布局 */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/* 文本工具类 */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-sm {
+  font-size: 24rpx;
+}
+
+.text-lg {
+  font-size: 32rpx;
+}
+
+.text-xl {
+  font-size: 36rpx;
+}
+
+.text-meta {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* 规则值颜色展示 */
+.rule-green {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.rule-yellow {
+  color: #FFC107;
+  font-weight: bold;
+}
+
+.rule-orange {
+  color: #FF9800;
+  font-weight: bold;
+}
+
+.rule-red {
+  color: #F44336;
+  font-weight: bold;
+}
+
+/* 间距工具类 */
+.mt-10 { margin-top: 10rpx; }
+.mt-20 { margin-top: 20rpx; }
+.mt-30 { margin-top: 30rpx; }
+.mb-10 { margin-bottom: 10rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.mb-30 { margin-bottom: 30rpx; }
+.ml-10 { margin-left: 10rpx; }
+.ml-20 { margin-left: 20rpx; }
+.mr-10 { margin-right: 10rpx; }
+.mr-20 { margin-right: 20rpx; }
+
+.p-10 { padding: 10rpx; }
+.p-20 { padding: 20rpx; }
+.p-30 { padding: 30rpx; }
+
+.safe-bottom {
+  padding-bottom: calc(var(--spacing-2xl) + var(--safe-area-bottom));
+}
+
+.tap-target {
+  min-height: 84rpx;
+  min-width: 84rpx;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+}
+
+/* 空状态 */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  color: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.empty-text {
+  margin-top: 20rpx;
+  color: var(--text-secondary);
+  font-size: 28rpx;
+}
+
+/* 渐变背景 */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 球队Logo占位符 */
+.team-logo {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* 比分样式 */
+.score {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  font-family: 'DIN Alternate', 'Arial', sans-serif;
+}
+
+

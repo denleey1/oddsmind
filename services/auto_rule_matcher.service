@@ -1,0 +1,15 @@
+[Unit]
+Description=Oddsmind Auto Rule Matcher Service
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/oddsmind
+EnvironmentFile=/home/ubuntu/oddsmind/oddsmind.env
+ExecStart=/usr/bin/python3 /home/ubuntu/oddsmind/services/auto_rule_matcher.py --daemon --interval 60 --window 60
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

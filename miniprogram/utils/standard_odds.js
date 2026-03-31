@@ -1,0 +1,740 @@
+﻿module.exports = {
+  "标准89": {
+    "0": {
+      "zoneLabel": "0区 (平手0)",
+      "winMin": 2.51,
+      "winMax": 2.6,
+      "drawMin": 3.09,
+      "drawMax": 3.1,
+      "loseMin": 2.4,
+      "loseMax": 2.49,
+      "returnMin": 0.889723470445904,
+      "returnMax": 0.890438877239451
+    },
+    "1": {
+      "zoneLabel": "1区 (平手-0)",
+      "winMin": 2.31,
+      "winMax": 2.5,
+      "drawMin": 3.09,
+      "drawMax": 3.13,
+      "loseMin": 2.5,
+      "loseMax": 2.69,
+      "returnMin": 0.889571714104071,
+      "returnMax": 0.890647149178949
+    },
+    "2": {
+      "zoneLabel": "2区 (平手-0.25)",
+      "winMin": 2.01,
+      "winMax": 2.3,
+      "drawMin": 3.14,
+      "drawMax": 3.29,
+      "loseMin": 2.7,
+      "loseMax": 3.1,
+      "returnMin": 0.889586776859504,
+      "returnMax": 0.890627503337784
+    },
+    "3": {
+      "zoneLabel": "3区 (半球0.5)",
+      "winMin": 1.81,
+      "winMax": 2.0,
+      "drawMin": 3.29,
+      "drawMax": 3.38,
+      "loseMin": 3.13,
+      "loseMax": 3.63,
+      "returnMin": 0.889614126933316,
+      "returnMax": 0.890375306404103
+    },
+    "4": {
+      "zoneLabel": "4区 (半一-0.75)",
+      "winMin": 1.61,
+      "winMax": 1.8,
+      "drawMin": 3.39,
+      "drawMax": 3.57,
+      "loseMin": 3.66,
+      "loseMax": 4.49,
+      "returnMin": 0.889341725162929,
+      "returnMax": 0.890434944670938
+    },
+    "5": {
+      "zoneLabel": "5区 (一球-1)",
+      "winMin": 1.51,
+      "winMax": 1.6,
+      "drawMin": 3.58,
+      "drawMax": 3.77,
+      "loseMin": 4.56,
+      "loseMax": 5.09,
+      "returnMin": 0.889664401710355,
+      "returnMax": 0.890244237358184
+    },
+    "6": {
+      "zoneLabel": "6区 (一球半1.25)",
+      "winMin": 1.41,
+      "winMax": 1.5,
+      "drawMin": 3.8,
+      "drawMax": 4.05,
+      "loseMin": 5.15,
+      "loseMax": 5.97,
+      "returnMin": 0.889680254584028,
+      "returnMax": 0.890045254015583
+    },
+    "7": {
+      "zoneLabel": "7区 (球半1.5)",
+      "winMin": 1.31,
+      "winMax": 1.4,
+      "drawMin": 4.09,
+      "drawMax": 4.47,
+      "loseMin": 6.07,
+      "loseMax": 7.33,
+      "returnMin": 0.889773081684923,
+      "returnMax": 0.890128557389543
+    },
+    "8": {
+      "zoneLabel": "8区 (球半两球-1.75)",
+      "winMin": 1.21,
+      "winMax": 1.3,
+      "drawMin": 4.52,
+      "drawMax": 5.45,
+      "loseMin": 7.5,
+      "loseMax": 8.8,
+      "returnMin": 0.889723196966864,
+      "returnMax": 0.89029378951283
+    },
+    "9": {
+      "zoneLabel": "9区 (两球-2)",
+      "winMin": 1.11,
+      "winMax": 1.2,
+      "drawMin": 5.6,
+      "drawMax": 7.45,
+      "loseMin": 8.95,
+      "loseMax": 11.3,
+      "returnMin": 0.889760111283168,
+      "returnMax": 0.890430928678576
+    },
+    "10": {
+      "zoneLabel": "10区 (两球球半-2.25)",
+      "winMin": 1.01,
+      "winMax": 1.1,
+      "drawMin": 7.7,
+      "drawMax": 14.0,
+      "loseMin": 11.8,
+      "loseMax": 16.0,
+      "returnMin": 0.889657884388518,
+      "returnMax": 0.890335080354703
+    }
+  },
+  "澳门90.2": {
+    "0": {
+      "zoneLabel": "0区 (平手0)",
+      "winMin": 2.54,
+      "winMax": 2.63,
+      "drawMin": 3.12,
+      "drawMax": 3.13,
+      "loseMin": 2.45,
+      "loseMax": 2.54,
+      "returnMin": 0.902109497988455,
+      "returnMax": 0.903142465974067
+    },
+    "1": {
+      "zoneLabel": "1区 (平手-0)",
+      "winMin": 2.34,
+      "winMax": 2.53,
+      "drawMin": 3.12,
+      "drawMax": 3.16,
+      "loseMin": 2.55,
+      "loseMax": 2.74,
+      "returnMin": 0.901900607182921,
+      "returnMax": 0.902838692707892
+    },
+    "2": {
+      "zoneLabel": "2区 (平手-0.25)",
+      "winMin": 2.04,
+      "winMax": 2.33,
+      "drawMin": 3.17,
+      "drawMax": 3.32,
+      "loseMin": 2.75,
+      "loseMax": 3.15,
+      "returnMin": 0.901339402958942,
+      "returnMax": 0.90284962309727
+    },
+    "3": {
+      "zoneLabel": "3区 (半球0.5)",
+      "winMin": 1.83,
+      "winMax": 2.03,
+      "drawMin": 3.33,
+      "drawMax": 3.43,
+      "loseMin": 3.17,
+      "loseMax": 3.69,
+      "returnMin": 0.901716464357432,
+      "returnMax": 0.902479988237985
+    },
+    "4": {
+      "zoneLabel": "4区 (半一-0.75)",
+      "winMin": 1.63,
+      "winMax": 1.82,
+      "drawMin": 3.44,
+      "drawMax": 3.62,
+      "loseMin": 3.72,
+      "loseMax": 4.56,
+      "returnMin": 0.901613125603199,
+      "returnMax": 0.902226484984786
+    },
+    "5": {
+      "zoneLabel": "5区 (一球-1)",
+      "winMin": 1.53,
+      "winMax": 1.62,
+      "drawMin": 3.63,
+      "drawMax": 3.82,
+      "loseMin": 4.6,
+      "loseMax": 5.17,
+      "returnMin": 0.900773211324449,
+      "returnMax": 0.902049205101856
+    },
+    "6": {
+      "zoneLabel": "6区 (一球半1.25)",
+      "winMin": 1.43,
+      "winMax": 1.52,
+      "drawMin": 3.85,
+      "drawMax": 4.1,
+      "loseMin": 5.23,
+      "loseMax": 6.05,
+      "returnMin": 0.901843704971845,
+      "returnMax": 0.902354490714265
+    },
+    "7": {
+      "zoneLabel": "7区 (球半1.5)",
+      "winMin": 1.33,
+      "winMax": 1.42,
+      "drawMin": 4.14,
+      "drawMax": 4.5,
+      "loseMin": 6.15,
+      "loseMax": 7.4,
+      "returnMin": 0.901507537688442,
+      "returnMax": 0.902223453314967
+    },
+    "8": {
+      "zoneLabel": "8区 (球半两球-1.75)",
+      "winMin": 1.23,
+      "winMax": 1.32,
+      "drawMin": 4.55,
+      "drawMax": 5.4,
+      "loseMin": 7.6,
+      "loseMax": 9.0,
+      "returnMin": 0.901465798045603,
+      "returnMax": 0.902044040683322
+    },
+    "9": {
+      "zoneLabel": "9区 (两球-2)",
+      "winMin": 1.12,
+      "winMax": 1.22,
+      "drawMin": 5.55,
+      "drawMax": 7.8,
+      "loseMin": 9.2,
+      "loseMax": 11.4,
+      "returnMin": 0.901677791809489,
+      "returnMax": 0.902270422020642
+    },
+    "10": {
+      "zoneLabel": "10区 (两球球半-2.25)",
+      "winMin": 1.01,
+      "winMax": 1.11,
+      "drawMin": 8.1,
+      "drawMax": 15.3,
+      "loseMin": 11.8,
+      "loseMax": 18.8,
+      "returnMin": 0.901554796486834,
+      "returnMax": 0.902067581813442
+    }
+  },
+  "竞彩88.6": {
+    "0": {
+      "zoneLabel": "0区 (平手0)",
+      "winMin": 2.5,
+      "winMax": 2.6,
+      "drawMin": 3.07,
+      "drawMax": 3.08,
+      "loseMin": 2.38,
+      "loseMax": 2.48,
+      "returnMin": 0.885379812695109,
+      "returnMax": 0.886246047114219
+    },
+    "1": {
+      "zoneLabel": "1区 (平手-0)",
+      "winMin": 2.3,
+      "winMax": 2.49,
+      "drawMin": 3.07,
+      "drawMax": 3.12,
+      "loseMin": 2.49,
+      "loseMax": 2.68,
+      "returnMin": 0.885379812695109,
+      "returnMax": 0.886257140874714
+    },
+    "2": {
+      "zoneLabel": "2区 (平手-0.25)",
+      "winMin": 2.0,
+      "winMax": 2.29,
+      "drawMin": 3.12,
+      "drawMax": 3.27,
+      "loseMin": 2.69,
+      "loseMax": 3.1,
+      "returnMin": 0.885465243556465,
+      "returnMax": 0.886365719134493
+    },
+    "3": {
+      "zoneLabel": "3区 (半球0.5)",
+      "winMin": 1.8,
+      "winMax": 1.99,
+      "drawMin": 3.27,
+      "drawMax": 3.37,
+      "loseMin": 3.12,
+      "loseMax": 3.61,
+      "returnMin": 0.885398573415426,
+      "returnMax": 0.886210648912685
+    },
+    "4": {
+      "zoneLabel": "4区 (半一-0.75)",
+      "winMin": 1.6,
+      "winMax": 1.79,
+      "drawMin": 3.37,
+      "drawMax": 3.55,
+      "loseMin": 3.65,
+      "loseMax": 4.51,
+      "returnMin": 0.88516885700822,
+      "returnMax": 0.886195146420355
+    },
+    "5": {
+      "zoneLabel": "5区 (一球-1)",
+      "winMin": 1.5,
+      "winMax": 1.59,
+      "drawMin": 3.56,
+      "drawMax": 3.76,
+      "loseMin": 4.57,
+      "loseMax": 5.1,
+      "returnMin": 0.885413711432184,
+      "returnMax": 0.886349027995885
+    },
+    "6": {
+      "zoneLabel": "6区 (一球半1.25)",
+      "winMin": 1.4,
+      "winMax": 1.49,
+      "drawMin": 3.79,
+      "drawMax": 4.07,
+      "loseMin": 5.16,
+      "loseMax": 5.92,
+      "returnMin": 0.88569995420147,
+      "returnMax": 0.886185643606153
+    },
+    "7": {
+      "zoneLabel": "7区 (球半1.5)",
+      "winMin": 1.3,
+      "winMax": 1.39,
+      "drawMin": 4.11,
+      "drawMax": 4.45,
+      "loseMin": 6.02,
+      "loseMax": 7.4,
+      "returnMin": 0.885672907830764,
+      "returnMax": 0.886082927811881
+    },
+    "8": {
+      "zoneLabel": "8区 (球半两球-1.75)",
+      "winMin": 1.2,
+      "winMax": 1.29,
+      "drawMin": 4.5,
+      "drawMax": 5.4,
+      "loseMin": 7.6,
+      "loseMax": 9.1,
+      "returnMin": 0.885554992397364,
+      "returnMax": 0.886328644477327
+    },
+    "9": {
+      "zoneLabel": "9区 (两球-2)",
+      "winMin": 1.1,
+      "winMax": 1.19,
+      "drawMin": 5.55,
+      "drawMax": 7.7,
+      "loseMin": 9.25,
+      "loseMax": 11.15,
+      "returnMin": 0.885898184276015,
+      "returnMax": 0.886148787505138
+    },
+    "10": {
+      "zoneLabel": "10区 (两球球半-2.25)",
+      "winMin": 1.01,
+      "winMax": 1.09,
+      "drawMin": 8.0,
+      "drawMax": 13.0,
+      "loseMin": 11.6,
+      "loseMax": 16.2,
+      "returnMin": 0.885935391433284,
+      "returnMax": 0.886171655021379
+    }
+  },
+  "马会88.2": {
+    "0": {
+      "zoneLabel": "0区 (平手0)",
+      "winMin": 2.49,
+      "winMax": 2.58,
+      "drawMin": 3.06,
+      "drawMax": 3.07,
+      "loseMin": 2.38,
+      "loseMax": 2.47,
+      "returnMin": 0.882163325596117,
+      "returnMax": 0.882879947599888
+    },
+    "1": {
+      "zoneLabel": "1区 (平手-0)",
+      "winMin": 2.29,
+      "winMax": 2.48,
+      "drawMin": 3.06,
+      "drawMax": 3.11,
+      "loseMin": 2.48,
+      "loseMax": 2.67,
+      "returnMin": 0.882163325596117,
+      "returnMax": 0.883077838964132
+    },
+    "2": {
+      "zoneLabel": "2区 (平手-0.25)",
+      "winMin": 1.99,
+      "winMax": 2.28,
+      "drawMin": 3.11,
+      "drawMax": 3.26,
+      "loseMin": 2.68,
+      "loseMax": 3.09,
+      "returnMin": 0.881958354397519,
+      "returnMax": 0.882893961446981
+    },
+    "3": {
+      "zoneLabel": "3区 (半球0.5)",
+      "winMin": 1.79,
+      "winMax": 1.98,
+      "drawMin": 3.26,
+      "drawMax": 3.35,
+      "loseMin": 3.11,
+      "loseMax": 3.62,
+      "returnMin": 0.881972974147295,
+      "returnMax": 0.883031311713636
+    },
+    "4": {
+      "zoneLabel": "4区 (半一-0.75)",
+      "winMin": 1.6,
+      "winMax": 1.78,
+      "drawMin": 3.36,
+      "drawMax": 3.54,
+      "loseMin": 3.65,
+      "loseMax": 4.44,
+      "returnMin": 0.882074308122599,
+      "returnMax": 0.883014365427995
+    },
+    "5": {
+      "zoneLabel": "5区 (一球-1)",
+      "winMin": 1.5,
+      "winMax": 1.59,
+      "drawMin": 3.55,
+      "drawMax": 3.72,
+      "loseMin": 4.5,
+      "loseMax": 5.06,
+      "returnMin": 0.882095897047484,
+      "returnMax": 0.883072964528579
+    },
+    "6": {
+      "zoneLabel": "6区 (一球半1.25)",
+      "winMin": 1.4,
+      "winMax": 1.49,
+      "drawMin": 3.73,
+      "drawMax": 4.01,
+      "loseMin": 5.17,
+      "loseMax": 5.88,
+      "returnMin": 0.882043992219063,
+      "returnMax": 0.883023402296623
+    },
+    "7": {
+      "zoneLabel": "7区 (球半1.5)",
+      "winMin": 1.3,
+      "winMax": 1.39,
+      "drawMin": 4.05,
+      "drawMax": 4.43,
+      "loseMin": 5.98,
+      "loseMax": 7.25,
+      "returnMin": 0.882119803526733,
+      "returnMax": 0.883012600281532
+    },
+    "8": {
+      "zoneLabel": "8区 (球半两球-1.75)",
+      "winMin": 1.2,
+      "winMax": 1.29,
+      "drawMin": 4.48,
+      "drawMax": 5.28,
+      "loseMin": 7.45,
+      "loseMax": 9.1,
+      "returnMin": 0.882060333444196,
+      "returnMax": 0.882910694597574
+    },
+    "9": {
+      "zoneLabel": "9区 (两球-2)",
+      "winMin": 1.1,
+      "winMax": 1.19,
+      "drawMin": 5.45,
+      "drawMax": 7.4,
+      "loseMin": 9.15,
+      "loseMax": 11.3,
+      "returnMin": 0.882236755859176,
+      "returnMax": 0.882881323135522
+    },
+    "10": {
+      "zoneLabel": "10区 (两球球半-2.25)",
+      "winMin": 1.01,
+      "winMax": 1.09,
+      "drawMin": 7.7,
+      "drawMax": 13.0,
+      "loseMin": 11.7,
+      "loseMax": 15.0,
+      "returnMin": 0.882076316732354,
+      "returnMax": 0.882947337723881
+    }
+  },
+  "威廉94.5": {
+    "0": {
+      "zoneLabel": "0区 (平手0)",
+      "winMin": 2.67,
+      "winMax": 2.77,
+      "drawMin": 3.27,
+      "drawMax": 3.28,
+      "loseMin": 2.55000000000001,
+      "loseMax": 2.65000000000001,
+      "returnMin": 0.944686865135977,
+      "returnMax": 0.945447022911994
+    },
+    "1": {
+      "zoneLabel": "1区 (平手-0)",
+      "winMin": 2.45,
+      "winMax": 2.66,
+      "drawMin": 3.27,
+      "drawMax": 3.31,
+      "loseMin": 2.66000000000001,
+      "loseMax": 2.87,
+      "returnMin": 0.94454560949973,
+      "returnMax": 0.945519657708294
+    },
+    "2": {
+      "zoneLabel": "2区 (平手-0.25)",
+      "winMin": 2.14,
+      "winMax": 2.44,
+      "drawMin": 3.32,
+      "drawMax": 3.48,
+      "loseMin": 2.88,
+      "loseMax": 3.29,
+      "returnMin": 0.944315458147817,
+      "returnMax": 0.945501409585179
+    },
+    "3": {
+      "zoneLabel": "3区 (半球0.5)",
+      "winMin": 1.91,
+      "winMax": 2.13,
+      "drawMin": 3.49,
+      "drawMax": 3.6,
+      "loseMin": 3.31,
+      "loseMax": 3.9,
+      "returnMin": 0.944354258099512,
+      "returnMax": 0.945404547858276
+    },
+    "4": {
+      "zoneLabel": "4区 (半一-0.75)",
+      "winMin": 1.71,
+      "winMax": 1.9,
+      "drawMin": 3.6,
+      "drawMax": 3.79,
+      "loseMin": 3.93,
+      "loseMax": 4.77,
+      "returnMin": 0.944276433883238,
+      "returnMax": 0.945698526101388
+    },
+    "5": {
+      "zoneLabel": "5区 (一球-1)",
+      "winMin": 1.6,
+      "winMax": 1.7,
+      "drawMin": 3.8,
+      "drawMax": 4.0,
+      "loseMin": 4.82,
+      "loseMax": 5.45,
+      "returnMin": 0.944410069760388,
+      "returnMax": 0.945295956734181
+    },
+    "6": {
+      "zoneLabel": "6区 (一球半1.25)",
+      "winMin": 1.49,
+      "winMax": 1.59,
+      "drawMin": 4.03,
+      "drawMax": 4.34,
+      "loseMin": 5.51,
+      "loseMax": 6.4,
+      "returnMin": 0.94468136854864,
+      "returnMax": 0.94546713867939
+    },
+    "7": {
+      "zoneLabel": "7区 (球半1.5)",
+      "winMin": 1.38,
+      "winMax": 1.48,
+      "drawMin": 4.38,
+      "drawMax": 4.8,
+      "loseMin": 6.5,
+      "loseMax": 8.0,
+      "returnMin": 0.944616547034378,
+      "returnMax": 0.945329396666997
+    },
+    "8": {
+      "zoneLabel": "8区 (球半两球-1.75)",
+      "winMin": 1.27,
+      "winMax": 1.37,
+      "drawMin": 4.85,
+      "drawMax": 5.95,
+      "loseMin": 8.2,
+      "loseMax": 9.7,
+      "returnMin": 0.944352203952654,
+      "returnMax": 0.945246749948415
+    },
+    "9": {
+      "zoneLabel": "9区 (两球-2)",
+      "winMin": 1.16,
+      "winMax": 1.26,
+      "drawMin": 6.09999999999999,
+      "drawMax": 8.5,
+      "loseMin": 9.9,
+      "loseMax": 12.7,
+      "returnMin": 0.944393881516666,
+      "returnMax": 0.94512811903213
+    },
+    "10": {
+      "zoneLabel": "10区 (两球球半-2.25)",
+      "winMin": 1.06,
+      "winMax": 1.15,
+      "drawMin": 9.0,
+      "drawMax": 16.0,
+      "loseMin": 12.8,
+      "loseMax": 19.0,
+      "returnMin": 0.944402640122116,
+      "returnMax": 0.94498869630746
+    }
+  },
+  "威廉93.5": {
+    "0": {
+      "zoneLabel": "0区 (平手0)",
+      "winMin": 2.64,
+      "winMax": 2.74,
+      "drawMin": 3.22,
+      "drawMax": 3.23,
+      "loseMin": 2.53,
+      "loseMax": 2.63,
+      "returnMin": 0.934664067989427,
+      "returnMax": 0.935389861066478
+    },
+    "1": {
+      "zoneLabel": "1区 (平手-0)",
+      "winMin": 2.42,
+      "winMax": 2.63,
+      "drawMin": 3.22,
+      "drawMax": 3.27,
+      "loseMin": 2.64,
+      "loseMax": 2.85,
+      "returnMin": 0.934527661457659,
+      "returnMax": 0.935389861066479
+    },
+    "2": {
+      "zoneLabel": "2区 (平手-0.25)",
+      "winMin": 2.12,
+      "winMax": 2.41,
+      "drawMin": 3.28,
+      "drawMax": 3.44,
+      "loseMin": 2.86,
+      "loseMax": 3.26,
+      "returnMin": 0.934193481253802,
+      "returnMax": 0.935608418065737
+    },
+    "3": {
+      "zoneLabel": "3区 (半球0.5)",
+      "winMin": 1.89,
+      "winMax": 2.11,
+      "drawMin": 3.45,
+      "drawMax": 3.56,
+      "loseMin": 3.27,
+      "loseMax": 3.86,
+      "returnMin": 0.934524560154581,
+      "returnMax": 0.935395276135046
+    },
+    "4": {
+      "zoneLabel": "4区 (半一-0.75)",
+      "winMin": 1.69,
+      "winMax": 1.88,
+      "drawMin": 3.57,
+      "drawMax": 3.75,
+      "loseMin": 3.89,
+      "loseMax": 4.73,
+      "returnMin": 0.934256397900713,
+      "returnMax": 0.935369391769161
+    },
+    "5": {
+      "zoneLabel": "5区 (一球-1)",
+      "winMin": 1.58,
+      "winMax": 1.68,
+      "drawMin": 3.76,
+      "drawMax": 3.96,
+      "loseMin": 4.8,
+      "loseMax": 5.43,
+      "returnMin": 0.934521349757933,
+      "returnMax": 0.935019877123238
+    },
+    "6": {
+      "zoneLabel": "6区 (一球半1.25)",
+      "winMin": 1.48,
+      "winMax": 1.57,
+      "drawMin": 4.0,
+      "drawMax": 4.27,
+      "loseMin": 5.47,
+      "loseMax": 6.25,
+      "returnMin": 0.934472775532364,
+      "returnMax": 0.935152085293195
+    },
+    "7": {
+      "zoneLabel": "7区 (球半1.5)",
+      "winMin": 1.38,
+      "winMax": 1.47,
+      "drawMin": 4.3,
+      "drawMax": 4.7,
+      "loseMin": 6.37,
+      "loseMax": 7.55,
+      "returnMin": 0.934576577985854,
+      "returnMax": 0.935147552571126
+    },
+    "8": {
+      "zoneLabel": "8区 (球半两球-1.75)",
+      "winMin": 1.27,
+      "winMax": 1.37,
+      "drawMin": 4.75,
+      "drawMax": 5.75,
+      "loseMin": 7.75,
+      "loseMax": 9.3,
+      "returnMin": 0.934344461640504,
+      "returnMax": 0.935592414776445
+    },
+    "9": {
+      "zoneLabel": "9区 (两球-2)",
+      "winMin": 1.16,
+      "winMax": 1.26,
+      "drawMin": 5.9,
+      "drawMax": 8.12,
+      "loseMin": 9.4,
+      "loseMax": 11.8,
+      "returnMin": 0.934607881388997,
+      "returnMax": 0.935054899056573
+    },
+    "10": {
+      "zoneLabel": "10区 (两球球半-2.25)",
+      "winMin": 1.06,
+      "winMax": 1.15,
+      "drawMin": 8.4,
+      "drawMax": 14.8,
+      "loseMin": 12.3,
+      "loseMax": 17.0,
+      "returnMin": 0.934654867256637,
+      "returnMax": 0.935199074774427
+    }
+  }
+};
