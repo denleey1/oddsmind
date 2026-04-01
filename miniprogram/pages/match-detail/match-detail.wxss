@@ -2286,6 +2286,9 @@
   background: #fff; border-radius: 8rpx;
   border: 1rpx solid rgba(124,58,237,0.1);
 }
+.ds-odds-water {
+  margin-top: 8rpx;
+}
 .ds-odds-value {
   font-size: 30rpx; font-weight: 700; color: #1e293b;
 }
@@ -2479,6 +2482,12 @@
   align-items: center;
   margin: 6rpx 0 4rpx;
   gap: 12rpx;
+  flex-wrap: wrap;
+}
+.ds-water-side {
+  font-size: 20rpx;
+  font-weight: 600;
+  color: #475569;
 }
 .ds-water-tag {
   font-size: 22rpx;

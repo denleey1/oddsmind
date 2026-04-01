@@ -2697,12 +2697,36 @@ function renderDrawSystemCard(ds) {
         if (wl.includes('低')) return { bg: '#dcfce7', color: '#16a34a' };
         return { bg: '#e0f2fe', color: '#0369a1' };
     };
-    // 水位标注行 HTML
-    const waterRow = (waterLevel, zoneName, standardDraw) => {
+    const waterBadge = (waterLevel) => {
         if (!waterLevel) return '';
         const ws = waterStyle(waterLevel);
+        return `<span style="display:inline-flex;align-items:center;justify-content:center;margin-top:8px;font-size:0.75rem;font-weight:700;padding:2px 10px;border-radius:12px;background:${ws.bg};color:${ws.color};">${waterLevel}</span>`;
+    };
+    const pickWaterSide = (waterLevel, h, a, h94, a94) => {
+        if (!waterLevel) return { side: '', sideText: '' };
+        const toNumber = (value) => {
+            const num = Number(value);
+            return Number.isFinite(num) ? num : null;
+        };
+        const home94 = toNumber(h94);
+        const away94 = toNumber(a94);
+        const homeRaw = toNumber(h);
+        const awayRaw = toNumber(a);
+        let side = '';
+        if (home94 != null && away94 != null) {
+            side = home94 <= away94 ? 'home' : 'away';
+        } else if (homeRaw != null && awayRaw != null) {
+            side = homeRaw <= awayRaw ? 'home' : 'away';
+        }
+        return {
+            side,
+            sideText: side === 'home' ? '主队低赔' : side === 'away' ? '客队低赔' : ''
+        };
+    };
+    const waterRow = (waterLevel, zoneName, standardDraw, sideText) => {
+        if (!waterLevel) return '';
         return `<div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
-            <span style="font-size:0.75rem;font-weight:700;padding:2px 10px;border-radius:12px;background:${ws.bg};color:${ws.color};">${waterLevel}</span>
+            ${sideText ? `<span style="font-size:0.75rem;font-weight:600;color:#475569;">${sideText}</span>` : ''}
             ${zoneName ? `<span style="font-size:0.75rem;color:#94a3b8;">${zoneName}</span>` : ''}
             <span style="margin-left:auto;font-size:0.75rem;color:#64748b;">标准平 <strong style="color:#0f766e;">${fmt(standardDraw)}</strong></span>
         </div>`;
@@ -2739,7 +2763,9 @@ function renderDrawSystemCard(ds) {
         </div>`;
     }
 
-    const oddsBlock = (label, dotColor, tagText, tagBg, h, d, a, h94, d94, a94, meta1, waterLevel, zoneName, standardDraw) => `
+    const oddsBlock = (label, dotColor, tagText, tagBg, h, d, a, h94, d94, a94, meta1, waterLevel, zoneName, standardDraw) => {
+        const waterInfo = pickWaterSide(waterLevel, h, a, h94, a94);
+        return `
         <div style="background:rgba(30,41,59,0.03); border-radius:10px; padding:1rem 1.2rem; margin-bottom:1rem; border:1px solid rgba(30,41,59,0.08);">
             <div style="display:flex; align-items:center; margin-bottom:0.8rem;">
                 <span style="width:10px;height:10px;border-radius:50%;background:${dotColor};margin-right:8px;flex-shrink:0;"></span>
@@ -2750,6 +2776,7 @@ function renderDrawSystemCard(ds) {
                 <div style="text-align:center; background:#fff; border-radius:8px; padding:0.6rem 0; border:1px solid rgba(0,0,0,0.06);">
                     <div style="font-size:0.75rem;color:#64748b;">主</div>
                     <div style="font-size:1.3rem;font-weight:700;color:#1e293b;">${h}</div>
+                    ${waterInfo.side === 'home' ? waterBadge(waterLevel) : ''}
                 </div>
                 <div style="text-align:center; background:#fff; border-radius:8px; padding:0.6rem 0; border:1px solid rgba(124,58,237,0.15);">
                     <div style="font-size:0.75rem;color:#64748b;">平</div>
@@ -2758,12 +2785,14 @@ function renderDrawSystemCard(ds) {
                 <div style="text-align:center; background:#fff; border-radius:8px; padding:0.6rem 0; border:1px solid rgba(0,0,0,0.06);">
                     <div style="font-size:0.75rem;color:#64748b;">客</div>
                     <div style="font-size:1.3rem;font-weight:700;color:#1e293b;">${a}</div>
+                    ${waterInfo.side === 'away' ? waterBadge(waterLevel) : ''}
                 </div>
             </div>
             <div style="font-size:0.8rem;color:#475569;">94%体系: ${h94} / ${d94} / ${a94}</div>
-            ${waterRow(waterLevel, zoneName, standardDraw)}
+            ${waterRow(waterLevel, zoneName, standardDraw, waterInfo.sideText)}
             ${meta1 ? `<div style="font-size:0.8rem;color:#475569;margin-top:4px;">${meta1}</div>` : ''}
         </div>`;
+    };
 
     if (hasLongNode) {
         const durText = ds.long_node_duration_hours != null ? `持续 ${Number(ds.long_node_duration_hours).toFixed(1)}h` : '';

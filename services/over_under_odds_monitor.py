@@ -79,6 +79,15 @@ def _records_to_models(records) -> list:
     now_ts = get_now()
     models = []
     for record in records:
+        if not getattr(record, "current_is_prematch", True):
+            logger.info(
+                "Skipping live over/under row for match %s bookmaker %s source=%s",
+                getattr(record, "match_id", None),
+                getattr(record, "bookmaker", None),
+                getattr(record, "current_source", None),
+            )
+            continue
+
         company_id = _resolve_company_id(getattr(record, "bookmaker", None))
         if not company_id:
             continue
@@ -168,9 +177,9 @@ def _do_scrape() -> Dict[str, Any]:
         """
         SELECT m.match_id
         FROM matches m
-        WHERE m.match_time >= NOW() - INTERVAL 2 HOUR
+        WHERE m.match_time > NOW()
           AND m.match_time < NOW() + INTERVAL 48 HOUR
-          AND m.match_status IN ('scheduled', 'live')
+          AND m.match_status IN ('scheduled', 'not_started', 'pending', 'Fixture')
         ORDER BY m.match_time
         """,
         fetch="all",

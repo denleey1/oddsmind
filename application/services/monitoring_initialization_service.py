@@ -125,6 +125,15 @@ class MonitoringInitializationService:
         if not records:
             return models
         for record in records:
+            if not getattr(record, "current_is_prematch", True):
+                logger.info(
+                    "Skip non-prematch over/under row for match %s bookmaker %s source=%s",
+                    getattr(record, "match_id", None),
+                    getattr(record, "bookmaker", None),
+                    getattr(record, "current_source", None),
+                )
+                continue
+
             company_id = self._resolve_company_id(getattr(record, "bookmaker", None))
             if not company_id:
                 continue
@@ -307,4 +316,3 @@ class MonitoringInitializationService:
 
 
 __all__ = ["COMPANY_NAME_LOOKUP", "MonitoringInitializationService"]
-

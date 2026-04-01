@@ -44,6 +44,9 @@ class MarketRecord:
     over_odds_close: Optional[str]
     under_odds_close: Optional[str]
     time_close: Optional[str]
+    detail_url: Optional[str] = None
+    current_is_prematch: bool = True
+    current_source: Optional[str] = None
 
 TITAN007_BROWSER_HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",

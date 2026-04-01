@@ -238,6 +238,7 @@
             <view class="ds-odds-item">
               <text class="ds-odds-label">主</text>
               <text class="ds-odds-value">{{drawSystem.longNode.home}}</text>
+              <text wx:if="{{drawSystem.longNode.homeWaterLevel}}" class="ds-odds-water ds-water-tag {{drawSystem.longNode.homeWaterClass}}">{{drawSystem.longNode.homeWaterLevel}}</text>
             </view>
             <view class="ds-odds-item">
               <text class="ds-odds-label">平</text>
@@ -246,6 +247,7 @@
             <view class="ds-odds-item">
               <text class="ds-odds-label">客</text>
               <text class="ds-odds-value">{{drawSystem.longNode.away}}</text>
+              <text wx:if="{{drawSystem.longNode.awayWaterLevel}}" class="ds-odds-water ds-water-tag {{drawSystem.longNode.awayWaterClass}}">{{drawSystem.longNode.awayWaterLevel}}</text>
             </view>
           </view>
           <view class="ds-meta-row">
@@ -258,7 +260,7 @@
           </view>
           <!-- 水位标注 -->
           <view class="ds-water-row" wx:if="{{drawSystem.longNode.waterLevel}}">
-            <text class="ds-water-tag {{drawSystem.longNode.waterClass}}">{{drawSystem.longNode.waterLevel}}</text>
+            <text class="ds-water-side">{{drawSystem.longNode.waterSideText}}</text>
             <text class="ds-water-zone">{{drawSystem.longNode.zoneName}}</text>
             <view class="ds-water-std-wrap">
               <text class="ds-water-std-label">标准平</text>
@@ -281,6 +283,7 @@
             <view class="ds-odds-item">
               <text class="ds-odds-label">主</text>
               <text class="ds-odds-value">{{drawSystem.controlNode.home}}</text>
+              <text wx:if="{{drawSystem.controlNode.homeWaterLevel}}" class="ds-odds-water ds-water-tag {{drawSystem.controlNode.homeWaterClass}}">{{drawSystem.controlNode.homeWaterLevel}}</text>
             </view>
             <view class="ds-odds-item">
               <text class="ds-odds-label">平</text>
@@ -289,6 +292,7 @@
             <view class="ds-odds-item">
               <text class="ds-odds-label">客</text>
               <text class="ds-odds-value">{{drawSystem.controlNode.away}}</text>
+              <text wx:if="{{drawSystem.controlNode.awayWaterLevel}}" class="ds-odds-water ds-water-tag {{drawSystem.controlNode.awayWaterClass}}">{{drawSystem.controlNode.awayWaterLevel}}</text>
             </view>
           </view>
           <view class="ds-meta-row">
@@ -301,7 +305,7 @@
           </view>
           <!-- 水位标注 -->
           <view class="ds-water-row" wx:if="{{drawSystem.controlNode.waterLevel}}">
-            <text class="ds-water-tag {{drawSystem.controlNode.waterClass}}">{{drawSystem.controlNode.waterLevel}}</text>
+            <text class="ds-water-side">{{drawSystem.controlNode.waterSideText}}</text>
             <text class="ds-water-zone">{{drawSystem.controlNode.zoneName}}</text>
             <view class="ds-water-std-wrap">
               <text class="ds-water-std-label">标准平</text>
@@ -324,6 +328,7 @@
             <view class="ds-odds-item">
               <text class="ds-odds-label">主</text>
               <text class="ds-odds-value">{{drawSystem.currentNode.home}}</text>
+              <text wx:if="{{drawSystem.currentNode.homeWaterLevel}}" class="ds-odds-water ds-water-tag {{drawSystem.currentNode.homeWaterClass}}">{{drawSystem.currentNode.homeWaterLevel}}</text>
             </view>
             <view class="ds-odds-item">
               <text class="ds-odds-label">平</text>
@@ -332,6 +337,7 @@
             <view class="ds-odds-item">
               <text class="ds-odds-label">客</text>
               <text class="ds-odds-value">{{drawSystem.currentNode.away}}</text>
+              <text wx:if="{{drawSystem.currentNode.awayWaterLevel}}" class="ds-odds-water ds-water-tag {{drawSystem.currentNode.awayWaterClass}}">{{drawSystem.currentNode.awayWaterLevel}}</text>
             </view>
           </view>
           <view class="ds-meta-row">
@@ -344,7 +350,7 @@
           </view>
           <!-- 水位标注 -->
           <view class="ds-water-row" wx:if="{{drawSystem.currentNode.waterLevel}}">
-            <text class="ds-water-tag {{drawSystem.currentNode.waterClass}}">{{drawSystem.currentNode.waterLevel}}</text>
+            <text class="ds-water-side">{{drawSystem.currentNode.waterSideText}}</text>
             <text class="ds-water-zone">{{drawSystem.currentNode.zoneName}}</text>
             <view class="ds-water-std-wrap">
               <text class="ds-water-std-label">标准平</text>

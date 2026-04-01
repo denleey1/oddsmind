@@ -14,9 +14,11 @@ from __future__ import annotations
 
 import time
 import random
+import re
 from typing import List, Optional, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
+from urllib.parse import urljoin
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 
@@ -173,6 +175,8 @@ class OverUnderOddsFetcher:
                 # 解析HTML
                 html = self._decode_response(response)
                 records = self._parse_html(match_id, html)
+                if records and any(not getattr(record, "current_is_prematch", True) for record in records):
+                    records = self._hydrate_prematch_closes(match_id, session, records)
                 
                 if retry_count > 0:
                     self.logger.info(f"Match {match_id}: 成功 (重试{retry_count}次, {len(records)}条记录)")
@@ -217,6 +221,148 @@ class OverUnderOddsFetcher:
                 continue
         
         return raw.decode('utf-8', errors='ignore')
+
+    @staticmethod
+    def _page_started(soup) -> bool:
+        head_vs = soup.find(id='headVs')
+        if not head_vs:
+            return False
+
+        text = ''.join(head_vs.stripped_strings).replace(' ', '').upper()
+        return bool(text and text != 'VS')
+
+    @staticmethod
+    def _extract_latest_prematch_close(detail_html: str) -> Optional[Tuple[str, str, str, str]]:
+        try:
+            from bs4 import BeautifulSoup
+        except ImportError:
+            raise RuntimeError("闇€瑕?beautifulsoup4")
+
+        soup = BeautifulSoup(detail_html, 'html.parser')
+        target_table = None
+        for table in soup.find_all('table'):
+            rows = table.find_all('tr')
+            if len(rows) < 2:
+                continue
+            header_cells = rows[0].find_all(['td', 'th'])
+            header_text = ''.join(cell.get_text(strip=True) for cell in header_cells)
+            if all(token in header_text for token in ('时间', '变化时间', '状态')):
+                target_table = table
+                break
+
+        if target_table is None:
+            return None
+
+        for tr in target_table.find_all('tr')[1:]:
+            cells = [td.get_text(' ', strip=True) for td in tr.find_all('td')]
+            if len(cells) < 7:
+                continue
+
+            status = cells[-1].strip()
+            if status != '即':
+                continue
+
+            over = cells[-5].strip()
+            line = cells[-4].strip()
+            under = cells[-3].strip()
+            change_time = cells[-2].strip()
+            if not over or not line or not under or not change_time:
+                continue
+            if '封' in (over, line, under):
+                continue
+
+            return line, over, under, change_time
+
+        return None
+
+    def _fetch_latest_prematch_close(
+        self,
+        match_id: str,
+        session: requests.Session,
+        detail_url: str,
+    ) -> Optional[Tuple[str, str, str, str]]:
+        try:
+            self.rate_limiter.wait()
+            response = session.get(
+                detail_url,
+                timeout=self.timeout,
+                allow_redirects=True,
+                headers={'Referer': f'https://vip.titan007.com/OverDown_n.aspx?id={match_id}'},
+            )
+            if not response.ok:
+                self.logger.warning(
+                    "Match %s: detail fetch failed %s for %s",
+                    match_id,
+                    response.status_code,
+                    detail_url,
+                )
+                return None
+            detail_html = self._decode_response(response)
+            return self._extract_latest_prematch_close(detail_html)
+        except Exception as exc:
+            self.logger.warning(
+                "Match %s: failed to resolve prematch close from %s - %s",
+                match_id,
+                detail_url,
+                exc,
+            )
+            return None
+
+    def _hydrate_prematch_closes(
+        self,
+        match_id: str,
+        session: requests.Session,
+        records: List[MarketRecord],
+    ) -> List[MarketRecord]:
+        detail_cache = {}
+        resolved_count = 0
+        skipped_count = 0
+
+        for record in records:
+            if getattr(record, "current_is_prematch", True):
+                continue
+
+            detail_url = getattr(record, "detail_url", None)
+            if not detail_url:
+                record.line_close = None
+                record.over_odds_close = None
+                record.under_odds_close = None
+                record.time_close = None
+                record.current_source = "missing_detail_url"
+                skipped_count += 1
+                continue
+
+            if detail_url not in detail_cache:
+                detail_cache[detail_url] = self._fetch_latest_prematch_close(match_id, session, detail_url)
+
+            resolved = detail_cache[detail_url]
+            if resolved is None:
+                record.line_close = None
+                record.over_odds_close = None
+                record.under_odds_close = None
+                record.time_close = None
+                record.current_source = "detail_immediate_missing"
+                skipped_count += 1
+                continue
+
+            line_close, over_close, under_close, time_close = resolved
+            record.line_close = line_close
+            record.over_odds_close = over_close
+            record.under_odds_close = under_close
+            record.time_close = time_close
+            record.current_is_prematch = True
+            record.current_source = "detail_immediate"
+            resolved_count += 1
+
+        if resolved_count or skipped_count:
+            self.logger.info(
+                "Match %s: prematch close backfill resolved=%s skipped=%s",
+                match_id,
+                resolved_count,
+                skipped_count,
+            )
+
+        return records
     
     def _parse_html(self, match_id: str, html: str) -> List[MarketRecord]:
         """解析HTML获取赔率数据"""
@@ -226,6 +372,7 @@ class OverUnderOddsFetcher:
             raise RuntimeError("需要 beautifulsoup4")
         
         soup = BeautifulSoup(html, 'html.parser')
+        page_started = self._page_started(soup)
         title_el = soup.find('title')
         home, away = (None, None)
         if title_el and title_el.text:
@@ -266,13 +413,20 @@ class OverUnderOddsFetcher:
                 return (None, None, None)
             
             line_close, over_close, under_close = pick_close(tr_el)
+            detail_link = tr_el.find('a', href=re.compile(r'/changeDetail/(?:multi)?overunder\.aspx', re.IGNORECASE))
+            detail_url = None
+            if detail_link and detail_link.get('href'):
+                detail_url = urljoin('https://vip.titan007.com', detail_link['href'])
             
             return MarketRecord(
                 site='Titan007', league=None, match_id=str(match_id), match_time=None,
                 home=home or '', away=away or '', bookmaker=bookmaker_name or None,
                 market='O/U', variant=variant_label,
                 line_open=line_open, over_odds_open=over_open, under_odds_open=under_open, time_open=time_open,
-                line_close=line_close, over_odds_close=over_close, under_odds_close=under_close, time_close=None
+                line_close=line_close, over_odds_close=over_close, under_odds_close=under_close, time_close=None,
+                detail_url=detail_url,
+                current_is_prematch=not page_started,
+                current_source='summary' if not page_started else 'live_summary'
             )
         
         records = []

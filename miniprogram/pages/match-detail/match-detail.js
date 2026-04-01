@@ -898,6 +898,52 @@ Page({
       };
     };
 
+    const buildNodeDisplay = (node) => {
+      if (!node) {
+        return null;
+      }
+      const home94Num = node.home94 != null ? Number(node.home94) : null;
+      const away94Num = node.away94 != null ? Number(node.away94) : null;
+      const homeNum = node.home != null ? Number(node.home) : null;
+      const awayNum = node.away != null ? Number(node.away) : null;
+      let waterSide = '';
+      if (node.waterLevel) {
+        if (home94Num != null && away94Num != null && !Number.isNaN(home94Num) && !Number.isNaN(away94Num)) {
+          waterSide = home94Num <= away94Num ? 'home' : 'away';
+        } else if (homeNum != null && awayNum != null && !Number.isNaN(homeNum) && !Number.isNaN(awayNum)) {
+          waterSide = homeNum <= awayNum ? 'home' : 'away';
+        }
+      }
+      const waterSideLabel = waterSide === 'home'
+        ? '主队'
+        : waterSide === 'away'
+          ? '客队'
+          : '';
+      const waterLevel = node.waterLevel || '';
+      return {
+        home: fmt(node.home),
+        draw: fmt(node.draw),
+        away: fmt(node.away),
+        home94: fmt(node.home94),
+        draw94: fmt(node.draw94),
+        away94: fmt(node.away94),
+        duration: node.duration != null ? fmtDur(node.duration) : null,
+        time: node.time ? fmtTime(node.time) : null,
+        waterLevel,
+        waterClass: waterClass(waterLevel),
+        homeWaterLevel: waterSide === 'home' ? waterLevel : '',
+        homeWaterClass: waterSide === 'home' ? waterClass(waterLevel) : '',
+        awayWaterLevel: waterSide === 'away' ? waterLevel : '',
+        awayWaterClass: waterSide === 'away' ? waterClass(waterLevel) : '',
+        waterSide,
+        waterSideLabel,
+        waterSideText: waterSideLabel ? `${waterSideLabel}低赔` : '',
+        zoneName: node.zoneName || '',
+        standardDraw: node.standardDraw != null ? fmt(node.standardDraw) : '--',
+        ouSnapshot: node.ouSnapshot || null
+      };
+    };
+
     const openOuSnapshot = normalizeOuSnapshot(raw.ou_open_snapshot, '初指');
     const currentOuSnapshot = normalizeOuSnapshot(raw.ou_current_snapshot, '即时');
     const referenceOuSnapshot = raw.ou_reference_phase === 'current'
@@ -907,56 +953,55 @@ Page({
       .replace('（估算）', '')
       .replace('(估算)', '');
 
-    const longNode = raw.odds_source === 'long_node' ? {
-      home: fmt(raw.raw_home),
-      draw: fmt(raw.raw_draw),
-      away: fmt(raw.raw_away),
-      home94: fmt(raw.home_94),
-      draw94: fmt(raw.draw_94 != null ? raw.draw_94 : raw.actual_draw_94),
-      away94: fmt(raw.away_94),
-      duration: fmtDur(raw.long_node_duration_hours),
-      time: fmtTime(raw.long_node_time),
-      waterLevel: raw.water_level || '',
-      waterClass: waterClass(raw.water_level),
-      zoneName: raw.zone_name || '',
-      standardDraw: raw.standard_draw != null ? fmt(raw.standard_draw) : '--',
-      ouSnapshot: openOuSnapshot
-    } : null;
+    const longNode = raw.odds_source === 'long_node'
+      ? buildNodeDisplay({
+        home: raw.raw_home,
+        draw: raw.raw_draw,
+        away: raw.raw_away,
+        home94: raw.home_94,
+        draw94: raw.draw_94 != null ? raw.draw_94 : raw.actual_draw_94,
+        away94: raw.away_94,
+        duration: raw.long_node_duration_hours,
+        time: raw.long_node_time,
+        waterLevel: raw.water_level || '',
+        zoneName: raw.zone_name || '',
+        standardDraw: raw.standard_draw,
+        ouSnapshot: openOuSnapshot
+      })
+      : null;
 
     let controlNode = null;
     if (raw.control_home != null) {
-      controlNode = {
-        home: fmt(raw.control_home),
-        draw: fmt(raw.control_draw),
-        away: fmt(raw.control_away),
-        home94: fmt(raw.control_home_94),
-        draw94: fmt(raw.control_draw_94),
-        away94: fmt(raw.control_away_94),
-        time: fmtTime(raw.control_time),
+      controlNode = buildNodeDisplay({
+        home: raw.control_home,
+        draw: raw.control_draw,
+        away: raw.control_away,
+        home94: raw.control_home_94,
+        draw94: raw.control_draw_94,
+        away94: raw.control_away_94,
+        time: raw.control_time,
         waterLevel: raw.control_water_level || '',
-        waterClass: waterClass(raw.control_water_level),
         zoneName: raw.control_zone_name || '',
-        standardDraw: raw.control_standard_draw != null ? fmt(raw.control_standard_draw) : '--',
+        standardDraw: raw.control_standard_draw,
         ouSnapshot: openOuSnapshot
-      };
+      });
     }
 
     let currentNode = null;
     if (raw.current_home != null) {
-      currentNode = {
-        home: fmt(raw.current_home),
-        draw: fmt(raw.current_draw),
-        away: fmt(raw.current_away),
-        home94: fmt(raw.current_home_94),
-        draw94: fmt(raw.current_draw_94),
-        away94: fmt(raw.current_away_94),
-        time: raw.current_time ? fmtTime(raw.current_time) : null,
+      currentNode = buildNodeDisplay({
+        home: raw.current_home,
+        draw: raw.current_draw,
+        away: raw.current_away,
+        home94: raw.current_home_94,
+        draw94: raw.current_draw_94,
+        away94: raw.current_away_94,
+        time: raw.current_time,
         waterLevel: raw.current_water_level || '',
-        waterClass: waterClass(raw.current_water_level),
         zoneName: raw.current_zone_name || '',
-        standardDraw: raw.current_standard_draw != null ? fmt(raw.current_standard_draw) : '--',
+        standardDraw: raw.current_standard_draw,
         ouSnapshot: currentOuSnapshot || openOuSnapshot
-      };
+      });
     }
 
     const dev = raw.deviation;
