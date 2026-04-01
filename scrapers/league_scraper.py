@@ -66,6 +66,54 @@ class LeagueScraper(BaseScraper):
             'matches_found': 0,
             'standings_sections': 0
         }
+
+    def _fetch_validated_league_content(
+        self,
+        league_code: str,
+        url: str,
+        max_attempts: int = 3,
+    ) -> str:
+        """Retry transient short/error responses before marking a league failed."""
+        last_error: Optional[Exception] = None
+
+        for attempt in range(1, max_attempts + 1):
+            try:
+                response = self.make_request(url)
+                content = self.content_processor.decode_content(response.content)
+
+                if self.content_processor.validate_content(
+                    content,
+                    min_length=100,
+                    required_markers=['var arrLeague']
+                ):
+                    return content
+
+                raise ContentError(
+                    f"Invalid or incomplete content for {league_code}",
+                    content_length=len(content),
+                    expected_markers=['var arrLeague'],
+                    url=url
+                )
+            except (ContentError, ScrapingError) as exc:
+                last_error = exc
+                if attempt >= max_attempts:
+                    break
+
+                delay = min(0.8 * attempt, 3.0) + random.uniform(0.1, 0.4)
+                self.logger.warning(
+                    "League %s fetch attempt %s/%s failed, retrying in %.1fs: %s",
+                    league_code,
+                    attempt,
+                    max_attempts,
+                    delay,
+                    exc,
+                )
+                time.sleep(delay)
+
+        raise last_error or ContentError(
+            f"Invalid or incomplete content for {league_code}",
+            url=url
+        )
     
     @log_execution_time()
     def scrape(
@@ -219,23 +267,7 @@ class LeagueScraper(BaseScraper):
                     season=league_info.season,
                     league_filename=league_info.league_filename
                 )
-                response = self.make_request(url)
-                
-                # Handle encoding using utility
-                content = self.content_processor.decode_content(response.content)
-            
-            # Validate content using utility
-            if not self.content_processor.validate_content(
-                content, 
-                min_length=100, 
-                required_markers=['var arrLeague']
-            ):
-                raise ContentError(
-                    f"Invalid or incomplete content for {league_code}",
-                    content_length=len(content),
-                    expected_markers=['var arrLeague'],
-                    url=url
-                )
+                content = self._fetch_validated_league_content(league_code, url)
             
             # Parse the data
             with log_performance(self.logger, f"parse_league_data_{league_code}"):

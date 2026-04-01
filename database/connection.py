@@ -102,6 +102,9 @@ class DatabaseConnection:
         conn = borrow_connection()
         try:
             yield conn
+        except DatabaseError:
+            conn.rollback()
+            raise
         except Exception as exc:
             conn.rollback()
             logger.error("Database operation failed: %s", exc)
@@ -119,7 +122,10 @@ class DatabaseConnection:
                 conn.commit()
             except Exception as exc:
                 conn.rollback()
-                logger.error("Transaction failed: %s", exc)
+                if self._is_deadlock_or_lock_timeout(exc):
+                    logger.warning("Transaction hit retryable deadlock/lock-timeout: %s", exc)
+                else:
+                    logger.error("Transaction failed: %s", exc)
                 raise DatabaseError(f"Transaction failed: {exc}") from exc
             finally:
                 cursor.close()
